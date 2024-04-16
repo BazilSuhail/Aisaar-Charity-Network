@@ -1,0 +1,26 @@
+*{
+   text-decoration: none;
+   color: black;
+}
+/* App.css */
+
+/* For webkit-based browsers */
+::-webkit-scrollbar {
+  width: 3px; /* Width of the scrollbar */
+  color: aqua;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #b80000; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e70000; /* Color of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the handle on hover */
+}

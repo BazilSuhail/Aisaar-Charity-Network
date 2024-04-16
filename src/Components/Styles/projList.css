@@ -1,0 +1,90 @@
+/* projList.css */
+
+.renderObjects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100vw;
+}
+
+.render {
+    width: calc(30.33% - 20px);
+    /* Adjust width of project cards */
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 15px;
+    background-color: #e5ffeca4;
+    border-radius: 15px;
+    box-shadow: 20px black blur;
+    /* Adjust spacing between rows */
+    box-sizing: border-box;
+}
+
+.name-cont {
+    display: flex;
+    background-color: #03581b;
+    padding: 5px;
+    justify-content: center;
+    border-radius: 12px;
+    color: white;
+    width: 100%;
+}
+
+.name {
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.don-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.donations {
+    width: 70%;
+    border-radius: 5px;
+    color: white;
+    margin: 4px;
+    font-size: large;
+    font-weight: 600;
+    padding: 5px;
+    background-color: #447d54;
+}
+
+.donations::placeholder {
+    color: rgb(196, 209, 210);
+    font-size: medium;
+}
+
+.handle-donations {
+    width: 75%;
+    cursor: pointer;
+    background-color: #015719;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.handle-donations:disabled {
+    background-color: #ccc;
+}
+
+@media (max-width: 920px) {
+    .render {
+        width: calc(45% - 20px);
+        /* Render two cards when width is less than 800px */
+    }
+}
+
+@media (max-width: 650px) {
+    .render {
+        width: calc(100% - 20px);
+        /* Render one card when width is less than 400px */
+    }
+}

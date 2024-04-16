@@ -1,0 +1,271 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover {
+  padding: 30px;
+  height: 65vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+
+}
+
+.coverImage {
+  width: 580px;
+  height: 420px;
+  justify-self: center;
+  align-self: center;
+  animation: animate 5s ease-in-out infinite;
+  transition: all is ease-in-out;
+
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.naam {
+  font-size: 130px;
+  font-weight: 900;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.tagline {
+  font-size: 60px;
+  font-weight: 950;
+  text-align: center;
+  color: rgb(0, 83, 37);
+  margin-top: 54px;
+  margin-bottom: 5px;
+}
+
+.typewriter {
+  font-size: 55px;
+  font-weight: 500;
+  background-color: #0a4927;
+  color: white;
+  border-radius: 15px;
+  padding: 8px;
+}
+
+
+@keyframes animate {
+  0% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 30% 60% 30% 40%/50% 60% 30% 60%;
+  }
+
+  100% {
+    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+  }
+}
+
+.aboutheading {
+  font-size: 35px;
+  background-color: rgb(48, 85, 55);
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  width: 95vw;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  padding: 5px;
+}
+
+.about img {
+  height: 420px;
+  width: 450px;
+}
+
+.abouttext {
+  display: flex;
+  flex-direction: row;
+  margin: 25px;
+  text-align: center;
+  align-self: center;
+  font-size: 18px;
+  font-weight: 650;
+  border: 2px green solid;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.continue {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  gap: 20px;
+  padding: 20px;
+}
+
+.getinvolve {
+  text-align: center;
+  align-self: center;
+  color: #0a4927;
+  grid-column: span 2;
+  font-size: x-large;
+  margin: 2px 4px;
+  font-weight: 500;
+}
+
+.navButton {
+  text-align: center;
+  font-size: xx-large;
+  align-self: center;
+  font-weight: 800;
+  color: rgb(0, 58, 10);
+  padding: 30px;
+  text-decoration: none;
+  border: 2px green solid;
+  border-radius: 20px;
+}
+
+.navButton:hover {
+  background-color: #003c1c;
+  color: white;
+}
+
+/*Gallery Section*/
+
+.statheading {
+  font-size: 35px;
+  background-color: rgb(255, 255, 255);
+  font-weight: 900;
+  border: 3px green solid;
+  padding: 10px;
+  width: 95vw;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  color: white;
+  border: 2px green solid;
+  flex-direction: column;
+  margin: 8px;
+  height: 185px;
+  border-radius: 15px;
+}
+
+.title {
+  text-align: center;
+  margin-top: 15px;
+  background-color: #00381abb;
+  padding: 10px;
+  width: 85%;
+
+  border-radius: 10px;
+  font-size: larger;
+  font-weight: 800;
+
+}
+
+.total {
+  margin-top: 10px;
+  font-size: 70px;
+  font-weight: 1000;
+  color: rgb(0, 89, 33);
+  justify-self: center;
+}
+
+.footer {
+  align-items: flex-end;
+  background-color: #003c1c;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media screen and (max-width: 980px) {
+  .cover {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 12px;
+    height: 82vh;
+  }
+
+  .tagline {
+    font-size: 40px;
+  }
+
+  .typewriter {
+    font-size: 35px;
+  }
+
+  .continue{
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .navButton {
+    font-size: 30px;
+    font-weight: 900;
+    padding: 7px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, 1fr);
+  }
+
+  .card {
+    background-color: rgb(240, 255, 244);
+  }
+
+  .coverImage {
+    margin-top: 10px;
+    width: 330px;
+    height: 220px;
+  }
+
+  .numbers {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .about img {
+    height: 300px;
+    width: 350px;
+  }
+}
