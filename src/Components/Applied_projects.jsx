@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { auth, fs } from "../Config/Config";
 
 import "./Styles/donor.css"
-
 import "./Styles/tables.css"
 import "./Styles/form.css"
+
 const AppliedProj = () => {
   const [loggedInVolunteer, setLoggedInVolunteer] = useState(null);
   const [proposedProjectData, setProposedProjectData] = useState({
@@ -12,12 +12,15 @@ const AppliedProj = () => {
     description: "",
     startDate: "",
     endDate: "",
-    targetAmount: "0", // Initialize as string
-    collectedAmount: "0", // Initialize as string
+    targetAmount: "0",
     status: "",
     volunteerID: "",
+    franchiseID: "", // Add franchiseID field
+    collectedAmount: "0", // Initialize collectedAmount to "0"
   });
+
   const [appliedProjects, setAppliedProjects] = useState([]);
+  const [franchises, setFranchises] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -27,6 +30,7 @@ const AppliedProj = () => {
         if (currentUser) {
           setLoggedInVolunteer(currentUser.uid);
           fetchAppliedProjects(currentUser.uid);
+          fetchFranchises();
         }
       } catch (error) {
         console.error("Error fetching logged-in volunteer:", error.message);
@@ -34,7 +38,7 @@ const AppliedProj = () => {
     };
 
     fetchLoggedInVolunteer();
-  }, []);
+  });
 
   const fetchAppliedProjects = async (volunteerID) => {
     try {
@@ -52,10 +56,25 @@ const AppliedProj = () => {
     }
   };
 
+  const fetchFranchises = async () => {
+    try {
+      const franchisesRef = fs.collection("franchise");
+      const snapshot = await franchisesRef.get();
+      const franchiseData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setFranchises(franchiseData);
+
+      console.log(franchises)
+    } catch (error) {
+      console.error("Error fetching franchises:", error.message);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const parsedValue = name === "collectedAmount" || name === "targetAmount" ? value : value;
-    setProposedProjectData({ ...proposedProjectData, [name]: parsedValue });
+    setProposedProjectData({ ...proposedProjectData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -70,10 +89,10 @@ const AppliedProj = () => {
         description: "",
         startDate: "",
         endDate: "",
-        targetAmount: "0", 
-        collectedAmount: "0",
+        targetAmount: "0",
         status: "",
         volunteerID: loggedInVolunteer,
+        collectedAmount: "0", // Initialize collectedAmount to "0"
       });
       alert("Project proposed successfully!");
       fetchAppliedProjects(loggedInVolunteer);
@@ -115,10 +134,10 @@ const AppliedProj = () => {
       </div>
       <br />
       <div className="placeForm">
-        <button className="tooglebutton" onClick={() => setShowForm(!showForm)}>{showForm ? "Cancel Application" : "Apply Project"}</button>
-
-        {showForm && ( 
-
+        <button className="tooglebutton" onClick={() => setShowForm(!showForm)}>
+          {showForm ? "Cancel Application" : "Apply Project"}
+        </button>
+        {showForm && (
           <div className='form'>
             <form className="formData" onSubmit={handleSubmit}>
               <div className='attribute'>Name: </div>
@@ -135,6 +154,28 @@ const AppliedProj = () => {
 
               <div className='attribute'>Target Amount : </div>
               <input type="text" name="targetAmount" value={proposedProjectData.targetAmount} onChange={handleChange} />
+              {
+                /*
+                
+              <div className='attribute'>Franchise: </div>
+              <select name="franchiseID" value={proposedProjectData.franchiseID} onChange={handleChange}>
+                <option value="">Select Franchise</option>
+                {franchises.map((franchise) => (
+                  <option key={franchise.id} value={franchise.id}>{franchise.name}</option>
+                ))}
+              </select>
+                */
+              }
+              <div className='attribute'>Select Franchise to which to Propose : </div>
+              <select className="accType" name="franchiseID" value={proposedProjectData.franchiseID} onChange={handleChange} required >
+                <option value="">Select Organization</option>
+                {franchises.map((branch) => (
+                  <option className="selection" key={branch.id} value={branch.id}>
+                    {branch.name}
+                  </option>
+                ))}
+              </select>
+
 
               <div className="attribute"> Status: </div>
               <select className="accType" name="status" value={proposedProjectData.status} onChange={handleChange}>
@@ -142,11 +183,9 @@ const AppliedProj = () => {
                 <option className="selection" value="In Progress">In Progress</option>
               </select>
               <br />
-
               <button className='save' type="submit">Save</button>
             </form>
           </div>
-
         )}
       </div>
     </div>

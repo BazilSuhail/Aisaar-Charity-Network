@@ -1,28 +1,39 @@
 /* donor.css */
 
-.form-container {
+.login-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
+    /*
     background-image: url("../login.png");
-    background-size: cover;
-    /* Fit the background image to the container */
-    background-repeat: no-repeat;
-    /* Prevent the background image from repeating */
+    background-size: cover;*/
+    background-color: #e2ffe2;
     height: 100vh;
+    width: 99vw;
 }
 
 .signup {
-    color: aliceblue;
-    background-color: rgb(0, 76, 14);
+    color: rgb(19, 53, 28);
+    border: 3px green solid;
     padding: 20px;
     font-size: xx-large;
     font-weight: 900;
     margin-top: 25px;
     border-radius: 15px;
-    width: 30vw;
+    width: 35vw;
     text-align: center;
-    box-shadow: 5px 5px 50px rgb(0, 47, 10);
+}
+
+.signup-tagline {
+    margin: 15px;
+    width: 35.5vw;
+    padding: 15px;
+    font-size: large;
+    font-weight: 500;
+    color: rgb(196, 255, 207);
+    text-align: center;
+    background-color: #004b19;
+    border-radius: 15px;
 }
 
 .form-data {
@@ -32,37 +43,38 @@
     justify-content: center;
     background-color: #003d036b;
     backdrop-filter: blur(15px);
-    padding: 4rem;
+    padding: 35px;
     border-radius: 20px;
-    width: 30vw;
+    width: 33.5vw;
     box-shadow: 0 5 40px white;
-}
-
-.accType {
-    font-size: x-large;
-    color: rgba(213, 255, 223, 0.545);
-    font-weight: 800;
-    text-shadow: 0px 0px 14px rgba(187, 255, 205, 0.596)
-
-}
+} 
 
 .text {
     color: #004b19;
-    font-size: large;
-    font-style: italic;
-    font-weight: 800;
-    text-shadow: 0px 2px 4px rgb(187, 255, 205)
+    font-size: large; 
+    font-weight: 900;
+    margin-bottom: 17px;
 }
 
 .link {
     text-decoration: none;
-    padding: 3px 15px;
-    border-radius: 15px;
-    color: rgb(198, 255, 216) !important;
-    text-shadow: 0px 0px 0px rgb(198, 255, 216);
-    font-size: 1.2rem;
-    background-color: #002b01;
-    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 15px; 
+    color: rgb(11, 125, 45);
+    font-size: x-large; 
+    text-decoration: underline;
+    font-weight: 600; 
+}
+
+.link:hover {
+    color: #233e2c; 
+}
+.accType {
+    font-size: x-large;
+    color: rgb(0, 44, 10);
+    font-weight: 700; 
+    font-style: oblique;
+    margin-bottom: 10px;
 }
 
 .selection {
@@ -72,15 +84,13 @@
     border-radius: 15px;
     color: aliceblue;
     background-color: #002b01;
+    font-size: medium;
     font-weight: 600;
     font-style: oblique;
     border: 2px rgb(183, 255, 205) solid;
 }
 
-.form-container input[type="text"],
-.form-container input[type="email"],
-.form-container input[type="password"],
-.form-container button {
+.display-name,.email,.password {
     padding: 10px;
     width: 70%;
     margin: 8px;
@@ -89,64 +99,77 @@
     font-size: large;
     background-color: #002b01;
     border: 2px rgb(183, 255, 205) solid;
-
 }
 
-.form-container input[type="text"]::placeholder,
-.form-container input[type="email"]::placeholder,
-.form-container input[type="password"]::placeholder {
-    color: #ffffff6e;
+.form-data input::placeholder{
+    color: #80987e;
     font-weight: 400;
-    font-size: medium;
+    font-size: large;
     font-style: italic;
 }
 
 
-.form-container button {
+.login-btn {
     background-color: #002b01;
     margin-top: 20px;
-    color: rgb(206, 255, 205);
+    color: rgb(232, 250, 232);
     font-family: Arial, Helvetica, sans-serif;
     border: 3px rgb(1, 87, 0) solid;
     cursor: pointer;
-    font-size: larger;
+    padding: 10px;
+    border-radius: 15px;
+    width: 75%;
+    font-size: x-large;
     font-weight: 700;
 }
 
-.form-container button:hover {
-    box-shadow: 0px 0px 40px rgba(172, 255, 190, 0.664);
+.login-btn:hover {
+    background-color: rgb(208, 255, 213);
+    color: rgb(4, 50, 4);
 }
 
 .form-container p {
     margin-top: 20px;
     text-align: center;
 }
- 
+
+
 @media screen and (max-width: 1230px) {
     .form-data {
-        width: 65vw;
+        width: 75vw;
+        padding: 25px; 
     }
 
-    .form-data {
-        padding: 25px;
+    .signup,
+    .signup-tagline {
+        width: 75vw;
     }
 
-    .form-container input[type="text"],
-    .form-container input[type="email"],
-    .form-container input[type="password"],
+    .accType {
+        font-size: larger;
+    }
+
+    .display-name,
+    .email,
+    .password,
     .form-container button {
         width: 92%;
     }
 
+
+    .login-btn { 
+        width: 75%;
+    }
     .selection {
-        width: 95%;
+        width: 94%;
     }
 }
 
 @media screen and (max-width: 830px) {
-    .signup{
+    .signup {
         font-size: 30px;
     }
+
     .form-data {
         width: 75vw;
     }
@@ -154,10 +177,19 @@
     .form-data {
         padding: 25px;
     }
+    .text{
+        text-align: center;
+    }
+    .link { 
+        font-size: larger; 
+    }
 
-    .form-container input[type="text"],
-    .form-container input[type="email"],
-    .form-container input[type="password"],
+    .login-btn { 
+        width: 97%;
+    }
+    .display-name,
+    .email,
+    .password,
     .form-container button {
         width: 92%;
     }

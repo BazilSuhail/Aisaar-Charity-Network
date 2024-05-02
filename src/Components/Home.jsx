@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fs } from '../Config/Config';
 import "./Styles/home.css";
 import "./Styles/tables.css";
+import Footer from "./Footer";
 import mainlogo from "./Logo.png"; // Import the image
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
@@ -9,21 +10,21 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
 
-  const [organizations, setOrganizations] = useState([]);
+  const [franchises, setFranchises] = useState([]);
   useEffect(() => {
 
-    const fetchOrganizations = async () => {
+    const fetchFranchises = async () => {
       try {
-        const organizationsRef = fs.collection('organizations');
+        const organizationsRef = fs.collection('franchise');
         const snapshot = await organizationsRef.get();
         const orgData = snapshot.docs.map(doc => doc.data());
-        setOrganizations(orgData);
+        setFranchises(orgData);
       } catch (error) {
-        console.error('Error fetching organizations:', error.message);
+        console.error('Error fetching franchises:', error.message);
       }
     };
 
-    fetchOrganizations();
+    fetchFranchises();
   }, []);
 
   const [toDisplay] = useTypewriter({
@@ -46,9 +47,9 @@ const Home = () => {
           </div>
 
         </div>
-        <img className="coverImage"  src="https://source.unsplash.com/1080x720/?poor" alt="Loading.............." />
+        <img className="coverImage"  src="https://source.unsplash.com/1080x720/?poor" alt="=================> Poor Connection!!" />
       </div>
-      <p className=" aboutheading"  >Welcome To إيثار</p>
+      <p className="aboutheading"  >Welcome To إيثار</p>
 
       {/*about section*/}
       <div className="about">
@@ -91,11 +92,11 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {organizations.map((organization, index) => (
+              {franchises.map((franchise, index) => (
                 <tr key={index}>
-                  <td>{organization.name}</td>
-                  <td>{organization.location}</td>
-                  <td>{organization.city}</td>
+                  <td>{franchise.name}</td>
+                  <td>{franchise.location}</td>
+                  <td>{franchise.city}</td>
                 </tr>
               ))}
             </tbody>
@@ -111,11 +112,8 @@ const Home = () => {
         <Link to="/signup" className="navButton">Volunteer Project</Link>
       </div>
       
-      <footer className="footer">
-        <div className="container">
-          <p>© 2024  إيثار . All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
+      
     </div>
   );
 };

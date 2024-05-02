@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { auth, fs } from '../Config/Config';
-import TransactionHistory from './Transaction_History';
+import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+//import TransactionHistory from './Transaction_History';
 import "./Styles/donor.css"
 
 import "./Styles/form.css"
 const Donor = () => {
+  const navigate = useNavigate();
   const [donorData, setDonorData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -16,8 +19,8 @@ const Donor = () => {
     idtype: "Donor"
   });
 
-  const [showTransactionHistory, setShowTransactionHistory] = useState(false);
-  console.log(showTransactionHistory);
+  //const [showTransactionHistory, setShowTransactionHistory] = useState(false);
+  //console.log(showTransactionHistory);
 
   useEffect(() => {
     const fetchDonorData = async () => {
@@ -51,7 +54,6 @@ const Donor = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Update the form data without causing re-renders on every keystroke
     setFormData(prevState => ({
       ...prevState,
       [name]: value
@@ -74,10 +76,12 @@ const Donor = () => {
     }
   };
 
-  const toggleTransactionHistory = () => {
-    setShowTransactionHistory(!showTransactionHistory);
-  };
-
+  // const toggleTransactionHistory = () => {
+  // setShowTransactionHistory(!showTransactionHistory);
+  //};
+  const gotoTransactionHistory = () => {
+    navigate('/transactionhistory');
+  }
 
   return (
     <div className='donor'>
@@ -112,14 +116,20 @@ const Donor = () => {
             <div className='values'>{donorData.donations}</div>
             <button className='edit' onClick={handleEdit}>Edit</button>
           </div>
+          <button className='show-transaction' onClick={gotoTransactionHistory}>
+            Check Transaction History
+          </button>
 
+          {/*
           <button className='show-transaction' onClick={toggleTransactionHistory}>
             {showTransactionHistory ? "Hide Transaction History" : "Show Transaction History"}
           </button>
-          <div className='transaction-table'>{showTransactionHistory && <TransactionHistory />}</div>
+          <div className='transaction-table'>{showTransactionHistory && <TransactionHistory />}</div>  
+        
+         */}
         </>
       )}
-
+      <Footer />
     </div >
   );
 };

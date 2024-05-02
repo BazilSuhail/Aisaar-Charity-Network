@@ -200,7 +200,7 @@ const Volunteer = () => {
                       <td>{project.title}</td>
                       <td>{project.targetAmount}</td>
                       <td>{project.collectedAmount}</td>
-                      <td>{project.Status}</td>
+                      <td>{project.status}</td>
                     </tr>
                   ))}
                 </tbody>

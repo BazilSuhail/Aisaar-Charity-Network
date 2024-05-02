@@ -3,9 +3,17 @@
   flex-direction: row;
   justify-content: space-between;
   height: 70px;
-  width: 98.7vw;
+  width: 100vw;
   background-color: rgb(0, 56, 15);
   align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 7px;  
+}
+  
+::-webkit-scrollbar-track {
+  background: #003d02; 
 }
 
 .logo {
@@ -31,8 +39,8 @@
   font-weight: bolder;
   padding: 10px;
   margin-top: 3px;
-  
-  margin-right:8px;
+
+  margin-right: 8px;
 }
 
 .nav-links:hover {
@@ -91,9 +99,9 @@
     justify-content: flex-start;
     align-items: flex-start;
     height: 69px;
+    width: 99vw;
     margin-top: 0px;
-    padding: 10px;
-    width: 100%;
+    padding: 10px; 
     background-color: rgb(0, 56, 15);
     z-index: 5;
     position: relative;
@@ -120,7 +128,6 @@
     margin-left: 25px;
     margin-top: 8px;
     margin-bottom: 15px;
-    /* Adjust margin between logo and icon as needed */
   }
 
   .navbar.open {
@@ -148,19 +155,18 @@
   .sign-links,
   .logout-button {
     display: none;
-    /* Initially hide nav links */
   }
 
 
   .navbar.open .nav-links {
     display: block;
-    /* Display nav links when navbar is open */
   }
 
   .navbar.open .logout-button,
   .navbar.open .sign-links {
     display: block;
-    margin-bottom: 40px;
-    /* Display nav links when navbar is open */
+    margin-bottom: 80px;
+    font-size: larger;
+    padding: 8px;
   }
 }

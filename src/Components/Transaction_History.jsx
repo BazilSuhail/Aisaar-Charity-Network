@@ -1,9 +1,12 @@
 // TransactionHistory.js
 import React, { useState, useEffect } from "react";
 import { fs, useFirebaseAuth } from "../Config/Config";
-
+import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 import "./Styles/tables.css";
 const TransactionHistory = () => {
+  const navigate = useNavigate();
+
   const { currentUser } = useFirebaseAuth();
   const [transactionHistory, setTransactionHistory] = useState([]);
 
@@ -29,10 +32,18 @@ const TransactionHistory = () => {
     fetchTransactionHistory();
   }, [currentUser]);
 
-  return (
-    <div >
-      <h2>Transaction History</h2>
+  const gotoProfile = () => {
+    navigate('/donor');
+  }
 
+  return (
+    <div className="donor" >
+
+
+      <button className='show-transaction' onClick={gotoProfile}>
+        Go to Profile
+      </button>
+      <h2>Transaction History</h2>
       <div className="back">
         <div className="table-container">
           <table className="table-body">
@@ -40,7 +51,7 @@ const TransactionHistory = () => {
               <tr>
                 <th>Amount</th>
                 <th>Name</th>
-                <th>Donated To</th> 
+                <th>Donated To</th>
                 <th>ID</th>
                 <th>Time</th>
                 <th>Date</th>
@@ -51,7 +62,7 @@ const TransactionHistory = () => {
                 <tr key={index}>
                   <td>{transaction.amount}</td>
                   <td>{transaction.projectName}</td>
-                  <td><strong>{transaction.idType}</strong></td> 
+                  <td><strong>{transaction.idType}</strong></td>
                   <td>{transaction.projectId}</td>
                   <td>{new Date(transaction.timestamp).toLocaleTimeString()}</td>
                   <td>{new Date(transaction.timestamp).toLocaleDateString()}</td>
@@ -62,6 +73,7 @@ const TransactionHistory = () => {
         </div>
       </div>
 
+      <Footer />
     </div>
   );
 };

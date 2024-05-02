@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { fs, auth } from "../Config/Config";
 import { FieldValue } from "../Config/Config";
 
-import "./Styles/tables.css";
+import Footer from "./Footer";
+import CampaignComp from "./CampaignComp.jsx";
+import "./Styles/campaignList.css";
 
 const Listcampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const [donationAmount, setDonationAmount] = useState(0);
   const [currentUser, setCurrentUser] = useState(null);
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
+
+  const [updatecampaigns, setUpdatecampaigns] = useState(false); // State to trigger re-fetching projects
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -32,7 +35,7 @@ const Listcampaigns = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [updatecampaigns]);
 
   const checkUserInDonorsCollection = async (user) => {
     if (!user) {
@@ -51,7 +54,7 @@ const Listcampaigns = () => {
     }
   };
 
-  const handleDonate = async (campaignId, name) => {
+  const handleDonate = async (campaignId, donationAmount, name) => {
     try {
       if (!currentUser) throw new Error("User not logged in");
       if (!userInDonorsCollection)
@@ -115,62 +118,241 @@ const Listcampaigns = () => {
           ],
         });
       }
-    } catch (error) {
+
+      setUpdatecampaigns(prevState => !prevState);
+    }
+    catch (error) {
       console.error("Error donating:", error);
     }
   };
 
   return (
-    <div>
-      <h2>Listed Campaigns</h2>
-      <div className="back">
-        <div className="table-container">
-          <table className="table-body">
-            <thead className="head">
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Target Amount</th>
-                <th>Current Amount Raised</th>
-                <th>Status</th>
-                <th>Organization ID</th>
-                <th>Donate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {campaigns.map((campaign) => (
-                <tr key={campaign.id}>
-                  <td>{campaign.name}</td>
-                  <td>{campaign.description}</td>
-                  <td>{campaign.startDate}</td>
-                  <td>{campaign.endDate}</td>
-                  <td>{campaign.targetAmount}</td>
-                  <td>{campaign.currentAmountRaised}</td>
-                  <td>{campaign.status}</td>
-                  <td>{campaign.organizationID}</td>
-                  <td>
-                    <input
-                      type="number"
-                      placeholder="Enter amount"
-                      value={donationAmount}
-                      onChange={(e) => setDonationAmount(e.target.value)}
-                      disabled={!userInDonorsCollection}
-                    />
-                    <button
-                      onClick={() => handleDonate(campaign.id, campaign.name)}
-                      disabled={!userInDonorsCollection}
-                    >
-                      Donate
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="campaign">
+      <div className="camp-heading">Registered Campaigns</div>
+
+      <div className="render-campaigns"></div>
+
+      <div className='c-render'>
+
+        <div className="camp-details">
+          <div className='c-title'>Kheton ka khana</div>
+          <div className='c-franchise'>Regulating Franchise : <div className="franchise-name">Aisaar 5001</div></div>
+
+          <div className="franchise-props">
+            <div className='cont-loc'>Contact</div>
+            <div className='cont-loc'>Location</div>
+          </div>
+
+          <div className="franchise-props-values">
+            <div className='cont-loc-values'>0354656846568</div>
+            <div className='cont-loc-values'>Gulberg 34,berlin</div>
+          </div>
         </div>
+
+        <div className="camp-description">
+          <div className='c-desc-cont'>
+            <div className="c-head-desc">   Description  </div>
+            <div className="c-actual-desc"> asdasdasds das d as dasd a sdasd </div>
+          </div>
+
+          <div className="c-dates">
+            <div className="c-start">Start Date</div>
+            <div className="c-start-date">12-2-2022</div>
+
+          </div>
+          <div className="c-dates">
+            <div className="c-end">End Date</div>
+            <div className="c-end-date">12-2-2022</div>
+          </div>
+        </div>
+
+        <div className="camp-donation">
+          <div className='c-target-cont'>Target Amount: <div className="c-target-amt">$123333</div></div>
+          <div className='c-collected-cont'>Collected Amount: <div className="c-collected-amt">$12656543333</div></div>
+
+          <div className='c-status-cont'>Status:<div className="c-status-actual">In progress</div></div>
+
+          <div className='c-don-cont'>
+            <input className='c-donations' type="number" placeholder="Enter amount" />
+            <button className='c-handle-donations'>
+              Donate
+            </button>
+          </div>
+        </div>
+
+
+
+
       </div>
+      <div className='c-render'>
+
+        <div className="camp-details">
+          <div className='c-title'>Kheton ka khana</div>
+          <div className='c-franchise'>Regulating Franchise : <div className="franchise-name">Aisaar 5001</div></div>
+
+          <div className="franchise-props">
+            <div className='cont-loc'>Contact</div>
+            <div className='cont-loc'>Location</div>
+          </div>
+
+          <div className="franchise-props-values">
+            <div className='cont-loc-values'>0354656846568</div>
+            <div className='cont-loc-values'>Gulberg 34,berlin</div>
+          </div>
+        </div>
+
+        <div className="camp-description">
+          <div className='c-desc-cont'>
+            <div className="c-head-desc">   Description  </div>
+            <div className="c-actual-desc"> asdasdasds das d as dasd a sdasd </div>
+          </div>
+
+          <div className="c-dates">
+            <div className="c-start">Start Date</div>
+            <div className="c-start-date">12-2-2022</div>
+
+          </div>
+          <div className="c-dates">
+            <div className="c-end">End Date</div>
+            <div className="c-end-date">12-2-2022</div>
+          </div>
+        </div>
+
+        <div className="camp-donation">
+          <div className='c-target-cont'>Target Amount: <div className="c-target-amt">$123333</div></div>
+          <div className='c-collected-cont'>Collected Amount: <div className="c-collected-amt">$12656543333</div></div>
+
+          <div className='c-status-cont'>Status:<div className="c-status-actual">In progress</div></div>
+
+          <div className='c-don-cont'>
+            <input className='c-donations' type="number" placeholder="Enter amount" />
+            <button className='c-handle-donations'>
+              Donate
+            </button>
+          </div>
+        </div>
+
+
+
+
+      </div><div className='c-render'>
+
+        <div className="camp-details">
+          <div className='c-title'>Kheton ka khana</div>
+          <div className='c-franchise'>Regulating Franchise : <div className="franchise-name">Aisaar 5001</div></div>
+
+          <div className="franchise-props">
+            <div className='cont-loc'>Contact</div>
+            <div className='cont-loc'>Location</div>
+          </div>
+
+          <div className="franchise-props-values">
+            <div className='cont-loc-values'>0354656846568</div>
+            <div className='cont-loc-values'>Gulberg 34,berlin</div>
+          </div>
+        </div>
+
+        <div className="camp-description">
+          <div className='c-desc-cont'>
+            <div className="c-head-desc">   Description  </div>
+            <div className="c-actual-desc"> asdasdasds das d as dasd a sdasd </div>
+          </div>
+
+          <div className="c-dates">
+            <div className="c-start">Start Date</div>
+            <div className="c-start-date">12-2-2022</div>
+
+          </div>
+          <div className="c-dates">
+            <div className="c-end">End Date</div>
+            <div className="c-end-date">12-2-2022</div>
+          </div>
+        </div>
+
+        <div className="camp-donation">
+          <div className='c-target-cont'>Target Amount: <div className="c-target-amt">$123333</div></div>
+          <div className='c-collected-cont'>Collected Amount: <div className="c-collected-amt">$12656543333</div></div>
+
+          <div className='c-status-cont'>Status:<div className="c-status-actual">In progress</div></div>
+
+          <div className='c-don-cont'>
+            <input className='c-donations' type="number" placeholder="Enter amount" />
+            <button className='c-handle-donations'>
+              Donate
+            </button>
+          </div>
+        </div>
+
+
+
+
+      </div><div className='c-render'>
+
+        <div className="camp-details">
+          <div className='c-title'>Kheton ka khana</div>
+          <div className='c-franchise'>Regulating Franchise : <div className="franchise-name">Aisaar 5001</div></div>
+
+          <div className="franchise-props">
+            <div className='cont-loc'>Contact</div>
+            <div className='cont-loc'>Location</div>
+          </div>
+
+          <div className="franchise-props-values">
+            <div className='cont-loc-values'>0354656846568</div>
+            <div className='cont-loc-values'>Gulberg 34,berlin</div>
+          </div>
+        </div>
+
+        <div className="camp-description">
+          <div className='c-desc-cont'>
+            <div className="c-head-desc">   Description  </div>
+            <div className="c-actual-desc"> asdasdasds das d as dasd a sdasd </div>
+          </div>
+
+          <div className="c-dates">
+            <div className="c-start">Start Date</div>
+            <div className="c-start-date">12-2-2022</div>
+
+          </div>
+          <div className="c-dates">
+            <div className="c-end">End Date</div>
+            <div className="c-end-date">12-2-2022</div>
+          </div>
+        </div>
+
+        <div className="camp-donation">
+          <div className='c-target-cont'>Target Amount: <div className="c-target-amt">$123333</div></div>
+          <div className='c-collected-cont'>Collected Amount: <div className="c-collected-amt">$12656543333</div></div>
+
+          <div className='c-status-cont'>Status:<div className="c-status-actual">In progress</div></div>
+
+          <div className='c-don-cont'>
+            <input className='c-donations' type="number" placeholder="Enter amount" />
+            <button className='c-handle-donations'>
+              Donate
+            </button>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      {
+        /*
+        
+          <div className="renderObjects">
+            {campaigns.map((campaign) => (
+              <CampaignComp
+                key={campaign.id}
+                campaign={campaign}
+                handleDonate={handleDonate}
+                userInDonorsCollection={userInDonorsCollection}
+              />
+            ))}
+          </div>*/
+      }
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, fs } from "../Config/Config";
 import "./Styles/loginsignup.css";
+import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -34,15 +35,19 @@ const SignUp = () => {
     }
   };
 
+  const [toDisplay] = useTypewriter({
+    words: ['To make differnece' ,'To Spread Smiles'],
+    loop: true,
+    typeSpeed: 80,
+    deleteSpeed: 40
+  });
 
   return (
-    <div className="form-container">
+    <div className="login-container">
 
-      <div className="signup">Sign Up</div>
-
-
-      <p className="text">Already have an account? <Link className="link" to="/login">Sign In</Link> </p>
-
+      <div className="signup">Sign Up</div> 
+      <div className="signup-tagline">Register Now !! {toDisplay}<Cursor cursorStyle='|' /></div>
+      <div className="text">Already have an account  <Link className="link" to="/login">Sign In</Link> </div>
 
       <form className="form-data" onSubmit={handleSignUp}>
         <div className="accType">How Would you like to Register</div>
@@ -51,11 +56,10 @@ const SignUp = () => {
           <option className="selection" value="volunteer">Volunteer</option>
         </select>
 
-        <input type="text" placeholder="Display Name" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Sign Up</button>
-
+        <input className="display-name" type="text" placeholder="Display Name" value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
+        <input className="email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input className="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+        <button className="login-btn" type="submit">Sign Up</button>
       </form>
 
 

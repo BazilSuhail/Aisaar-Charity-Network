@@ -1,4 +1,20 @@
-/* projList.css */
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(179, 223, 194, 0.533);
+}
+
+.proj-heading {
+    width: 75%;
+    padding: 10px;
+    text-align: center;
+    margin: 10px auto;
+    border-radius: 10px;
+    background-color: #174826;
+    color: #ffffff;
+    font-size: xx-large;
+}
 
 .renderObjects {
     display: flex;
@@ -8,34 +24,211 @@
 }
 
 .render {
-    width: calc(30.33% - 20px);
-    /* Adjust width of project cards */
-    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(42% - 20px);
+    border: 1px solid #00511c;
     padding: 20px;
     margin: 15px;
-    background-color: #e5ffeca4;
+    background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 20px black blur;
-    /* Adjust spacing between rows */
     box-sizing: border-box;
 }
 
 .name-cont {
     display: flex;
-    background-color: #03581b;
     padding: 5px;
-    justify-content: center;
     border-radius: 12px;
-    color: white;
-    width: 100%;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    width: 90%;
+    background-color: #00511c;
+    margin: 8px;
+    /*box-shadow:inset 0px 0px 20px rgb(6, 69, 18);*/
 }
 
 .name {
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
     font-size: x-large;
     font-weight: 800;
+}
+
+.details {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin: 16px 0px;
+}
+
+.volunteer-cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    /*background-color: #002f0d;*/
+    border-radius: 12px;
+    color: rgb(0, 95, 41);
+    width: 85%;
+    font-size: large;
+    font-weight: 900;
+    box-shadow: 0px 0px 12px rgb(6, 69, 18);
+    margin-top: 12px;
+}
+
+.volunteer-name {
+    color: #ffffff;
+    border-radius: 8px;
+    margin: 0px 15px;
+    font-size: x-large;
+    padding: 6px;
+    font-weight: 900;
+    background-color: #345b3fdc;
+}
+
+
+.dates {
+    display: flex;
+    width: 100%;
+    margin-top: 6px;
+    padding: 5px;
+    justify-content: space-evenly;
+
+}
+
+.dates div {
+    text-align: center;
+    width: 43%;
+    border-radius: 8px;
+    padding: 7px;
+}
+
+.start {
+    background-color: #008526;
+    color: #e4ffec;
+}
+
+.end {
+    background-color: red;
+    color: white;
+}
+
+.start-date {
+    border: 2px green solid;
+    color: #01b337;
+    font-weight: 700;
+}
+
+.end-date {
+    border: 2px red solid;
+    color: rgb(255, 0, 0);
+    font-weight: 700;
+}
+
+.desc-cont {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    background-color: #345b3fdc;
+    border-radius: 9px;
+    padding: 6px;
+}
+
+.head-desc {
+    font-size: larger;
+    font-weight: 800;
+    color: #c6ffd6;
+    margin-bottom: 10px;
+}
+
+.actual-desc {
+    border: 2px #81b08f solid;
+    border-radius: 5px;
+    width: 93%;
+    text-align: center;
+    padding: 5px;
+    color: #dfffe8;
+    font-style: oblique;
+
+}
+
+.target-cont {
+    display: flex;
+    margin-top: 13px;
+    font-size: larger;
+    padding: 6px;
+    border-radius: 12px;
+    justify-content: center;
+    color: rgb(255, 208, 208);
+    font-weight: 800;
+    background-color: rgb(103, 33, 33);
+    width: 87%;
+
+}
+
+.target-amt {
+    color: #ffffff;
+    border-radius: 8px;
+    margin: 0px 10px;
+    padding: 2px 6px;
+    font-weight: 900;
+}
+
+.collected-cont {
+    display: flex;
+    margin-top: 6px;
+    font-size: larger;
+    padding: 6px;
+    border-radius: 12px;
+    justify-content: center;
+    color: rgb(216, 255, 222);
+    font-weight: 800;
+    background-color: rgb(0, 56, 22);
+    width: 87%;
+
+}
+
+.collected-amt {
+    color: #5fff46;
+    border-radius: 8px;
+    margin: 0px 10px;
+    padding: 2px 6px;
+    font-weight: 900;
+}
+
+.contact-cont {
+    text-align: center;
+    padding: 8px;
+    margin-top: 7px;
+    font-size: medium;
+    font-weight: 800;
+    border: 2px green solid;
+    border-radius: 12px;
+    color: rgb(0, 59, 17);
+    width: 87%;
+
+}
+
+.status-cont {
+    display: flex;
+    padding: 8px;
+    margin-top: 7px;
+    background-color: #2f4e00;
+    font-size: larger;
+    font-weight: 900;
+    border-radius: 12px;
+    justify-content: center;
+    color: rgb(106, 198, 0);
+    width: 87%;
+
+}
+
+.status-actual {
+    color: #ffffff;
+    margin: 0px 15px;
+    font-weight: 500;
 }
 
 .don-cont {
@@ -45,10 +238,10 @@
 }
 
 .donations {
-    width: 70%;
+    width: 75%;
     border-radius: 5px;
     color: white;
-    margin: 4px;
+    margin: 8px;
     font-size: large;
     font-weight: 600;
     padding: 5px;
@@ -61,7 +254,7 @@
 }
 
 .handle-donations {
-    width: 75%;
+    width: 80%;
     cursor: pointer;
     background-color: #015719;
     color: #fff;
@@ -75,16 +268,81 @@
     background-color: #ccc;
 }
 
+.loader {
+    width: 25%;
+    height: 55px;
+    margin-left: 10px;
+    margin-top: 20px;
+    background-color: #03581b;
+    align-self: center;
+    color: #00b533;
+    text-align: center;
+    align-content: center;
+    font-weight: 900;
+    border-radius: 12px;
+    animation: expandLoader 2s forwards;
+}
+
+@keyframes expandLoader {
+    from {
+        width: 25%;
+    }
+
+    to {
+        width: 95%;
+    }
+}
+
+@media (max-width: 1300px) {
+    .render {
+        width: calc(49% - 20px);
+    }
+
+    .volunteer-cont {
+        font-size: large;
+        text-align: center;
+    }
+
+    .volunteer-name {
+        text-align: center;
+        font-size: larger;
+    }
+
+}
+ 
 @media (max-width: 920px) {
     .render {
-        width: calc(45% - 20px);
-        /* Render two cards when width is less than 800px */
+        width: calc(47% - 20px);
+    }
+
+    .proj-heading {
+        width: 60%;
+        font-size: x-large;
+    }
+
+    .target-cont {
+        font-size: medium;
+    }
+
+    .collected-cont {
+        font-size: medium;
+    }
+
+    .volunteer-cont {
+        width: 100%;
+        font-size: small;
+    }
+
+    .volunteer-name {
+        font-size: larger;
+        margin: 0px 8px;
+        padding: 2px 4px;
+        font-weight: 900;
     }
 }
 
 @media (max-width: 650px) {
     .render {
         width: calc(100% - 20px);
-        /* Render one card when width is less than 400px */
     }
 }

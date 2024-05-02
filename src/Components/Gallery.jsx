@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../Config/Config';
+import Footer from "./Footer";
 import "./Styles/home.css";
 import "./Styles/tables.css";
 
 const Gallery = () => {
     const [totalProjects, setTotalProjects] = useState(0);
     const [totalCampaigns, setTotalCampaigns] = useState(0);
-    const [totalorganizations, setTotalorganizations] = useState(0);
+    const [totalfranchises, setTotalfranchises] = useState(0);
 
     const [projects, setProjects] = useState([]);
     const [campaigns, setCampaigns] = useState([]);
@@ -16,11 +17,11 @@ const Gallery = () => {
     const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
     useEffect(() => {
 
-        const fetchOrganizations = async () => {
+        const fetchFranchises = async () => {
             try {
-                const organizationsRef = fs.collection('organizations');
-                const snapshot = await organizationsRef.get();
-                setTotalorganizations(snapshot.size);
+                const franchiseRef = fs.collection('franchise');
+                const snapshot = await franchiseRef.get();
+                setTotalfranchises(snapshot.size);
             } catch (error) {
                 console.error('Error fetching organizations:', error.message);
             }
@@ -45,7 +46,7 @@ const Gallery = () => {
                 const snapshot = await campaignsRef.get();
                 const campaignData = snapshot.docs.map(doc => doc.data());
                 setCampaigns(campaignData);
-                setTotalCampaigns(snapshot.size); // Set the total number of campaigns
+                setTotalCampaigns(snapshot.size);
             } catch (error) {
                 console.error('Error fetching campaigns:', error.message);
             }
@@ -85,7 +86,7 @@ const Gallery = () => {
             }
         };
 
-        fetchOrganizations();
+        fetchFranchises();
         fetchProjects();
         fetchCampaigns();
         fetchTotalVolunteers();
@@ -142,7 +143,7 @@ const Gallery = () => {
         <div>
 
 
-            
+
             {/*Stats section*/}
             <p className="statheading" >Generosity in Action</p>
 
@@ -150,7 +151,7 @@ const Gallery = () => {
 
                 <div className="card">
                     <div className="title">Total Organizations</div>
-                    <AnimatedCounter value={totalorganizations} duration={1500} start={50} incrementByHundred={false} val={1} />
+                    <AnimatedCounter value={totalfranchises} duration={1500} start={50} incrementByHundred={false} val={1} />
                 </div>
 
                 <div className="card">
@@ -193,6 +194,7 @@ const Gallery = () => {
 
 
             </div>
+            <Footer />
         </div>
     )
 }
