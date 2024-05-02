@@ -116,6 +116,12 @@
   }
 
   .menu-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+padding: 10px 5px;
+
     display: block;
     color: white;
     font-size: x-large;

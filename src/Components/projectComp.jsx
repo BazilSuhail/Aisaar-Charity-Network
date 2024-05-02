@@ -9,7 +9,7 @@ const Projectcomp = ({ project, handleDonate, userInDonorsCollection }) => {
     const [volunteerContact, setVolunteercontact] = useState("");
     const [franchiseTitle, setFranchiseTitle] = useState("");
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchVolunteerName = async () => {
             if (project.volunteerID) {
                 const volunteerRef = fs.collection("volunteer").doc(project.volunteerID);
@@ -20,7 +20,7 @@ const Projectcomp = ({ project, handleDonate, userInDonorsCollection }) => {
                     setVolunteercontact(volunteerDoc.data().phoneNumber);
                 }
             }
-        }; 
+        };
         const fetchFranchiseTitle = async () => {
             if (project.franchiseID) {
                 const franchiseRef = fs.collection("franchise").doc(project.franchiseID);
@@ -50,7 +50,7 @@ const Projectcomp = ({ project, handleDonate, userInDonorsCollection }) => {
 
             <div className='volunteer-cont'>Volunteer / Manager : <div className="volunteer-name">{volunteerName}</div></div>
             <div className='volunteer-cont'>Franchise Monitoring : <div className="volunteer-name">{franchiseTitle}</div></div>
-            <div className='contact-cont'>Contact Info: {volunteerContact}</div>  
+            <div className='contact-cont'>Contact Info: {volunteerContact}</div>
             <div className="dates">
                 <div className="start">Start Date</div>
                 <div className="end">End Date</div>
@@ -64,12 +64,12 @@ const Projectcomp = ({ project, handleDonate, userInDonorsCollection }) => {
                 <div className="head-desc">   Description  </div>
                 <div className="actual-desc">  {project.description} </div>
             </div>
- 
+
             <div className='target-cont'>Target Amount: <div className="target-amt">${project.targetAmount}</div></div>
             <div className='collected-cont'>Collected Amount: <div className="collected-amt">${project.collectedAmount}</div></div>
-            
-            <div className='status-cont'>Status:<div className="status-actual">{project.status}</div></div> 
- 
+
+            <div className='status-cont'>Status:<div className="status-actual">{project.status}</div></div>
+
 
             {userInDonorsCollection && !donationComplete && (
                 <div className='don-cont'>
@@ -80,9 +80,7 @@ const Projectcomp = ({ project, handleDonate, userInDonorsCollection }) => {
                 </div>
             )}
 
-            {donationComplete && (
-                <div className="loader">DONATING !!</div>
-            )}
+            {donationComplete && (<div className="loader">DONATING !!</div>)}
         </div>
     );
 };
