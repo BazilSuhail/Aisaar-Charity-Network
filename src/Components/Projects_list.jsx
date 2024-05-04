@@ -4,10 +4,14 @@ import { fs, auth, FieldValue } from "../Config/Config";
 import Projectcomp from "./projectComp";
 import Footer from "./Footer";
 import "./Styles/projList.css"
+import Loader from "./Loader";
 
 const Listedprojects = () => {
   const [projects, setProjects] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [loadProjects, setLoadProjects] = useState(true);
+
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
 
   const [updateProjects, setUpdateProjects] = useState(false); // State to trigger re-fetching projects
@@ -21,6 +25,7 @@ const Listedprojects = () => {
           id: doc.id, ...doc.data(),
         }));
         setProjects(projectsData);
+        setLoadProjects(false);
       }
       catch (error) {
         console.error("Error fetching projects:", error);
@@ -142,20 +147,33 @@ const Listedprojects = () => {
 
   return (
     <div className="project">
+
       <div className="proj-heading">Ongoing Projects</div>
+     
 
-      <div className="renderObjects">
-        {projects.map((project) => (
-          <Projectcomp
-            key={project.id}
-            project={project}
-            handleDonate={handleDonate}
-            userInDonorsCollection={userInDonorsCollection}
-          />
-        ))}
-      </div>
+      {loadProjects ? (
+        <Loader typeOfloader={"a"}/>
+      ) :
+        (
+          <>
+            {/** Aik Aik projects component */}
 
-      <Footer />
+            <div className="renderObjects">
+              {projects.map((project) => (
+                <Projectcomp
+                  key={project.id}
+                  project={project}
+                  handleDonate={handleDonate}
+                  userInDonorsCollection={userInDonorsCollection}
+                />
+              ))}
+            </div>
+
+            <Footer />
+          </>
+        )}
+
+
     </div>
   );
 };

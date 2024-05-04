@@ -23,6 +23,7 @@
 }
 
 .profileText {
+  align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,9 +202,10 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .cover { 
+  .cover {
     height: 58vh;
   }
+
   .navButton {
     font-size: 35px;
     font-weight: 900;
@@ -211,23 +213,37 @@
     padding: 7px;
   }
 }
+
 @media screen and (max-width: 880px) {
   .cover {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     padding: 12px;
     height: 68vh;
+    margin-bottom: 10px;
+  }
+
+  .coverImage {
+    margin-top: 18px;
+    width: 330px;
+    height: 220px;
+  }
+
+  .naam {
+    font-size: 100px;
   }
 
   .tagline {
     font-size: 40px;
+    margin-top: 5px;
+    margin-bottom: 8px;
   }
 
   .typewriter {
     font-size: 35px;
   }
 
-  .continue{
+  .continue {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
   }
@@ -246,12 +262,6 @@
 
   .card {
     background-color: rgb(240, 255, 244);
-  }
-
-  .coverImage {
-    margin-top: 10px;
-    width: 330px;
-    height: 220px;
   }
 
   .numbers {

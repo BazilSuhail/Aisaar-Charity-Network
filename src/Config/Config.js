@@ -5,13 +5,14 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCzrJ4Rvu5guVQdB43USr6Vnr0CvGRgx5g",
-  authDomain: "aisaar-3985a.firebaseapp.com",
-  projectId: "aisaar-3985a",
-  storageBucket: "aisaar-3985a.appspot.com",
-  messagingSenderId: "326493818088",
-  appId: "1:326493818088:web:28fb284516bea5837acd5d",
-  measurementId: "G-VW81E19PNQ"
+  apiKey: "AIzaSyCh1HTmU0Eoaojgi7nnWxQlqoIvt-MvL4k",
+  authDomain: "charity-management-syste-6c5f7.firebaseapp.com",
+  databaseURL: "https://charity-management-syste-6c5f7-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "charity-management-syste-6c5f7",
+  storageBucket: "charity-management-syste-6c5f7.appspot.com",
+  messagingSenderId: "533819495425",
+  appId: "1:533819495425:web:879fba64f8eec103531c00",
+  measurementId: "G-FBVBWL9BSZ"
 };
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();

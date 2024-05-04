@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, fs } from "../Config/Config";
+import "./Styles/donor.css";
+import "./Styles/tables.css";
+import "./Styles/form.css";
 
-import "./Styles/donor.css"
-
-import "./Styles/tables.css"
-import "./Styles/form.css"
 const Volunteer = () => {
   const navigate = useNavigate();
   const [volunteerData, setVolunteerData] = useState({});
@@ -25,54 +23,55 @@ const Volunteer = () => {
   });
 
   useEffect(() => {
-    const fetchVolunteerData = async () => {
+    const fetchData = async () => {
       try {
         const currentUser = auth.currentUser;
         if (currentUser) {
+          // Fetch volunteer data
           const volunteerRef = fs.collection("volunteer").doc(currentUser.uid);
-          const doc = await volunteerRef.get();
-          if (doc.exists) {
-            setVolunteerData(doc.data());
-            setFormData({ ...doc.data(), idtype: "Volunteer" });
-          }
-          else {
+          const volunteerDoc = await volunteerRef.get();
+          if (volunteerDoc.exists) {
+            const volunteerData = volunteerDoc.data();
+            setVolunteerData(volunteerData);
+            setFormData({ ...volunteerData, idtype: "Volunteer" });
+          } else {
             console.log("No volunteer data found");
           }
-        }
-      }
-      catch (error) {
-        console.error("Error fetching volunteer data:", error.message);
-      }
-    };
-
-    const fetchProjectsData = async () => {
-      try {
-        const currentUser = auth.currentUser;
-
-        if (currentUser && currentUser.uid) {
+  
+          // Fetch projects data
           const projectsRef = fs
             .collection("projects")
             .where("volunteerID", "==", currentUser.uid);
-          const snapshot = await projectsRef.get();
-          const projectsData = [];
-
-          snapshot.forEach((doc) => {
-            projectsData.push(doc.data());
-          });
+          const projectsSnapshot = await projectsRef.get();
+          const projectsData = projectsSnapshot.docs.map((doc) => doc.data());
           setProjects(projectsData);
+  
+          // Fetch applied projects data
+          const appliedProjectsRef = fs
+            .collection("proposedProjects")
+            .where("volunteerID", "==", currentUser.uid);
+          const appliedProjectsSnapshot = await appliedProjectsRef.get();
+          const appliedProjectsData = appliedProjectsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setAppliedProjects(appliedProjectsData);
         }
-        else {
-          console.log("No volunteer data found");
-        }
-      }
-      catch (error) {
-        console.error("Error fetching projects data:", error.message);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
       }
     };
-
-    fetchVolunteerData();
-    fetchProjectsData();
+  
+    // Call fetchData when the component mounts or when the authentication state changes
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchData();
+      }
+    });
+  
+    return unsubscribe; // Cleanup function to unsubscribe from the auth state listener
   }, []);
+  
 
 
   const handleChange = (e) => {
@@ -80,35 +79,9 @@ const Volunteer = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  useEffect(() => {
-    const fetchAppliedProjects = async () => {
-      try {
-        const currentUser = auth.currentUser;
-        if (currentUser && currentUser.uid) {
-          const appliedProjectsRef = fs
-            .collection("proposedProjects")
-            .where("volunteerID", "==", currentUser.uid);
-          const snapshot = await appliedProjectsRef.get();
-          const appliedProjectsData = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setAppliedProjects(appliedProjectsData);
-        }
-      }
-      catch (error) {
-        console.error("Error fetching applied projects:", error.message);
-      }
-    };
-
-    fetchAppliedProjects();
-  }, []);
-
-
   const handleEdit = () => {
     setEditMode(true);
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,12 +93,12 @@ const Volunteer = () => {
         console.log(volunteerData);
         setEditMode(false);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error updating volunteer data:", error.message);
     }
   };
-  const handle_proposal = () => { 
+
+  const handle_proposal = () => {
     navigate('/AppliedProject');
   };
   return (
@@ -135,21 +108,20 @@ const Volunteer = () => {
       {editMode ? (
         <div className='form'>
           <form className="formData" onSubmit={handleSubmit}>
+
             <div className='attribute'>Name: </div>
             <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} />
             <div className='attribute'>Email:</div>
             <input type="email" name="email" value={formData.email} onChange={handleChange} />
             <div className='attribute'>Phone Number: </div>
+            <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
+            <div className='attribute'>Address: </div>
             <input type="text" name="address" value={formData.address} onChange={handleChange} />
-
             <div className='attribute'>Date of Birth: </div>
             <input type="date" name="dob" value={formData.dob} onChange={handleChange} />
-            <div className='attribute'>Phone Number: </div>
-            <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-
-
             <div className='attribute'>CNIC: </div>
             <input type="text" name="cnic" value={formData.cnic} onChange={handleChange} />
+
             <button className='save' type="submit">Save</button>
           </form>
         </div>
@@ -161,15 +133,32 @@ const Volunteer = () => {
               <div className='values'>{volunteerData.displayName}</div>
               <div className='attributes'>Email:</div>
               <div className='values'>{volunteerData.email}</div>
+
               <div className='attributes'>Phone Number: </div>
-              <div className='values'>{volunteerData.phoneNumber}</div>
+              <div className='values'>{!volunteerData.phoneNumber
+                ? (<div className='values-placeholder'>Enter your bio</div>)
+                : (<div>{volunteerData.phoneNumber}</div>)}
+              </div>
+
               <div className='attributes'>Address: </div>
-              <div className='values'>{volunteerData.address}</div>
+              <div className='values'>{!volunteerData.address
+                ? (<div className='values-placeholder'>Enter your bio</div>)
+                : (<div>{volunteerData.address}</div>)}
+              </div>
 
               <div className='attributes'>Date of Birth: </div>
-              <div className='values'>{volunteerData.dob}</div>
+              <div className='values'>{!volunteerData.dob
+                ? (<div className='values-placeholder'>Enter your bio</div>)
+                : (<div>{volunteerData.dob}</div>)}
+              </div>
+
               <div className='attributes'>CNIC:</div>
-              <div className='values'>{volunteerData.cnic}</div>
+              <div className='values'>{!volunteerData.cnic
+                ? (<div className='values-placeholder'>Enter your bio</div>)
+                : (<div>{volunteerData.cnic}</div>)}
+              </div>
+
+
               <button className='edit-btn' onClick={handleEdit}>Edit Info</button>
               <button className='proposal' onClick={handle_proposal}>Propose a Project</button>
 
@@ -211,9 +200,9 @@ const Volunteer = () => {
       )}
 
       {appliedProjects.length > 0 && (
-        <div> 
+        <div>
           <div className="back">
-          <div className="headings">Applied Projects </div>
+            <div className="headings">Applied Projects </div>
             <div className="table-container">
               <table className="table-body">
                 <thead className="head">

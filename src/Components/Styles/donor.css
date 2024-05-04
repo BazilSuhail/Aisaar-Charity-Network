@@ -33,7 +33,12 @@
   padding: 10px;
   font-size: x-large;
 }
-
+.values-placeholder {
+  color: rgb(116, 130, 115); 
+  font-size: medium;
+  font-weight: 700;
+  font-style: italic;
+}
 .edit {
   width: 40%;
   margin: 10px;

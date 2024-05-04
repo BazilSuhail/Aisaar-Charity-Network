@@ -5,12 +5,14 @@ import { FieldValue } from "../Config/Config";
 import Footer from "./Footer";
 import CampaignComp from "./CampaignComp.jsx";
 import "./Styles/campaignList.css";
+import Loader from "./Loader";
 
 const Listcampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
 
+  const [loadProjects, setLoadProjects] = useState(true);
   const [updatecampaigns, setUpdatecampaigns] = useState(false); // State to trigger re-fetching projects
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const Listcampaigns = () => {
           ...doc.data(),
         }));
         setCampaigns(campaignsData);
+        setLoadProjects(false);
       } catch (error) {
         console.error("Error fetching campaigns:", error);
       }
@@ -128,21 +131,27 @@ const Listcampaigns = () => {
 
   return (
     <div className="campaign">
-      
+
       <div className="camp-heading">Registered Campaigns</div>
+      {loadProjects ? (
+        <Loader typeOfloader={"a"} />
+      ) :
+        (
+          <>
+            <div className="render-campaigns">
+              {campaigns.map((campaign) => (
+                <CampaignComp
+                  key={campaign.id}
+                  campaign={campaign}
+                  handleDonate={handleDonate}
+                  userInDonorsCollection={userInDonorsCollection}
+                />
+              ))}
+            </div>
 
-      <div className="render-campaigns">
-        {campaigns.map((campaign) => (
-          <CampaignComp
-            key={campaign.id}
-            campaign={campaign}
-            handleDonate={handleDonate}
-            userInDonorsCollection={userInDonorsCollection}
-          />
-        ))}
-      </div>
-
-      <Footer />
+            <Footer />
+          </>
+        )}
     </div>
   );
 };

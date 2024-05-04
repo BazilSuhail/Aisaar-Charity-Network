@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { auth, fs } from "../Config/Config";
 
-import "./Styles/donor.css"
-import "./Styles/tables.css"
-import "./Styles/form.css"
+import "./Styles/donor.css";
+import "./Styles/tables.css";
+import "./Styles/form.css";
 
 const AppliedProj = () => {
   const [loggedInVolunteer, setLoggedInVolunteer] = useState(null);
@@ -13,7 +13,7 @@ const AppliedProj = () => {
     startDate: "",
     endDate: "",
     targetAmount: "0",
-    status: "",
+    status: "Active", // Set default status to "Active"
     volunteerID: "",
     franchiseID: "", // Add franchiseID field
     collectedAmount: "0", // Initialize collectedAmount to "0"
@@ -38,7 +38,7 @@ const AppliedProj = () => {
     };
 
     fetchLoggedInVolunteer();
-  });
+  }, []); // Pass an empty dependency array to run only once on mount
 
   const fetchAppliedProjects = async (volunteerID) => {
     try {
@@ -65,8 +65,6 @@ const AppliedProj = () => {
         ...doc.data(),
       }));
       setFranchises(franchiseData);
-
-      console.log(franchises)
     } catch (error) {
       console.error("Error fetching franchises:", error.message);
     }
@@ -90,9 +88,10 @@ const AppliedProj = () => {
         startDate: "",
         endDate: "",
         targetAmount: "0",
-        status: "",
+        status: "Active", // Set default status to "Active"
         volunteerID: loggedInVolunteer,
-        collectedAmount: "0", // Initialize collectedAmount to "0"
+        franchiseID: "", // Reset franchiseID
+        collectedAmount: "0",
       });
       alert("Project proposed successfully!");
       fetchAppliedProjects(loggedInVolunteer);
@@ -134,56 +133,95 @@ const AppliedProj = () => {
       </div>
       <br />
       <div className="placeForm">
-        <button className="tooglebutton" onClick={() => setShowForm(!showForm)}>
+        <button
+          className="tooglebutton"
+          onClick={() => setShowForm(!showForm)}
+        >
           {showForm ? "Cancel Application" : "Apply Project"}
         </button>
         {showForm && (
-          <div className='form'>
+          <div className="form">
             <form className="formData" onSubmit={handleSubmit}>
-              <div className='attribute'>Name: </div>
-              <input type="text" name="title" value={proposedProjectData.title} onChange={handleChange} />
+              <div className="attribute">Name: </div>
+              <input
+                type="text"
+                name="title"
+                value={proposedProjectData.title}
+                onChange={handleChange}
+              />
 
-              <div className='attribute'>Description:</div>
-              <input type="text" name="description" value={proposedProjectData.description} onChange={handleChange} />
+              <div className="attribute">Description:</div>
+              <input
+                type="text"
+                name="description"
+                value={proposedProjectData.description}
+                onChange={handleChange}
+              />
 
-              <div className='attribute'>Start Date: </div>
-              <input type="date" name="startDate" value={proposedProjectData.startDate} onChange={handleChange} />
+              <div className="attribute">Start Date: </div>
+              <input
+                type="date"
+                name="startDate"
+                value={proposedProjectData.startDate}
+                onChange={handleChange}
+              />
 
-              <div className='attribute'>End Date: </div>
-              <input type="date" name="endDate" value={proposedProjectData.endDate} onChange={handleChange} />
+              <div className="attribute">End Date: </div>
+              <input
+                type="date"
+                name="endDate"
+                value={proposedProjectData.endDate}
+                onChange={handleChange}
+              />
 
-              <div className='attribute'>Target Amount : </div>
-              <input type="text" name="targetAmount" value={proposedProjectData.targetAmount} onChange={handleChange} />
-              {
-                /*
-                
-              <div className='attribute'>Franchise: </div>
-              <select name="franchiseID" value={proposedProjectData.franchiseID} onChange={handleChange}>
-                <option value="">Select Franchise</option>
-                {franchises.map((franchise) => (
-                  <option key={franchise.id} value={franchise.id}>{franchise.name}</option>
-                ))}
-              </select>
-                */
-              }
-              <div className='attribute'>Select Franchise to which to Propose : </div>
-              <select className="accType" name="franchiseID" value={proposedProjectData.franchiseID} onChange={handleChange} required >
+              <div className="attribute">Target Amount : </div>
+              <input
+                type="text"
+                name="targetAmount"
+                value={proposedProjectData.targetAmount}
+                onChange={handleChange}
+              />
+
+              <div className="attribute">
+                Select Franchise to which to Propose :{" "}
+              </div>
+              <select
+                className="accType"
+                name="franchiseID"
+                value={proposedProjectData.franchiseID}
+                onChange={handleChange}
+                required
+              >
                 <option value="">Select Organization</option>
                 {franchises.map((branch) => (
-                  <option className="selection" key={branch.id} value={branch.id}>
+                  <option
+                    className="selection"
+                    key={branch.id}
+                    value={branch.id}
+                  >
                     {branch.name}
                   </option>
                 ))}
               </select>
 
-
               <div className="attribute"> Status: </div>
-              <select className="accType" name="status" value={proposedProjectData.status} onChange={handleChange}>
-                <option className="selection" value="Active">Active</option>
-                <option className="selection" value="In Progress">In Progress</option>
+              <select
+                className="accType"
+                name="status"
+                value={proposedProjectData.status}
+                onChange={handleChange}
+              >
+                <option className="selection" value="Active">
+                  Active
+                </option>
+                <option className="selection" value="In Progress">
+                  In Progress
+                </option>
               </select>
               <br />
-              <button className='save' type="submit">Save</button>
+              <button className="save" type="submit">
+                Save
+              </button>
             </form>
           </div>
         )}

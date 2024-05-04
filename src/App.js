@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 
 import "../src/Components/Styles/loader.css";
+import Loader from "./Components/Loader";
 // Lazy loading components
 const Home = React.lazy(() => import("./Components/Home"));
 const Donor = React.lazy(() => import("./Components/Donor"));
@@ -22,18 +23,10 @@ const App = () => {
     <Router>
 
       <Navbar />
-      <Suspense fallback={
-              <div className="body-container">
-                <div className="body-head"> . </div>
-                <div className="main-loader">
-                  <div className="left-main"> . </div>
-                  <div className="right-main"> . </div>
-                </div>
-                <div className="body-footer"> . </div>
-              </div>
-            }>
-        
-        <Routes> 
+      <Suspense fallback={<Loader typeOfloader="skeleton" />}>
+
+        <Routes>
+          {/*  <Route path="/" element={<Loader typeOfloader="a" />} />*/}
           <Route path="/" element={<Home />} />
           <Route path="/donor" element={<Donor />} />
           <Route path="/gallery" element={<Gallery />} />

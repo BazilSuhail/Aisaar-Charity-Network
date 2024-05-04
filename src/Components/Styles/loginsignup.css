@@ -12,6 +12,13 @@
     width: 99vw;
 }
 
+.accType {
+    font-size: x-large;
+    color: rgb(0, 44, 10);
+    font-weight: 700; 
+    font-style: oblique;
+    margin-bottom: 10px;
+}
 .signup {
     color: rgb(19, 53, 28);
     border: 3px green solid;
@@ -68,13 +75,6 @@
 
 .link:hover {
     color: #233e2c; 
-}
-.accType {
-    font-size: x-large;
-    color: rgb(0, 44, 10);
-    font-weight: 700; 
-    font-style: oblique;
-    margin-bottom: 10px;
 }
 
 .selection {
