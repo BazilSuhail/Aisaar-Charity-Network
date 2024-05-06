@@ -186,7 +186,7 @@ const AppliedProj = () => {
                 Select Franchise to which to Propose :{" "}
               </div>
               <select
-                className="accType"
+                className="form-selection-fields"
                 name="franchiseID"
                 value={proposedProjectData.franchiseID}
                 onChange={handleChange}
@@ -205,23 +205,13 @@ const AppliedProj = () => {
               </select>
 
               <div className="attribute"> Status: </div>
-              <select
-                className="accType"
-                name="status"
-                value={proposedProjectData.status}
-                onChange={handleChange}
-              >
-                <option className="selection" value="Active">
-                  Active
-                </option>
-                <option className="selection" value="In Progress">
-                  In Progress
-                </option>
+
+              <select className="form-selection-fields" name="status" value={proposedProjectData.status} onChange={handleChange}    >
+                <option className="selection" value="Active">Active</option>
+                <option className="selection" value="In Progress"> In Progress</option>
               </select>
-              <br />
-              <button className="save" type="submit">
-                Save
-              </button>
+<br />
+              <button className="save" type="submit">    Save  </button>
             </form>
           </div>
         )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, fs } from "../Config/Config";
+import Footer from "./Footer";
 import "./Styles/donor.css";
 import "./Styles/tables.css";
 import "./Styles/form.css";
@@ -37,7 +38,7 @@ const Volunteer = () => {
           } else {
             console.log("No volunteer data found");
           }
-  
+
           // Fetch projects data
           const projectsRef = fs
             .collection("projects")
@@ -45,7 +46,7 @@ const Volunteer = () => {
           const projectsSnapshot = await projectsRef.get();
           const projectsData = projectsSnapshot.docs.map((doc) => doc.data());
           setProjects(projectsData);
-  
+
           // Fetch applied projects data
           const appliedProjectsRef = fs
             .collection("proposedProjects")
@@ -61,17 +62,17 @@ const Volunteer = () => {
         console.error("Error fetching data:", error.message);
       }
     };
-  
+
     // Call fetchData when the component mounts or when the authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         fetchData();
       }
     });
-  
+
     return unsubscribe; // Cleanup function to unsubscribe from the auth state listener
   }, []);
-  
+
 
 
   const handleChange = (e) => {
@@ -233,6 +234,7 @@ const Volunteer = () => {
         </div>
       )}
 
+      <Footer />
     </div>
   );
 };

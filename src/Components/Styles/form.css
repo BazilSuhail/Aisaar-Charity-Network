@@ -35,6 +35,18 @@
     box-sizing: border-box;
 }
 
+.form-selection-fields { 
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: hsl(148, 35%, 35%);
+    font-weight: 800;
+    font-size: large;
+    color: #daffda;
+    box-sizing: border-box;
+}
+
 .formData button[type="submit"] {
     padding: 10px 20px;
     margin: 10px 5px;
@@ -72,28 +84,17 @@
     font-size: larger;
 }
 
-.accType {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background-color: hsl(148, 35%, 35%);
-    color: rgb(231, 255, 196);
-    font-size: large;
-    font-weight: 700;
-
-}
-
-.selection { 
+.selection {
     color: rgb(231, 255, 196);
     font-weight: 600;
 }
-.tooglebutton{
+
+.tooglebutton {
     padding: 10px;
     font-size: large;
     font-weight: 600;
-    background-color:#c0ffd0; 
-    color:  #00340e;
+    background-color: #c0ffd0;
+    color: #00340e;
     border-radius: 8px;
 
 }

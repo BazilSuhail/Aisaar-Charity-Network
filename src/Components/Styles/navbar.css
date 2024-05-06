@@ -9,11 +9,11 @@
 }
 
 ::-webkit-scrollbar {
-  width: 7px;  
+  width: 7px;
 }
-  
+
 ::-webkit-scrollbar-track {
-  background: #003d02; 
+  background: #003d02;
 }
 
 .logo {
@@ -75,12 +75,54 @@
   color: white;
 }
 
+.auth-links {
+  display: flex;
+}
+
+.profile-container-donor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: medium;
+  color: rgb(255, 255, 255);
+  margin-right: 12px;
+  border: 3px white solid;
+  border-radius: 50%;
+  padding: 7px;
+  font-size: 28px;
+}
+
+.profile-container-donor:hover{
+  color: #84faa7;
+  background: white;
+}
+.profile-container-volunteer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: medium;
+  color: rgb(7, 58, 0);
+  margin-right: 12px;
+  background-color: rgb(221, 255, 226);
+  border-radius: 50%;
+  padding: 7px;
+  font-size: 28px;
+}
+
+.profile-container-volunteer:hover{
+  color:  white;
+  background: #06812b;
+}
+
 .logout-button {
-  justify-content: flex-end;
   color: #044217;
-  font-size: large;
-  font-weight: bolder;
-  padding: 10px;
+  font-size: 28px;
+  padding-top: 7px;
+  padding-left: 8px;
   border-radius: 15px;
   margin-right: 25px;
 }
@@ -91,9 +133,7 @@
   background-color: rgb(0, 121, 47);
 }
 
-@media screen and (max-width: 870px) {
-
-
+@media screen and (max-width: 870px) { 
   .navbar {
     flex-direction: column;
     justify-content: flex-start;
@@ -101,7 +141,7 @@
     height: 69px;
     width: 99vw;
     margin-top: 0px;
-    padding: 10px; 
+    padding: 10px;
     background-color: rgb(0, 56, 15);
     z-index: 5;
     position: relative;
@@ -119,9 +159,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-padding: 10px 5px;
-
+    padding: 10px 5px;
     display: block;
     color: white;
     font-size: x-large;
@@ -155,10 +193,13 @@ padding: 10px 5px;
 
   .auth-links {
     margin-top: auto;
+    flex-direction: column;
   }
 
   .nav-links,
   .sign-links,
+  .profile-container-volunteer,
+  .profile-container-donor,
   .logout-button {
     display: none;
   }
@@ -168,11 +209,51 @@ padding: 10px 5px;
     display: block;
   }
 
-  .navbar.open .logout-button,
+  .navbar.open .profile-container-volunteer,
+  .navbar.open .profile-container-donor {
+    display: block;
+    border: none;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    width: 55vw;
+    font-size: 40px;
+    color: #9dffba;
+    background-color: rgb(0, 63, 13);
+  }
+
+  .profile-container-volunteer::after  { 
+    content: "Volunteer Profile";
+    color: #9dffba;
+    font-size: 18px; 
+  } 
+  .profile-container-donor::after { 
+    content: "Donor Profile";
+    color: #9dffba;
+    font-size: 18px; 
+  }
   .navbar.open .sign-links {
     display: block;
     margin-bottom: 80px;
     font-size: larger;
     padding: 8px;
   }
+
+  .navbar.open .logout-button {
+    display: block;
+    margin-bottom: 95px;
+    margin-top: 12px;
+    padding: 8px;
+    color: #044217;
+    font-size: 31px;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    padding-left: 13px;
+    padding-right: 47vw;
+
+    border-radius: 15px;
+    margin-right: 25px;
+  }
+
 }

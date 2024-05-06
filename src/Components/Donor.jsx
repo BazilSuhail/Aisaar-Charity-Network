@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { auth, fs } from '../Config/Config';
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
-//import TransactionHistory from './Transaction_History';
-import "./Styles/donor.css"
 
+import "./Styles/donor.css"
 import "./Styles/form.css"
+
 const Donor = () => {
   const navigate = useNavigate();
   const [donorData, setDonorData] = useState({});
@@ -18,9 +18,6 @@ const Donor = () => {
     donations: "",
     idtype: "Donor"
   });
-
-  //const [showTransactionHistory, setShowTransactionHistory] = useState(false);
-  //console.log(showTransactionHistory);
 
   useEffect(() => {
     const fetchDonorData = async () => {
@@ -44,8 +41,14 @@ const Donor = () => {
         console.error("Error fetching donor data:", error.message);
       }
     };
+    // Call fetchData when the component mounts or when the authentication state changes
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchDonorData();
+      }
+    });
 
-    fetchDonorData();
+    return unsubscribe;
   }, []);
 
   const handleEdit = () => {
@@ -76,16 +79,13 @@ const Donor = () => {
     }
   };
 
-  // const toggleTransactionHistory = () => {
-  // setShowTransactionHistory(!showTransactionHistory);
-  //};
   const gotoTransactionHistory = () => {
     navigate('/transactionhistory');
-  }
+  };
 
   return (
     <div className='donor'>
-      <h2>Donor Information</h2>
+      <div className='donor-heading'>Donor Information</div>
       {editMode ? (
         <div className='form'>
           <form className="formData" onSubmit={handleSubmit}>
@@ -102,35 +102,39 @@ const Donor = () => {
         </div>
       ) : (
         <>
-
           <div className='props'>
             <div className='attributes'>Name: </div>
             <div className='values'>{donorData.displayName}</div>
             <div className='attributes'>Email:</div>
             <div className='values'>{donorData.email}</div>
+
             <div className='attributes'>Phone Number: </div>
-            <div className='values'>{donorData.phoneNumber}</div>
+            <div className='values'>{!donorData.phoneNumber
+              ? (<div className='values-placeholder'>Enter your bio</div>)
+              : (<div>{donorData.phoneNumber}</div>)}
+            </div>
+
             <div className='attributes'>City: </div>
-            <div className='values'>{donorData.city}</div>
+            <div className='values'>{!donorData.city
+              ? (<div className='values-placeholder'>Enter your bio</div>)
+              : (<div>{donorData.city}</div>)}
+            </div>
+
             <div className='attributes'>Donations:</div>
-            <div className='values'>{donorData.donations}</div>
+            <div className='values'>{!donorData.donations
+              ? (<div className='values-placeholder'>You Haven't Donated Yet</div>)
+              : (<div>{donorData.donations}</div>)}
+            </div>
+
             <button className='edit' onClick={handleEdit}>Edit</button>
           </div>
           <button className='show-transaction' onClick={gotoTransactionHistory}>
             Check Transaction History
           </button>
-
-          {/*
-          <button className='show-transaction' onClick={toggleTransactionHistory}>
-            {showTransactionHistory ? "Hide Transaction History" : "Show Transaction History"}
-          </button>
-          <div className='transaction-table'>{showTransactionHistory && <TransactionHistory />}</div>  
-        
-         */}
         </>
       )}
       <Footer />
-    </div >
+    </div>
   );
 };
 

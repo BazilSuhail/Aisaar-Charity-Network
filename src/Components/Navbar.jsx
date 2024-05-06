@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars } from 'react-icons/fa';
+import { IoMdPerson } from "react-icons/io";
+import { IoLogOutOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import "./Styles/navbar.css";
 import { fs, auth } from "../Config/Config";
@@ -54,15 +56,22 @@ const Navbar = () => {
     if (loggedUser === "Volunteer") {
       return (
         <> {/*<NavLink to="/AppliedProject" className="nav-links">Applied Projects</NavLink>*/}
-          
-          <NavLink to="/volunteer" className="nav-links">Volunteer Profile</NavLink>
+
+          {/*<NavLink to="/volunteer" className="nav-links">Volunteer Profile</NavLink>*/}
+          <NavLink to="/volunteer" className="profile-container-volunteer">
+            <IoMdPerson />
+          </NavLink>
         </>
       );
     } else if (loggedUser === "Donor") {
       return (
         <>
           {/*<NavLink to="/transactionhistory" className="nav-links">Transaction History</NavLink>*/}
-          <NavLink to="/donor" className="nav-links">Donor Profile</NavLink>
+          <NavLink to="/donor" className="profile-container-donor">
+            <IoMdPerson />
+          </NavLink>
+
+          {/*<NavLink to="/donor" className="nav-links">Donor Profile</NavLink>*/}
         </>
       );
     }
@@ -75,8 +84,13 @@ const Navbar = () => {
       );
     }
     else {
-      return (
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+      return ( //<button onClick={handleLogout} className="logout-button">Logout  </button>
+        <>
+          {renderLinks(loggedUser)}
+          <div>
+            <button onClick={handleLogout} className="logout-button"><IoLogOutOutline /></button>
+          </div>
+        </>
       );
     }
   };
@@ -100,7 +114,7 @@ const Navbar = () => {
         <NavLink to="/gallery" className="nav-links">Gallery</NavLink>
         <NavLink to="/listedprojects" className="nav-links">Projects</NavLink>
         <NavLink to="/listcampaigns" className="nav-links">Campaigns</NavLink>
-        {renderLinks(loggedUser)}
+        <NavLink to="/feedback" className="nav-links">Feedback</NavLink>
       </div>
       <div className="auth-links">
         {renderAuthLinks()}
