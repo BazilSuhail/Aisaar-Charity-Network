@@ -11,3 +11,10 @@ beneficiaries.
 #### Maintaining the record of Donor’s donations(Transaction made)
 #### Monitoring fundraising campaigns associated directly to franchises.
 #### Managing beneficiaries enrollment,status and skills they are acquiring within franchises.
+
+# Packages Install
+## To run this projects you have to install some external node modules or packages.To continue of with this projects run these commands:
+npm i firebase
+npm i react-icons
+npm i react-router-dom
+npm i react-toastify
