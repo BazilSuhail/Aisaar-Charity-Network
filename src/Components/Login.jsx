@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, fs } from "../Config/Config";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import "./Styles/loginsignup.css";
 
 const Login = () => {
+  const notify = () => toast("Wow so easy!");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("donor");
@@ -24,7 +29,7 @@ const Login = () => {
 
       await auth.signInWithEmailAndPassword(email, password);
       console.log("User logged in successfully!");
-      alert("User logged in successfully!");
+      // alert("User logged in successfully!");
       navigate(`/${userType}`);
     } catch (error) {
       alert("Incorrect Credentials !!!");
@@ -56,8 +61,21 @@ const Login = () => {
 
         <input className="email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input className="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button className="login-btn" type="submit">Log In</button>
-        
+        <button className="login-btn" onClick={notify} type="submit">Log In</button>
+
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          transition:Bounce/>
+
       </form>
     </div>
   );

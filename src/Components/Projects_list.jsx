@@ -136,6 +136,21 @@ const Listedprojects = () => {
           ],
         });
       }
+
+      //Logic to add Completed Projects
+      if (updatedCollectedAmount >= parseInt(projectToUpdate.targetAmount)) {
+        const completedProjectData = { ...projectToUpdate };
+        delete completedProjectData.collectedAmount;
+        await fs.collection("completedProjects").doc(projectId).set(completedProjectData);
+        await fs.collection("projects").doc(projectId).delete();
+      }
+
+      //Logic for premium member
+      if (amount > 1000000) {
+        await fs.collection("topDonors").doc(currentUser.uid).set({
+          donorId: currentUser.uid
+        }, { merge: true }); // Use merge to update the document if it already exists
+      }
       setUpdateProjects(prevState => !prevState);
     }
     catch (error) {
@@ -149,10 +164,10 @@ const Listedprojects = () => {
     <div className="project">
 
       <div className="proj-heading">Ongoing Projects</div>
-     
+
 
       {loadProjects ? (
-        <Loader typeOfloader={"a"}/>
+        <Loader typeOfloader={"a"} />
       ) :
         (
           <>
