@@ -1,0 +1,115 @@
+.footer {
+    background-color: #003004;
+    color: #fff;
+    width: 99vw;
+    padding: 15px 10px;
+    margin-top: 20px;  
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footer-content div {
+    width: 20%;
+}
+
+.organization-info {
+    padding: 20px;
+}
+
+.organization-info div {
+    width: 95%;
+}
+
+.organization-info h3 {
+    width: 97%;
+    border: 2px white solid;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: x-large;
+    text-align: center;
+}
+
+.message-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.message-bar div {
+    width: 100%;
+    margin: 8px;
+    text-align: center;
+}
+
+.message-us {
+    background-color: #003004;
+    border: 2px white solid;
+    margin: 7px;
+    padding: 10px;
+    width: 95%;
+    border-radius: 10px;
+    color: wheat; 
+}
+
+.links-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.f-link {
+    margin: 10px;
+    padding: 5px;
+    color: #fff;
+    font-size: large;
+    text-decoration: none;
+}
+
+.f-icon {
+    margin-right: 15px;
+}
+
+.rights-reserved {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width:767px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-content div {
+        width: 75%;
+    }
+
+    .message-bar {
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .organization-info {
+        border: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .organization-info div {
+
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .links-nav {
+        margin-left: 5px;
+        margin-top: 20px;
+    }
+}
