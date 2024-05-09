@@ -198,3 +198,11 @@
         width: 100%;
     }
 }
+@media (max-width: 768px) {
+    .Toastify__toast-container {
+      top: 45px; /* Adjust the top position for mobile screens */
+      left: 12%;  
+      width: 75vw; 
+    }
+  }
+  
