@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../Config/Config';
 import Footer from "./Footer";
-import "./Styles/home.css";
+import "./Styles/gallery.css";
 import "./Styles/tables.css";
+import Svg1 from './Styles/photos/charitycup.svg'; 
 
 const Gallery = () => {
     const [totalProjects, setTotalProjects] = useState(0);
     const [totalCampaigns, setTotalCampaigns] = useState(0);
-    const [totalfranchises, setTotalfranchises] = useState(0);
-
+    const [totalFranchises, setTotalFranchises] = useState(0);
     const [projects, setProjects] = useState([]);
     const [campaigns, setCampaigns] = useState([]);
+    const [completedProjects, setCompletedProjects] = useState([]);
     const [totalVolunteers, setTotalVolunteers] = useState(0);
     const [totalDonors, setTotalDonors] = useState(0);
-
     const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
-    useEffect(() => {
 
+    useEffect(() => {
         const fetchFranchises = async () => {
             try {
                 const franchiseRef = fs.collection('franchise');
                 const snapshot = await franchiseRef.get();
-                setTotalfranchises(snapshot.size);
+                setTotalFranchises(snapshot.size);
             } catch (error) {
-                console.error('Error fetching organizations:', error.message);
+                console.error('Error fetching franchises:', error.message);
             }
         };
-
 
         const fetchProjects = async () => {
             try {
@@ -34,7 +33,7 @@ const Gallery = () => {
                 const snapshot = await projectsRef.get();
                 const projectData = snapshot.docs.map(doc => doc.data());
                 setProjects(projectData);
-                setTotalProjects(snapshot.size); // Set the total number of projects
+                setTotalProjects(snapshot.size);
             } catch (error) {
                 console.error('Error fetching projects:', error.message);
             }
@@ -52,6 +51,16 @@ const Gallery = () => {
             }
         };
 
+        const fetchCompletedProjects = async () => {
+            try {
+                const completedProjectsRef = fs.collection('completedProjects');
+                const snapshot = await completedProjectsRef.get();
+                const completedProjectsData = snapshot.docs.map(doc => doc.data());
+                setCompletedProjects(completedProjectsData);
+            } catch (error) {
+                console.error('Error fetching completed projects:', error.message);
+            }
+        };
 
         const fetchBeneficiaries = async () => {
             try {
@@ -67,20 +76,17 @@ const Gallery = () => {
             try {
                 const volunteersRef = fs.collection('volunteer');
                 const snapshot = await volunteersRef.get();
-                const totalVolunteers = snapshot.size;
-                setTotalVolunteers(totalVolunteers);
+                setTotalVolunteers(snapshot.size);
             } catch (error) {
                 console.error('Error fetching total volunteers:', error.message);
             }
         };
 
-
         const fetchTotalDonors = async () => {
             try {
                 const donorsRef = fs.collection('donors');
                 const snapshot = await donorsRef.get();
-                const totalDonors = snapshot.size;
-                setTotalDonors(totalDonors);
+                setTotalDonors(snapshot.size);
             } catch (error) {
                 console.error('Error fetching total donors:', error.message);
             }
@@ -89,24 +95,26 @@ const Gallery = () => {
         fetchFranchises();
         fetchProjects();
         fetchCampaigns();
+        fetchCompletedProjects();
         fetchTotalVolunteers();
         fetchTotalDonors();
         fetchBeneficiaries();
     }, []);
 
-
     const projDonations = projects.reduce(
-        (total, project) => total + parseInt(project.collectedAmount),
+        (total, project) => total + parseInt(project.collectedAmount || 0),
+        0
+    ) + completedProjects.reduce(
+        (total, project) => total + parseInt(project.targetAmount || 0),
         0
     );
 
     const campDonations = campaigns.reduce(
-        (total, campaign) => total + parseInt(campaign.currentAmountRaised),
+        (total, campaign) => total + parseInt(campaign.currentAmountRaised || 0),
         0
     );
 
     const overallDonation = projDonations + campDonations;
-
 
     const AnimatedCounter = ({ value, duration, start, incrementByHundred, val }) => {
         const [displayValue, setDisplayValue] = useState(0);
@@ -138,32 +146,36 @@ const Gallery = () => {
         return <div className="total">{displayValue}</div>;
     };
 
-
     return (
-        <div>
+        <div className='gallery'>
+            {/* ABoyt us Section*/}
+            <div className="charity-container">
 
+                <div className="charity-header">Transforming Lives Through Compassionate Action</div>
 
-
-            {/*Stats section*/}
-            <p className="statheading" >Generosity in Action</p>
-
-            <div className="stats">
-
-                <div className="card">
-                    <div className="title">Total Organizations</div>
-                    <AnimatedCounter value={totalfranchises} duration={1500} start={50} incrementByHundred={false} val={1} />
+                <div className="charity-content">
+                    At <b>إيثار</b>, a non-profit charitable organization, our mission is to extend a helping hand to those in need through a range of humanitarian initiatives. With the unwavering support of our dedicated team of volunteers and supporters, we are committed to making a significant impact on the lives of individuals and communities facing hardships. Our efforts focus on providing essential aid and empowering communities to overcome adversity. Whether it's delivering food and medical supplies, offering educational resources, or supporting sustainable development projects, we strive to bring hope and tangible improvements to those we serve.
                 </div>
-
-                <div className="card">
-                    <div className="title">Total Projects</div>
-                    <AnimatedCounter value={totalProjects} duration={1500} start={500} incrementByHundred={false} val={1} />
+                <div className="how-to-help">
+                    <h2>How You Can Help</h2>
+                    <div className="help-section">
+                        <div className='help-heading'>Donate:</div>
+                        <p>Your financial support enables us to provide essential aid and expand our initiatives.</p>
+                    </div>
+                    <div className="help-section">
+                        <div className='help-heading'>Volunteer:</div>
+                        <p>Join our team of dedicated volunteers. Your time and skills can make a significant difference.</p>
+                    </div>
+                    <div className="help-section">
+                        <div className='help-heading'>Spread the Word:</div>
+                        <p>Help us raise awareness about our mission and work. Share our story with your network to inspire others to get involved.</p>
+                    </div>
                 </div>
+            </div>
 
-                <div className="card">
-                    <div className="title">Total Campaigns</div>
-                    <AnimatedCounter value={totalCampaigns} duration={1500} start={500} incrementByHundred={false} val={1} />
-                </div>
-
+            {/* Donaton stsats*/}
+            <p className="statheading">Generosity in Action</p>
+            <div className="donation-stats">
                 <div className="card">
                     <div className="title">Overall Donations</div>
                     <AnimatedCounter value={overallDonation} duration={20} start={10} incrementByHundred={true} val={500} />
@@ -176,27 +188,46 @@ const Gallery = () => {
                     <div className="title">Donations From Campaigns</div>
                     <AnimatedCounter value={campDonations} duration={20} start={10} incrementByHundred={true} val={200} />
                 </div>
+            </div>
+            <p className="logos-heading">Our Honourable Partners</p>
+            <div className="svg-container">
+                <img src={Svg1} alt="SVG 1" className="animated-svg" />
+                <img src={Svg1} alt="SVG 2" className="animated-svg" />
+                <img src={Svg1} alt="SVG 3" className="animated-svg" />
+                <img src={Svg1} alt="SVG 4" className="animated-svg" /> 
+            </div>
 
+            {/* Other stsats*/}
+            <p className="statheading">Our Work</p>
+            <div className="stats">
+                <div className="card">
+                    <div className="title">Total Franchises</div>
+                    <AnimatedCounter value={totalFranchises} duration={1500} start={50} incrementByHundred={false} val={1} />
+                </div>
+                <div className="card">
+                    <div className="title">Total Projects</div>
+                    <AnimatedCounter value={totalProjects} duration={1500} start={500} incrementByHundred={false} val={1} />
+                </div>
+                <div className="card">
+                    <div className="title">Total Campaigns</div>
+                    <AnimatedCounter value={totalCampaigns} duration={1500} start={500} incrementByHundred={false} val={1} />
+                </div>
                 <div className="card">
                     <div className="title">Total Volunteers</div>
                     <AnimatedCounter value={totalVolunteers} duration={1500} start={50} incrementByHundred={false} val={1} />
                 </div>
-
                 <div className="card">
                     <div className="title">Total Donors</div>
                     <AnimatedCounter value={totalDonors} duration={1500} start={50} incrementByHundred={false} val={1} />
                 </div>
-
                 <div className="card">
                     <div className="title">Total Beneficiaries</div>
                     <AnimatedCounter value={totalBeneficiaries} duration={1500} start={50} incrementByHundred={false} val={1} />
                 </div>
-
-
             </div>
             <Footer />
         </div>
-    )
-}
+    );
+};
 
-export default Gallery
+export default Gallery;

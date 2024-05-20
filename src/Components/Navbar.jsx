@@ -8,42 +8,41 @@ import "./Styles/navbar.css";
 import { fs, auth } from "../Config/Config";
 
 const GetcurrUser = () => {
-  const [useridtype, setUseridtype] = useState(null);
+  const [userDetails, setUserDetails] = useState({ userType: null, displayName: '' });
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
       if (user) {
         fs.collection('volunteer').doc(user.uid).get().then(snapshot => {
           if (snapshot.exists) {
-            setUseridtype("Volunteer");
+            setUserDetails({ userType: "Volunteer", displayName: snapshot.data().displayName });
           } else {
             fs.collection('donors').doc(user.uid).get().then(snapshot => {
               if (snapshot.exists) {
-                setUseridtype("Donor");
+                setUserDetails({ userType: "Donor", displayName: snapshot.data().displayName });
               } else {
-                setUseridtype(null);
+                setUserDetails({ userType: null, displayName: '' });
               }
             })
           }
         }).catch(error => {
           console.error("Error getting user document:", error);
-          setUseridtype(null);
+          setUserDetails({ userType: null, displayName: '' });
         });
       } else {
-        setUseridtype(null);
+        setUserDetails({ userType: null, displayName: '' });
       }
     });
   }, []);
 
-  return useridtype;
+  return userDetails;
 }
 
 const Navbar = () => {
-
-  const [isOpen, setIsOpen] = useState(false); // State to manage navbar visibility
+  const [isOpen, setIsOpen] = useState(false);  
   const toggleNavbar = () => { setIsOpen(!isOpen); };
 
-  const loggedUser = GetcurrUser();
+  const { userType, displayName } = GetcurrUser();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -51,55 +50,56 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const getFirstName = (displayName) => {
+    return displayName.split(' ')[0];
+  };
 
-  const renderLinks = (loggedUser) => {
-    if (loggedUser === "Volunteer") {
-      return (
-        <> {/*<NavLink to="/AppliedProject" className="nav-links">Applied Projects</NavLink>*/}
-
-          {/*<NavLink to="/volunteer" className="nav-links">Volunteer Profile</NavLink>*/}
-          <NavLink to="/volunteer" className="profile-container-volunteer">
-            <IoMdPerson />
-          </NavLink>
-        </>
-      );
-    } else if (loggedUser === "Donor") {
+  const renderLinks = (userType, displayName) => {
+    const firstName = getFirstName(displayName);
+    
+    if (userType === "Volunteer") {
       return (
         <>
-          {/*<NavLink to="/transactionhistory" className="nav-links">Transaction History</NavLink>*/}
+          <NavLink to="/volunteer" className="profile-container-volunteer">
+            <IoMdPerson /> 
+          </NavLink>
+          <div className="profile">{firstName}</div>
+        </>
+      );
+    } else if (userType === "Donor") {
+      return (
+        <>
           <NavLink to="/donor" className="profile-container-donor">
             <IoMdPerson />
           </NavLink>
-
-          {/*<NavLink to="/donor" className="nav-links">Donor Profile</NavLink>*/}
+          <div className="profile">{firstName}</div>
         </>
       );
     }
   };
 
   const renderAuthLinks = () => {
-    if (!loggedUser) {
+    if (!userType) {
       return (
-        <> <NavLink to="/login" className="sign-links">Get Started</NavLink> </>
+        <NavLink to="/login" className="sign-links">Get Started</NavLink>
       );
-    }
-    else {
-      return ( //<button onClick={handleLogout} className="logout-button">Logout  </button>
+    } else {
+      return (
         <>
-          {renderLinks(loggedUser)}
+          {renderLinks(userType, displayName)}
           <div>
-            <button onClick={handleLogout} className="logout-button"><IoLogOutOutline /></button>
+            <button onClick={handleLogout} className="logout-button">
+              <IoLogOutOutline />
+              <div className="logout-mobile">Logout</div>
+            </button>
           </div>
         </>
       );
     }
   };
 
-  //<div className="logo">إيثار</div>
-
   return (
-    <div className={`navwrapper navbar ${isOpen ? 'open' : ''}`}>
-
+    <div className={`navbar ${isOpen ? 'open' : ''}`}>
       <div className="logo-container">
         <div className="logo">إيثار</div>
         {isOpen ? (
@@ -113,8 +113,7 @@ const Navbar = () => {
         <NavLink to="/" className="nav-links">Home</NavLink>
         <NavLink to="/gallery" className="nav-links">Gallery</NavLink>
         <NavLink to="/listedprojects" className="nav-links">Projects</NavLink>
-        <NavLink to="/listcampaigns" className="nav-links">Campaigns</NavLink>
-        <NavLink to="/feedback" className="nav-links">Feedback</NavLink>
+        <NavLink to="/listcampaigns" className="nav-links">Campaigns</NavLink> 
       </div>
       <div className="auth-links">
         {renderAuthLinks()}

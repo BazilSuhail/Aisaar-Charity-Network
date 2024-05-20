@@ -1,0 +1,210 @@
+.gallery {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.donation-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.logos-heading {
+    font-size: 35px;
+    background-color: rgb(48, 85, 55);
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    width: 98.4vw;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    color: white;
+    border: 2px green solid;
+    flex-direction: column;
+    margin: 8px;
+    height: 185px;
+    border-radius: 15px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 15px;
+    background-color: #00381abb;
+    padding: 10px;
+    width: 85%;
+    border-radius: 10px;
+    font-size: larger;
+    font-weight: 800;
+}
+
+.charity-container {
+
+    background: url('/src/Components/Styles/photos/galleryback.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+    padding: 20px;
+    height: 95vh;
+    width: 97vw;
+}
+
+.charity-header {
+    text-align: center;
+    font-size: xx-large;
+    margin: 10px 0px;
+    font-weight: 800;
+    padding: 10px;
+    background-color: #ecffee;
+    color: #2d572c;
+    border-radius: 15px;
+}
+
+.charity-content {
+    margin-bottom: 30px;
+    font-size: larger;
+    text-align: center;
+}
+
+.how-to-help {
+    display: flex;
+    flex-direction: column;
+}
+
+.how-to-help h2 {
+    font-size: xx-large;
+    text-align: center;
+    border: 2px white solid;
+    border-radius: 8px;
+}
+
+.help-section {
+    margin-bottom: 20px;
+}
+
+.help-heading {
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.help-section p {
+    font-size: 18px;
+    margin: 0px;
+}
+
+/* SVGAnimation.css */
+
+.svg-container {
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.animated-svg {
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    animation: moveLeftToRight 10s linear infinite;
+}
+
+.animated-svg img{
+    margin-left: 20px;
+}
+
+.animated-svg:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.animated-svg:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.animated-svg:nth-child(3) {
+    animation-delay: 4s;
+}
+
+.animated-svg:nth-child(4) {
+    animation-delay: 6s;
+}
+
+.animated-svg:nth-child(5) {
+    animation-delay: 8s;
+}
+
+@keyframes moveLeftToRight {
+    0% {
+        left: -100px;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@media screen and (max-width: 880px) {
+
+    .charity-content {
+        font-size: medium;
+    }
+
+    .charity-container {
+        height: 105vh;
+        width: 95vw;
+    }
+
+    .charity-header {
+        font-size: large;
+    }
+
+    .animated-svg {
+        width: 95px;
+        height: 95px;
+    }
+
+    .help-heading {
+        font-size: x-large;
+        font-weight: 700;
+    }
+
+    .help-section p {
+        font-size: 13px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+    }
+
+    .donation-stats {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .card {
+        background-color: rgb(240, 255, 244);
+    }
+}

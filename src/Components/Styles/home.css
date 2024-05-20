@@ -95,7 +95,6 @@
 
 .abouttext {
   display: flex;
-  flex-direction: row;
   margin: 25px;
   text-align: center;
   align-self: center;
@@ -105,7 +104,7 @@
   padding: 20px;
   border-radius: 15px;
 }
-
+ 
 .numbers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -164,9 +163,11 @@
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
 }
+ 
+ 
 
 .card {
   display: flex;
@@ -257,7 +258,17 @@
 
   .stats {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .about-photo {
+    width: 99vw;
+    height: 35vh;
+  }
+
+  .donation-stats {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
   }
 
   .card {
@@ -279,3 +290,5 @@
     width: 350px;
   }
 }
+
+

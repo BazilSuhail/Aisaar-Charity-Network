@@ -16,8 +16,7 @@ const ID = React.lazy(() => import("./Components/ID"));
 const AppliedProj = React.lazy(() => import("./Components/Applied_projects"));
 const TransactionHistory = React.lazy(() => import("./Components/Transaction_History"));
 const Listcampaigns = React.lazy(() => import("./Components/Campaigns_list"));
-
-const Feedback = React.lazy(() => import("./Components/Feedback")); 
+ 
 
 const App = () => {
 
@@ -40,8 +39,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/donor" element={<Donor />} />
-          <Route path="/volunteer" element={<Volunteer />} />
-          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/volunteer" element={<Volunteer />} /> 
         </Routes>
 
 
