@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fs, auth, FieldValue } from "../Config/Config";
-
 import Projectcomp from "./projectComp";
 import Footer from "./Footer";
-import "./Styles/projList.css"
+import "./Styles/projList.css";
 import Loader from "./Loader";
 
 const Listedprojects = () => {
   const [projects, setProjects] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-
   const [loadProjects, setLoadProjects] = useState(true);
-
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
-
   const [updateProjects, setUpdateProjects] = useState(false); // State to trigger re-fetching projects
 
   useEffect(() => {
@@ -26,8 +22,7 @@ const Listedprojects = () => {
         }));
         setProjects(projectsData);
         setLoadProjects(false);
-      }
-      catch (error) {
+      } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
@@ -52,8 +47,7 @@ const Listedprojects = () => {
       const donorRef = fs.collection("donors").doc(donorId);
       const donorSnapshot = await donorRef.get();
       setUserInDonorsCollection(donorSnapshot.exists);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error checking user in donors collection:", error);
     }
   };
@@ -83,7 +77,6 @@ const Listedprojects = () => {
 
       const updatedCollectedAmount = amount + parseInt(projectToUpdate.collectedAmount);
 
-
       await fs.collection("projects").doc(projectId).update({
         collectedAmount: updatedCollectedAmount.toString(),
       });
@@ -100,8 +93,7 @@ const Listedprojects = () => {
         await donorRef.update({
           donations: updatedDonations,
         });
-      }
-      else {
+      } else {
         await donorRef.set({
           donations: amount,
         });
@@ -112,7 +104,6 @@ const Listedprojects = () => {
 
       if (transactionDoc.exists) {
         await transactionDocRef.update({
-
           history: FieldValue.arrayUnion({
             projectName: projectName,
             idType: "Project",
@@ -121,9 +112,7 @@ const Listedprojects = () => {
             timestamp: new Date().toISOString(),
           }),
         });
-      }
-      else {
-
+      } else {
         await transactionDocRef.set({
           history: [
             {
@@ -137,58 +126,60 @@ const Listedprojects = () => {
         });
       }
 
-      //Logic to add Completed Projects
+      // Logic to add Completed Projects
       if (updatedCollectedAmount >= parseInt(projectToUpdate.targetAmount)) {
-        const completedProjectData = { ...projectToUpdate };
+        const completedProjectData = { ...projectToUpdate, id: projectId }; // Add id to completedProjectData
         delete completedProjectData.collectedAmount;
+
         await fs.collection("completedProjects").doc(projectId).set(completedProjectData);
         await fs.collection("projects").doc(projectId).delete();
+
+        // Update volunteer's Projectscompleted attribute
+        const volunteerId = projectToUpdate.volunteerID;
+        if (volunteerId) {
+          const volunteerRef = fs.collection("volunteer").doc(volunteerId);
+          const volunteerSnapshot = await volunteerRef.get();
+
+          if (volunteerSnapshot.exists) {
+            const volunteerData = volunteerSnapshot.data();
+            const currentProjectsCompleted = volunteerData.Projectscompleted || 0;
+            await volunteerRef.update({
+              Projectscompleted: currentProjectsCompleted + 1,
+            });
+          } else {
+            await volunteerRef.set({
+              Projectscompleted: 1,
+            });
+          }
+        } 
       }
 
-      //Logic for premium member
-      if (amount > 1000000) {
-        await fs.collection("topDonors").doc(currentUser.uid).set({
-          donorId: currentUser.uid
-        }, { merge: true }); // Use merge to update the document if it already exists
-      }
       setUpdateProjects(prevState => !prevState);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error donating:", error);
     }
   };
 
-
-
   return (
     <div className="project">
-
       <div className="proj-heading">Ongoing Projects</div>
-
-
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
-      ) :
-        (
-          <>
-            {/** Aik Aik projects component */}
-
-            <div className="renderObjects">
-              {projects.map((project) => (
-                <Projectcomp
-                  key={project.id}
-                  project={project}
-                  handleDonate={handleDonate}
-                  userInDonorsCollection={userInDonorsCollection}
-                />
-              ))}
-            </div>
-
-            <Footer />
-          </>
-        )}
-
-
+      ) : (
+        <>
+          <div className="renderObjects">
+            {projects.map((project) => (
+              <Projectcomp
+                key={project.id}
+                project={project}
+                handleDonate={handleDonate}
+                userInDonorsCollection={userInDonorsCollection}
+              />
+            ))}
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

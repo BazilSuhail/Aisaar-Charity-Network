@@ -11,7 +11,6 @@ const Listcampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
-
   const [loadProjects, setLoadProjects] = useState(true);
   const [updatecampaigns, setUpdatecampaigns] = useState(false); // State to trigger re-fetching projects
 
@@ -73,9 +72,18 @@ const Listcampaigns = () => {
       const updatedCurrentAmountRaised =
         amount + parseInt(campaignToUpdate.currentAmountRaised);
 
-      await fs.collection("campaigns").doc(campaignId).update({
-        currentAmountRaised: updatedCurrentAmountRaised,
-      });
+      if (updatedCurrentAmountRaised >= parseInt(campaignToUpdate.targetAmount)) {
+        // Move campaign to completedcampaigns collection
+        const { currentAmountRaised, status, ...campaignData } = campaignToUpdate;
+        await fs.collection("completedcampaigns").doc(campaignId).set(campaignData);
+
+        // Delete campaign from campaigns collection
+        await fs.collection("campaigns").doc(campaignId).delete();
+      } else {
+        await fs.collection("campaigns").doc(campaignId).update({
+          currentAmountRaised: updatedCurrentAmountRaised,
+        });
+      }
 
       const donorId = currentUser.uid;
       const donorRef = fs.collection("donors").doc(donorId);
@@ -123,35 +131,31 @@ const Listcampaigns = () => {
       }
 
       setUpdatecampaigns(prevState => !prevState);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error donating:", error);
     }
   };
 
   return (
     <div className="campaign">
-
       <div className="camp-heading">Registered Campaigns</div>
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
-      ) :
-        (
-          <>
-            <div className="render-campaigns">
-              {campaigns.map((campaign) => (
-                <CampaignComp
-                  key={campaign.id}
-                  campaign={campaign}
-                  handleDonate={handleDonate}
-                  userInDonorsCollection={userInDonorsCollection}
-                />
-              ))}
-            </div>
-
-            <Footer />
-          </>
-        )}
+      ) : (
+        <>
+          <div className="render-campaigns">
+            {campaigns.map((campaign) => (
+              <CampaignComp
+                key={campaign.id}
+                campaign={campaign}
+                handleDonate={handleDonate}
+                userInDonorsCollection={userInDonorsCollection}
+              />
+            ))}
+          </div>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

@@ -2,7 +2,6 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-
 }
 
 .stats {
@@ -62,7 +61,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     color: #ffffff;
     padding: 20px;
     height: 95vh;
@@ -71,11 +69,11 @@
 
 .charity-header {
     text-align: center;
-    font-size: xx-large;
-    margin: 10px 0px;
+    font-size: 40px; 
+    margin-bottom: 35px;
     font-weight: 800;
-    padding: 10px;
-    background-color: #ecffee;
+    padding: 4px 15px;
+    background-color: #ffffff;
     color: #2d572c;
     border-radius: 15px;
 }
@@ -113,7 +111,6 @@
 }
 
 /* SVGAnimation.css */
-
 .svg-container {
     margin: 25px 0px;
     display: flex;
@@ -128,70 +125,104 @@
     width: 180px;
     height: 180px;
     position: absolute;
-    animation: moveLeftToRight 10s linear infinite;
+    animation: moveLeftToRight 12s linear infinite; /* Increased duration for smoother transition */
 }
-
-.animated-svg img{
-    margin-left: 20px;
-}
-
+ 
 .animated-svg:nth-child(1) {
     animation-delay: 0s;
 }
 
 .animated-svg:nth-child(2) {
-    animation-delay: 2s;
+    animation-delay: 2.4s; /* Adjusted delay for spacing */
 }
 
 .animated-svg:nth-child(3) {
-    animation-delay: 4s;
+    animation-delay: 4.8s; /* Adjusted delay for spacing */
 }
 
 .animated-svg:nth-child(4) {
-    animation-delay: 6s;
+    animation-delay: 7.2s; /* Adjusted delay for spacing */
 }
 
 .animated-svg:nth-child(5) {
-    animation-delay: 8s;
+    animation-delay: 9.6s; /* Adjusted delay for spacing */
 }
 
 @keyframes moveLeftToRight {
     0% {
-        left: -100px;
+        left: -200px; /* Start off-screen */
     }
 
     100% {
-        left: 100%;
+        left: calc(100% + 200px); /* End off-screen */
     }
 }
 
-@media screen and (max-width: 880px) {
 
-    .charity-content {
-        font-size: medium;
-    }
+.top-volunteers{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 99vw;
+}
+
+.volunteer-top-5{
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+    padding: 16px;
+    font-size: larger;
+    background-color: #2d572c;
+    color: rgb(171, 255, 159);
+
+}
+
+
+@media screen and (max-width: 880px) {
 
     .charity-container {
         height: 105vh;
+        font-size: medium;
         width: 95vw;
-    }
+        padding: 12px;
+    } 
 
     .charity-header {
-        font-size: large;
+        text-align: center; 
+        margin-top: 0px;
+        margin-bottom: 50px;
+        font-size: 25px;
     }
 
+    .charity-content{
+        font-size: medium;
+    }
+
+    .svg-container {  
+        height: 120px; 
+    }
+    
     .animated-svg {
-        width: 95px;
-        height: 95px;
+        width: 105px;
+        height: 105px;
     }
-
+    @keyframes moveLeftToRight {
+        0% {
+            left: -200px; 
+        }
+    
+        100% {
+            left: calc(100% + 200px); 
+        }
+    }
+ 
     .help-heading {
         font-size: x-large;
         font-weight: 700;
     }
 
     .help-section p {
-        font-size: 13px;
+        font-size: 18px;
     }
 
     .stats {
