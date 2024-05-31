@@ -17,4 +17,5 @@ beneficiaries.
 #### npm i firebase
 #### npm i react-icons
 #### npm i react-router-dom
-#### npm i react-toastify
+#### npm i react-toastify 
+#### npm i react-responsive-carousel
