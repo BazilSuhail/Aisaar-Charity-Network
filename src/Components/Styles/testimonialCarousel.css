@@ -1,0 +1,123 @@
+.testimonial-carousel-container {
+    width: 85vw;
+    margin: 15px auto;
+    background-color: #f3fff4;
+    border-radius: 25px;
+    box-shadow: 1px 1px 8px rgb(0, 61, 0);
+    padding: 20px;
+}
+
+.testimonial-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    padding: 15px;
+} 
+
+.testimonial-name {
+    font-size: 40px;
+    border-radius: 8px;
+    color: rgb(0, 102, 25);
+    font-weight: 700; 
+}
+
+.testimonial-email {
+    font-size: x-large;  
+    width: 40%;
+    padding: 5px 10px;
+    margin: 0px auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: rgb(55, 124, 67);
+}
+
+.testimonial-feedback {
+    width: 80%;
+    font-style: oblique;
+    font-size: larger;
+    align-self: center;
+    padding: 6px 20px;
+    border-radius: 8px;
+    color: rgb(27, 95, 40);
+    margin: 5px;
+}
+
+.left-comma{
+    align-self: flex-start;
+    font-size: 25px;
+    color: #1e6222;
+    margin-left: 35px;
+}
+.right-comma{
+    align-self: flex-end;
+    font-size: 25px;
+    color: #1e6222;
+    margin-right: 35px;
+}
+
+.carousel .control-prev.control-arrow,
+.carousel .control-next.control-arrow {
+    background: none !important; /* Ensure no background */
+    border: none; /* No border */
+    color: #7ea680; /* Medium green for arrows */
+    font-size: 2rem; /* Increase arrow size */
+    outline: none; /* Remove outline */
+    transition: none; /* Remove any transition effect */
+}
+
+.carousel .control-prev.control-arrow:before,
+.carousel .control-next.control-arrow:before {
+    border: none; /* Remove any border */
+    font-size: 29px;
+    color: #66a869; /* Medium green for arrows */
+    content: ''; /* Remove any default content */
+}
+
+.carousel .control-prev.control-arrow:before {
+    content: '\25C0'; /* Left arrow */
+}
+
+.carousel .control-next.control-arrow:before {
+    content: '\25B6'; /* Right arrow */
+}
+
+.carousel .control-dots .dot {
+    background: #18751c; /* Medium green dots */
+}
+
+.carousel .slide {
+    background: none; /* Remove default background */
+}
+
+@media (max-width: 768px) {
+    .testimonial-carousel-container {
+        padding: 10px;
+    }
+
+    .testimonial-item {
+        padding: 15px;
+    }
+
+    .left-comma{ 
+        margin-left: 20px;
+    }
+    .right-comma{ 
+        margin-right: 20px;
+    }
+    .testimonial-name {
+        font-size: 38px;
+    }
+
+    .testimonial-email {
+        width: 60%;
+        padding: 2px 6px; 
+    }
+
+    .testimonial-feedback {
+        font-size: 1em;
+    }
+    .carousel .control-prev.control-arrow:before,
+    .carousel .control-next.control-arrow:before { 
+        color: #b9d8ba; 
+    }
+}

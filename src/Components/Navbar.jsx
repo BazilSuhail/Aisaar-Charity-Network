@@ -39,7 +39,7 @@ const GetcurrUser = () => {
 }
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);  
+  const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => { setIsOpen(!isOpen); };
 
   const { userType, displayName } = GetcurrUser();
@@ -56,12 +56,12 @@ const Navbar = () => {
 
   const renderLinks = (userType, displayName) => {
     const firstName = getFirstName(displayName);
-    
+
     if (userType === "Volunteer") {
       return (
         <>
           <NavLink to="/volunteer" className="profile-container-volunteer">
-            <IoMdPerson /> 
+            <IoMdPerson />
           </NavLink>
           <div className="profile">{firstName}</div>
         </>
@@ -98,6 +98,20 @@ const Navbar = () => {
     }
   };
 
+
+  const renderFeedback = (userType) => {
+
+    if (userType === "Volunteer") {
+      return (
+          <NavLink to="/complains" className="nav-links">Complains</NavLink>
+      );
+    } else if (userType === "Donor") {
+      return (
+          <NavLink to="/testimonial" className="nav-links">Testimonials</NavLink>
+      );
+    }
+  };
+
   return (
     <div className={`navbar ${isOpen ? 'open' : ''}`}>
       <div className="logo-container">
@@ -114,7 +128,8 @@ const Navbar = () => {
         <NavLink to="/gallery" className="nav-links">Gallery</NavLink>
         <NavLink to="/listedprojects" className="nav-links">Projects</NavLink>
         {/*<NavLink to="/dummy" className="nav-links">dummy</NavLink>*/}
-        <NavLink to="/listcampaigns" className="nav-links">Campaigns</NavLink> 
+        <NavLink to="/listcampaigns" className="nav-links">Campaigns</NavLink>
+        {renderFeedback(userType)}
       </div>
       <div className="auth-links">
         {renderAuthLinks()}

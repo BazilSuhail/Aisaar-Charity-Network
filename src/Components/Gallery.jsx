@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../Config/Config';
 import Footer from "./Footer";
-import Loader from "./Loader"; // Ensure you have this Loader component
+//import TopVolunteers from './topVolunteers'; // Import the TopVolunteers component
+
+import Loader from './Loader';
+import "./Styles/tables.css";
 import "./Styles/gallery.css";
 import "./Styles/tables.css";
 import Svg1 from './Styles/photos/charitycup.svg';
@@ -20,8 +23,6 @@ const Gallery = () => {
     const [totalVolunteers, setTotalVolunteers] = useState(0);
     const [totalDonors, setTotalDonors] = useState(0);
     const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
-    const [topVolunteers, setTopVolunteers] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,36 +52,14 @@ const Gallery = () => {
 
                 const volunteersRef = fs.collection('volunteer');
                 const volunteersSnapshot = await volunteersRef.get();
-                const volunteersData = volunteersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setTotalVolunteers(volunteersSnapshot.size);
 
-                
                 const donorsRef = fs.collection('donors');
-                const donorsSnapshot = await donorsRef.get(); 
+                const donorsSnapshot = await donorsRef.get();
                 setTotalDonors(donorsSnapshot.size);
-
-                // Sort volunteers by Projectscompleted and get top 5
-                const sortedVolunteers = volunteersData
-                    .filter(volunteer => volunteer.Projectscompleted !== undefined)
-                    .sort((a, b) => b.Projectscompleted - a.Projectscompleted)
-                    .slice(0, 5);
-
-                setTopVolunteers(sortedVolunteers);
-
-                // Storing the top 5 volunteers back to 'topVolunteers' collection
-                const topVolunteersRef = fs.collection('topVolunteers');
-                const batch = fs.batch();
-
-                sortedVolunteers.forEach(volunteer => {
-                    const docRef = topVolunteersRef.doc(volunteer.id);
-                    batch.set(docRef, volunteer);
-                });
-
-                await batch.commit();
-            } catch (error) {
+            }
+            catch (error) {
                 console.error('Error fetching data:', error.message);
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -101,6 +80,44 @@ const Gallery = () => {
     );
 
     const overallDonation = projDonations + campDonations;
+
+    // -------->  *Other code for showing top VOlunteers
+
+    const [topVolunteers, setTopVolunteers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchVolunteers = async () => {
+            try {
+                const volunteersRef = fs.collection('volunteer');
+                const volunteersSnapshot = await volunteersRef.get();
+                const volunteersData = volunteersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+                const sortedVolunteers = volunteersData
+                    .filter(volunteer => volunteer.Projectscompleted !== undefined)
+                    .sort((a, b) => b.Projectscompleted - a.Projectscompleted)
+                    .slice(0, 5);
+
+                setTopVolunteers(sortedVolunteers);
+
+                const topVolunteersRef = fs.collection('topVolunteers');
+                const batch = fs.batch();
+
+                sortedVolunteers.forEach(volunteer => {
+                    const docRef = topVolunteersRef.doc(volunteer.id);
+                    batch.set(docRef, volunteer);
+                });
+
+                await batch.commit();
+            } catch (error) {
+                console.error('Error fetching top volunteers:', error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchVolunteers();
+    }, []);
 
     const AnimatedCounter = ({ value, duration, start, incrementByHundred, val }) => {
         const [displayValue, setDisplayValue] = useState(0);
@@ -208,20 +225,49 @@ const Gallery = () => {
                 </div>
             </div>
 
-            <p className="statheading">Top Volunteers</p>
+            <p className="logos-heading">Top Volunteers</p>
             {loading ? (
                 <Loader typeOfloader={"a"} />
             ) : (
-                <div className="top-volunteers">
-                    {topVolunteers.map((volunteer, index) => (
-                        <div key={index} className="volunteer-card">
-                            <div  >Name: {volunteer.displayName}</div>
-                            <div className="volunteer-phone">Phone: {volunteer.phoneNumber}</div>
-                            <div className="volunteer-email">Email: {volunteer.email}</div>
-                            <div className="volunteer-projects-completed">Projects Completed: {volunteer.Projectscompleted}</div>
+                    <div className="top-volunteers">
+                        {/*}     
+                    <div className="table-container">
+                        <table className="table-body">
+                            <thead className="head">
+                                <tr className='volunteer-header'>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Projects Completed</th>
+                                </tr>
+                            </thead>
+
+                            <tbody className="body">
+                                {topVolunteers.map((volunteer, index) => (
+                                    <tr key={index} className={`volunteer-row-${index + 1}`}>
+                                        <td>{index + 1}</td>
+                                        <td>{volunteer.displayName}</td>
+                                        <td>{volunteer.phoneNumber}</td>
+                                        <td>{volunteer.Projectscompleted}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                            */}
+
+                    <div>{topVolunteers.map((volunteer, index) => (
+                        <div key={index} className={`volunteer-row-${index + 1}`}>
+                            <div>{index + 1}</div>
+                            <div>{volunteer.displayName}</div>
+                            <div>{volunteer.phoneNumber}</div>
+                            <div>{volunteer.Projectscompleted}</div>
                         </div>
-                    ))}
+                    ))}</div>
+
+                        
                 </div>
+
             )}
 
             <Footer />
@@ -230,3 +276,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

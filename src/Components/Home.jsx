@@ -4,7 +4,13 @@ import "./Styles/home.css";
 import "./Styles/tables.css";
 import Footer from "./Footer";
 import mainlogo from "./Logo.png"; // Import the image
+import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
+
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import "./Styles/testimonialCarousel.css";
 
 import { Link } from "react-router-dom";
 
@@ -27,6 +33,37 @@ const Home = () => {
     fetchFranchises();
   }, []);
 
+
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const donorsSnapshot = await fs.collection("donors").get();
+        const testimonialData = await Promise.all(donorsSnapshot.docs.map(async (doc) => {
+          const donorData = doc.data();
+          const testimonialDoc = await fs.collection("testimonials").doc(doc.id).get();
+          if (testimonialDoc.exists && testimonialDoc.data().testimonialData.length > 0) {
+            const data = testimonialDoc.data().testimonialData;
+            const randomTestimonial = data[Math.floor(Math.random() * data.length)];
+            return {
+              displayName: donorData.displayName,
+              email: donorData.email,
+              feedback: randomTestimonial.feedback,
+            };
+          }
+          return null;
+        }));
+
+        setTestimonials(testimonialData.filter(testimonial => testimonial !== null));
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   const [toDisplay] = useTypewriter({
     words: ['Save Lives', 'Provide Shelter', 'Give Food', 'Create Happiness'],
     loop: true,
@@ -47,7 +84,7 @@ const Home = () => {
           </div>
 
         </div>
-        <img className="coverImage"  src="https://source.unsplash.com/1080x720/?poor" alt="=================> Poor Connection!!" />
+        <img className="coverImage" src="https://source.unsplash.com/1080x720/?poor" alt="=================> Poor Connection!!" />
       </div>
       <p className="aboutheading"  >Welcome To إيثار</p>
 
@@ -79,7 +116,8 @@ const Home = () => {
         </div>
 
       </div>
-      {/*Active franchises*/}
+
+      {/*Franchises */}
       <p className="aboutheading" >Active Franchises</p>
       <div className="back">
         <div className="table-container">
@@ -103,17 +141,37 @@ const Home = () => {
           </table>
         </div>
       </div>
+      {/*Testimonial */}
+
+      <p className="statheading">Top Donor's Testimonials</p>
+
+      <div className="testimonial-carousel-container">
+        <Carousel showArrows={true} showThumbs={false} infiniteLoop={true} autoPlay={true} interval={10000}>
+          {testimonials.map((testimonial, index) => (
+            <div key={index} className="testimonial-item">
+              <FaQuoteLeft className='left-comma' />
+              <div className="testimonial-feedback"><b>{testimonial.feedback}</b></div>
+              <FaQuoteRight className='right-comma' />
+              <div className="testimonial-info">
+                <div className="testimonial-name">{testimonial.displayName}</div>
+                <div className="testimonial-email">{testimonial.email}</div>
+              </div>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+
       {/*Continue*/}
 
-      <p className="statheading" >Let's Get Involved</p>
+      <p className="aboutheading" >Let's Get Involved</p>
       <div className="continue">
         <p className='getinvolve'>There are many ways to support our cause. Choose how you'd like to make a difference today:</p>
         <Link to="/signup" className="navButton">Donate Now</Link>
         <Link to="/signup" className="navButton">Volunteer Project</Link>
       </div>
-      
+
       <Footer />
-      
+
     </div>
   );
 };
