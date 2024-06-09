@@ -127,7 +127,8 @@ const Listedprojects = () => {
       }
 
       // Logic to add Completed Projects
-      if (updatedCollectedAmount >= parseInt(projectToUpdate.targetAmount)) {
+      if (updatedCollectedAmount >= parseInt(projectToUpdate.targetAmount))
+      {
         const completedProjectData = { ...projectToUpdate, id: projectId }; // Add id to completedProjectData
         delete completedProjectData.collectedAmount;
 

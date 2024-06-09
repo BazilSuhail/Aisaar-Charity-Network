@@ -57,34 +57,42 @@
     background-attachment: fixed;
     background-size: cover;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;  
     color: #ffffff;
     padding: 20px;
     height: 95vh;
     width: 97vw;
 }
 
+.donate-for-afterlife{
+    margin-top:110px;
+    padding: 20px;
+}
+
 .charity-header {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 35px;
-    font-weight: 800;
-    padding: 4px 15px;
-    background-color: #ffffff;
-    color: #2d572c;
-    border-radius: 15px;
+    font-size: 85px;
+    font-weight: 800; 
+    color: rgb(255, 255, 255);
+}
+
+.afterlife-charity-header {
+    color: rgb(142, 167, 135);
+    font-size: 55px; 
+    font-weight: 800; 
+    -webkit-text-stroke: none;
 }
 
 .charity-content {
-    margin-bottom: 30px;
+    width: 85%;
+    margin-top: 30px;
     font-size: larger;
     text-align: center;
 }
 
-.how-to-help {
+.how-to-help { 
+    margin-top:140px;
     display: flex;
     flex-direction: column;
 }
@@ -126,7 +134,7 @@
     width: 180px;
     height: 180px;
     position: absolute;
-    animation: moveLeftToRight 12s linear infinite; 
+    animation: moveLeftToRight 12s linear infinite;
 }
 
 .animated-svg:nth-child(1) {
@@ -134,31 +142,31 @@
 }
 
 .animated-svg:nth-child(2) {
-    animation-delay: 2.4s; 
+    animation-delay: 2.4s;
 }
 
 .animated-svg:nth-child(3) {
-    animation-delay: 4.8s; 
+    animation-delay: 4.8s;
 }
 
 .animated-svg:nth-child(4) {
-    animation-delay: 7.2s; 
+    animation-delay: 7.2s;
 }
 
 .animated-svg:nth-child(5) {
-    animation-delay: 9.6s; 
+    animation-delay: 9.6s;
 }
 
 @keyframes moveLeftToRight {
     0% {
-        left: -200px; 
+        left: -200px;
     }
 
     100% {
-        left: calc(100% + 200px); 
+        left: calc(100% + 200px);
     }
 }
- 
+
 .top-volunteers {
     display: flex;
     flex-direction: column;
@@ -166,54 +174,73 @@
     align-items: center;
     width: 99vw;
     color: white;
-} 
-.volunteer-header{
-    font-size: larger !important;
-    padding: 8px !important;
-    margin-bottom: 100px !important;
-}
- 
-.volunteer-row-1 {
-    background-color: #002b0c;  
 }
 
-.volunteer-row-2 {
+.volunteer-header {
+    border: 3px #003807e4 solid;   
+    font-size: 22px;
+    background-color: #e5ffec;
+    color: #002b0c;
+    margin: 5px;
+}
+
+
+.volunteer-row-1 { 
+    border: 12px #ffffff solid;   
+    font-size: 22px;
+    background-color: #002b0c;
+}
+
+.volunteer-row-2 { 
+    border: 12px #ffffff solid;   
+    font-size: 22px;
     background-color: #003f11 !important;
 }
 
-.volunteer-row-3 {
+.volunteer-row-3 { 
+    border: 12px #ffffff solid;   
+    font-size: 22px;
     background-color: #175d2b;
 }
 
 .volunteer-row-4 {
-    background-color: #28663b !important; 
+    border: 12px #ffffff solid;   
+    font-size: 22px;
+    background-color: #28663b !important;
 }
 
 .volunteer-row-5 {
-    background-color: #4ba46c; 
+    border: 12px #ffffff solid;   
+    font-size: 22px;
+    background-color: #4ba46c;
 }
-
-
+ 
 @media screen and (max-width: 880px) {
 
     .charity-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
         height: 105vh;
         font-size: medium;
-        width: 95vw;
+        width: 97vw;
         padding: 12px;
     }
-
-    .charity-header {
-        text-align: center;
-        margin-top: 0px;
-        margin-bottom: 50px;
-        font-size: 25px;
+    .donate-for-afterlife {
+        margin-top: 20px;
+        padding: 10px;
+    }
+    .charity-header { 
+        font-size: 65px;
     }
 
     .charity-content {
-        font-size: medium;
+        font-size: large;
+        margin-left: 15px;
+        width: 85vw;
     }
-
+    .how-to-help {
+        margin-top: -35px;
+    }
     .svg-container {
         height: 120px;
     }
@@ -254,5 +281,5 @@
 
     .card {
         background-color: rgb(240, 255, 244);
-    } 
+    }
 }

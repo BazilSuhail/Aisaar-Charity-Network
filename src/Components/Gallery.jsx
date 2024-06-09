@@ -152,10 +152,15 @@ const Gallery = () => {
     return (
         <div className='gallery'>
             <div className="charity-container">
-                <div className="charity-header">Transforming Lives Through Compassionate Action</div>
-                <div className="charity-content">
-                    At <b>إيثار</b>, a non-profit charitable organization, our mission is to extend a helping hand to those in need through a range of humanitarian initiatives. With the unwavering support of our dedicated team of volunteers and supporters, we are committed to making a significant impact on the lives of individuals and communities facing hardships. Our efforts focus on providing essential aid and empowering communities to overcome adversity. Whether it's delivering food and medical supplies, offering educational resources, or supporting sustainable development projects, we strive to bring hope and tangible improvements to those we serve.
+                <div className='donate-for-afterlife'>
+                    <div className="charity-header">Donate For</div>
+                    <div className="afterlife-charity-header">AfterLife</div>
+                    <div className="charity-content">
+                        At <b>إيثار</b>, a non-profit charitable organization, our mission is to extend a helping hand to those in need through
+                        a range of humanitarian initiatives , with the unwavering support of our dedicated team of volunteers and supporters.
+                    </div>
                 </div>
+
                 <div className="how-to-help">
                     <h2>How You Can Help</h2>
                     <div className="help-section">
@@ -229,8 +234,7 @@ const Gallery = () => {
             {loading ? (
                 <Loader typeOfloader={"a"} />
             ) : (
-                    <div className="top-volunteers">
-                        {/*}     
+                <div className="top-volunteers">
                     <div className="table-container">
                         <table className="table-body">
                             <thead className="head">
@@ -246,16 +250,29 @@ const Gallery = () => {
                                 {topVolunteers.map((volunteer, index) => (
                                     <tr key={index} className={`volunteer-row-${index + 1}`}>
                                         <td>{index + 1}</td>
-                                        <td>{volunteer.displayName}</td>
-                                        <td>{volunteer.phoneNumber}</td>
-                                        <td>{volunteer.Projectscompleted}</td>
+
+                                        <td>{!volunteer.displayName
+                                            ? (<div >Info Not entered</div>)
+                                            : (<div>{volunteer.displayName}</div>)}
+                                        </td>
+
+                                        <td>{!volunteer.phoneNumber
+                                            ? (<div >Info Not entered</div>)
+                                            : (<div>{volunteer.phoneNumber}</div>)}
+                                        </td>
+
+                                        <td>{!volunteer.Projectscompleted
+                                            ? (<div >Info Not entered</div>)
+                                            : (<div>{volunteer.Projectscompleted}</div>)}
+                                        </td>
+ 
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                            */}
 
+                    {/*
                     <div>{topVolunteers.map((volunteer, index) => (
                         <div key={index} className={`volunteer-row-${index + 1}`}>
                             <div>{index + 1}</div>
@@ -264,8 +281,9 @@ const Gallery = () => {
                             <div>{volunteer.Projectscompleted}</div>
                         </div>
                     ))}</div>
+                        */}
 
-                        
+
                 </div>
 
             )}
