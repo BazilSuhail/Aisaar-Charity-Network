@@ -46,11 +46,11 @@
 
 ### Our project Contains two portals/sites thus we dividied ourselves into two groups.
 ### `Client Site Developer` And `Admin Site Developer`
-#### `Client Site Developers:`
+## Client Site Developers:
 ### `Bazil Suhail` / `BSCS-22072` managed transactional operations with project applicantion.Testimonial and Complaints registration/making.
 ### `Abdullah Masood` / `BSCS-22054` managed authentication of user(volunteer/donor).There profile management and Stat and figures of gallery and Home.
 
 
-#### `Admin Site Developers:`
+## Admin Site Developers:
 ### `Muhammad Rehman` / `BSCS-22018` managed autentication of franchises with creation.Basic crud for Franchises and resolvment of complaints from volunteer.
 ### `Ahmad Saleem` / `BSCS-22078` managed operations within framchises.Approving projects,Campaign creation and enrollment of beneficiaries.
