@@ -13,7 +13,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "5000",
             "status": "Active",
             "volunteerID": "1ZfTADFfAxeWeW4DFBMLZRjA4wj2",
-            "franchiseID": "fran456",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "2500"
         },
         {
@@ -24,7 +24,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "10000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran567",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "7500"
         },
         {
@@ -35,7 +35,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "8000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran678",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "3000"
         },
         {
@@ -46,7 +46,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "6000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran789",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "4000"
         },
         {
@@ -57,8 +57,8 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "12000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran890",
-            "collectedAmount": "8000"
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
+            "collectedAmount": "10"
         },
         {
             "title": "Fundraiser 6",
@@ -68,7 +68,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "7000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran901",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "5500"
         },
         {
@@ -79,7 +79,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "9000",
             "status": "Active",
             "volunteerID": "UzrnsNQGhiR0DHijVfXzP9qYEf43",
-            "franchiseID": "fran012",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "6000"
         },
         {
@@ -90,7 +90,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "10000",
             "status": "Active",
             "volunteerID": "WrTEhNisDbfvlpfaLLryvZWjfq62",
-            "franchiseID": "fran123",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "8500"
         },
         {
@@ -101,7 +101,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "8000",
             "status": "Active",
             "volunteerID": "WrTEhNisDbfvlpfaLLryvZWjfq62",
-            "franchiseID": "fran234",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "5000"
         },
         {
@@ -112,7 +112,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "11000",
             "status": "Active",
             "volunteerID": "WrTEhNisDbfvlpfaLLryvZWjfq62",
-            "franchiseID": "fran345",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "7000"
         },
         {
@@ -123,7 +123,7 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "7000",
             "status": "Active",
             "volunteerID": "WrTEhNisDbfvlpfaLLryvZWjfq62",
-            "franchiseID": "fran456",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "4500"
         },
         {
@@ -134,97 +134,9 @@ const AddDummyDataToFirestore = () => {
             "targetAmount": "8000",
             "status": "Active",
             "volunteerID": "WrTEhNisDbfvlpfaLLryvZWjfq62",
-            "franchiseID": "fran567",
+            "franchiseID": "2plXpjvmljROLGZ6Q21LFpcIoP73",
             "collectedAmount": "6000"
-        },
-        {
-            "title": "Fundraiser 13",
-            "description": "Promoting mental health awareness",
-            "startDate": "2024-11-01",
-            "endDate": "2024-12-01",
-            "targetAmount": "10000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran678",
-            "collectedAmount": "8500"
-        },
-        {
-            "title": "Fundraiser 14",
-            "description": "Cancer research funding",
-            "startDate": "2024-11-10",
-            "endDate": "2024-12-10",
-            "targetAmount": "12000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran789",
-            "collectedAmount": "9500"
-        },
-        {
-            "title": "Fundraiser 15",
-            "description": "Supporting LGBTQ+ community",
-            "startDate": "2024-12-01",
-            "endDate": "2025-01-01",
-            "targetAmount": "9000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran890",
-            "collectedAmount": "7500"
-        },
-        {
-            "title": "Fundraiser 16",
-            "description": "Emergency medical aid",
-            "startDate": "2025-01-01",
-            "endDate": "2025-02-01",
-            "targetAmount": "15000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran901",
-            "collectedAmount": "12000"
-        },
-        {
-            "title": "Fundraiser 17",
-            "description": "Promoting sustainable living",
-            "startDate": "2025-01-10",
-            "endDate": "2025-02-10",
-            "targetAmount": "10000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran012",
-            "collectedAmount": "8500"
-        },
-        {
-            "title": "Fundraiser 18",
-            "description": "Disability rights advocacy",
-            "startDate": "2025-02-01",
-            "endDate": "2025-03-01",
-            "targetAmount": "8000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran123",
-            "collectedAmount": "6000"
-        },
-        {
-            "title": "Fundraiser 19",
-            "description": "Promoting cultural diversity",
-            "startDate": "2025-02-10",
-            "endDate": "2025-03-10",
-            "targetAmount": "11000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran234",
-            "collectedAmount": "9000"
-        },
-        {
-            "title": "Fundraiser 20",
-            "description": "Supporting small businesses",
-            "startDate": "2025-03-01",
-            "endDate": "2025-04-01",
-            "targetAmount": "12000",
-            "status": "Active",
-            "volunteerID": "c4385OAVvFVm30CF6goOjBbBCuv1",
-            "franchiseID": "fran345",
-            "collectedAmount": "10000"
-        }
+        } 
     ];
 
     // Function to add data to Firestore

@@ -4,7 +4,7 @@ import Navbar from "./Components/Navbar";
 
 import "../src/Components/Styles/loader.css";
 import Loader from "./Components/Loader";
-import AddDummyDataToFirestore from "./Components/Insertdata";  
+import AddDummyDataToFirestore from "./Components/insertProjects";  
 // Lazy loading components
 const Home = React.lazy(() => import("./Components/Home"));
 const Donor = React.lazy(() => import("./Components/Donor"));
