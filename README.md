@@ -3,20 +3,19 @@
 
 # `Functionalities / Methodology`
 ## To create such a network to streamline Such Functionalities we have implemented following features or methodologies to cater the problem:
-
-#### Creation and management of franchises, projects, volunteer, campaigns, and beneficiaries.
-#### Admin registering different franchises holding multiple projects, volunteers and campaigns as well as beneficiaries. 
-#### Proper authentication system for Franchises, Volunteers, Donors as well as the Admin
-#### Volunteer proposing different projects and getting approved from individual franchises. 
-#### Tracking of donations made by donors to specific projects and campaigns. 
-#### Maintaining the record of Donor’s donations(Transactions made)
-#### Monitoring fundraising campaigns associated directly to franchises. 
-#### Publishing Top Donor’s testimonials on Home Page.
-#### Monitoring Top volunteer who have completed most projects.
-#### Receiving complaints from volunteers and resolving their problems from Admin.
-#### Managing beneficiaries enrollment, status and skills they are acquiring within franchises.
-#### Maintaining record of completed Projects and franchises.  
-#### Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other). 
+##### Creation and management of franchises, projects, volunteer, campaigns, and beneficiaries.
+##### Admin registering different franchises holding multiple projects, volunteers and campaigns as well as beneficiaries. 
+##### Proper authentication system for Franchises, Volunteers, Donors as well as the Admin
+##### Volunteer proposing different projects and getting approved from individual franchises. 
+##### Tracking of donations made by donors to specific projects and campaigns. 
+##### Maintaining the record of Donor’s donations(Transactions made)
+##### Monitoring fundraising campaigns associated directly to franchises. 
+##### Publishing Top Donor’s testimonials on Home Page.
+##### Monitoring Top volunteer who have completed most projects.
+##### Receiving complaints from volunteers and resolving their problems from Admin.
+##### Managing beneficiaries enrollment, status and skills they are acquiring within franchises.
+##### Maintaining record of completed Projects and franchises.  
+##### Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other). 
 
 # `ToolKit`
 ### As the database seems to realistically implemented we will be using “REACT JS” for front-end and for back-end, we will be using the “FIREBASE” 
@@ -43,9 +42,9 @@
 ### Our project Contains two portals/sites thus we dividied ourselves into two groups.
 ### `Client Site Developer` And `Admin Site Developer`
 ## Client Site Developers:
-### `Bazil Suhail` / `BSCS-22072` managed transactional operations with project applicantion.Testimonial and Complaints registration/making.
+### `Bazil Suhail` / `BSCS-22072` managed transactional operations(of projects and campaigns) with project applicantion.Testimonial and Complaints registration/making.
 ### `Abdullah Masood` / `BSCS-22054` managed authentication of user(volunteer/donor).There profile management and Stat and figures of gallery and Home.
 
 ## Admin Site Developers:
 ### `Muhammad Rehman` / `BSCS-22018` managed autentication of franchises with creation.Basic crud for Franchises and resolvment of complaints from volunteer.
-### `Ahmad Saleem` / `BSCS-22078` managed operations within framchises.Approving projects,Campaign creation and enrollment of beneficiaries.
+### `Ahmad Saleem` / `BSCS-22078` managed operations within franchises.Approving projects,Campaign creation and enrollment of beneficiaries.
