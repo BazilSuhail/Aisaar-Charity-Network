@@ -4,6 +4,7 @@ import "./Styles/home.css";
 import "./Styles/tables.css";
 import Footer from "./Footer";
 import mainlogo from "./Logo.png"; // Import the image
+import coverImage from "../Components/Styles/photos/coverimage.jpg"; // Import the image
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
@@ -84,7 +85,9 @@ const Home = () => {
           </div>
 
         </div>
-        <img className="coverImage" src="https://source.unsplash.com/1080x720/?poor" alt="=================> Poor Connection!!" />
+        {/*
+        <img className="coverImage" src="https://source.unsplash.com/1080x720/?poor" alt="=================> Poor Connection!!" />*/}
+        <img className="coverImage" src={coverImage} alt= "Poor Connection!!" />
       </div>
       <p className="aboutheading"  >Welcome To إيثار</p>
 

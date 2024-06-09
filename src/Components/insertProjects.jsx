@@ -138,8 +138,7 @@ const AddDummyDataToFirestore = () => {
             "collectedAmount": "6000"
         } 
     ];
-
-    // Function to add data to Firestore
+ 
     const addDataToFirestore = async () => {
         setLoading(true);
         const batch = fs.batch();

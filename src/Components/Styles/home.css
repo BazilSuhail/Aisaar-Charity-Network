@@ -5,7 +5,8 @@
 
 .cover {
   padding: 30px;
-  height: 65vh;
+  height: 495px;
+  ;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -19,7 +20,6 @@
   align-self: center;
   animation: animate 5s ease-in-out infinite;
   transition: all is ease-in-out;
-
 }
 
 .profileText {
@@ -49,6 +49,7 @@
 .typewriter {
   font-size: 55px;
   font-weight: 500;
+  text-align: center;
   background-color: #0a4927;
   color: white;
   border-radius: 15px;
@@ -104,7 +105,7 @@
   padding: 20px;
   border-radius: 15px;
 }
- 
+
 .numbers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -166,8 +167,8 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
 }
- 
- 
+
+
 
 .card {
   display: flex;
@@ -202,9 +203,22 @@
   justify-self: center;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1140px) {
   .cover {
-    height: 58vh;
+    height: 490px;
+  }
+
+  .tagline {
+    font-size: 45px;
+  }
+
+  .typewriter {
+    font-size: 45px;
+  }
+
+  .coverImage {
+    width: 475px;
+    height: 315px;
   }
 
   .navButton {
@@ -215,7 +229,7 @@
   }
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 780px) {
   .cover {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -290,5 +304,3 @@
     width: 350px;
   }
 }
-
-
