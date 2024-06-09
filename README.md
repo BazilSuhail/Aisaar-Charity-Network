@@ -1,8 +1,8 @@
-### `Project Overview`
+# `Project Overview`
 ### The ”Charity Management System” named “AISAAR”  is a sort of open source charity network which aims to provide a centralized platform for charity franchises to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system will streamline administrative control, enhance donation control, and improve transparency in charity operations. 
 
 
-### `Functionalities`
+# `Functionalities`
 
 Creation and management of franchises, projects, volunteer, campaigns, and 
 beneficiaries.
@@ -19,7 +19,7 @@ beneficiaries.
 #### Maintaining record of completed Projects and franchises.  
 #### Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other). 
 
-### `Packages to Install`
+# `Packages to Install`
 #### To run this projects you have to install some external node modules or packages.To continue of with this projects run these commands:
 #### npm i firebase
 #### npm i react-icons
