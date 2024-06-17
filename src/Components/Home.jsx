@@ -71,7 +71,7 @@ const Home = () => {
     typeSpeed: 120,
     deleteSpeed: 50
   });
-
+ 
   return (
     <div className="home">
 
@@ -172,7 +172,7 @@ const Home = () => {
         <Link to="/signup" className="navButton">Donate Now</Link>
         <Link to="/signup" className="navButton">Volunteer Project</Link>
       </div>
-
+ 
       <Footer />
 
     </div>
