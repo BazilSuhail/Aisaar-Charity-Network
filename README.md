@@ -1,43 +1,47 @@
 # `Problem Definition`
-### Create ”Charity Management Network" network aims to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
+#### Create "Charity Management Network" network aims to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
 
 # Run Locally
+
  Clone the project
+
 ```bash
   git clone https://github.com/BazilSuhail/ClientSide-Charity-Network.git
 ```
+
 Go to the project directory
 
 ```bash
-  cd my-project
+cd my-project
 ```
+
 Install dependencies:
 ```bash
-  npm i firebase
+npm i firebase
 ```
 ```bash
-  npm i react-icons
+npm i react-icons
 ```
 ```bash
-  npm i react-router-dom
+npm i react-router-dom
 ```
 ```bash
-  npm i react-toastify
+npm i react-toastify
 ```
 ```bash
-  npm i react-responsive-carousel
+npm i react-responsive-carousel
 ```
 ```bash
-  npm i react-simple-typewriter
+npm i react-simple-typewriter
 ```
-#### OR Simply Run this command to install all
+#### OR Simply Run this command to install all packages at once
 ```bash
-  npm i firebase react-icons react-router-dom react-toastify  react-responsive-carousel react-simple-typewriter
+npm i firebase react-icons react-router-dom react-toastify  react-responsive-carousel react-simple-typewriter
 ```
 Start the server
 
 ```bash
-  npm run start
+  npm start
 ```
 
 # `Functionalities`
