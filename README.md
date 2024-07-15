@@ -1,40 +1,27 @@
-# `Problem Definition`
-#### Create "Charity Management Network" network aims to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
+## Aisaar
+#### `Aisaar` a "Charity Management Network" network whose aim is to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
 
-# Run Locally
+## Run Locally
 
- Clone the project
+At first create a React App using following command:
 
+```bash
+   npx create-react-app charity-system
+```
+ Clone the project using following command
 ```bash
   git clone https://github.com/BazilSuhail/ClientSide-Charity-Network.git
 ```
-
 Go to the project directory
-
 ```bash
 cd my-project
 ```
+Just for convenience copy all contents in the cloned repository and paste them into the directory where You have 
+created you **React App**.`A faster way to continue with this.`
 
-Install dependencies:
-```bash
-npm i firebase
-```
-```bash
-npm i react-icons
-```
-```bash
-npm i react-router-dom
-```
-```bash
-npm i react-toastify
-```
-```bash
-npm i react-responsive-carousel
-```
-```bash
-npm i react-simple-typewriter
-```
-#### OR Simply Run this command to install all packages at once
+## Install dependencies:
+Naviagate to you **React App** after pasting the content or any way you set it up.
+Afterwards simply run this command to install all required dependancies and packages at once.
 ```bash
 npm i firebase react-icons react-router-dom react-toastify  react-responsive-carousel react-simple-typewriter
 ```
@@ -44,7 +31,7 @@ Start the server
   npm start
 ```
 
-# `Functionalities`
+# `A`
 ### To create such a network to streamline Such Functionalities I implemented following features to cater the problem:
 - Creation and management of franchises, projects, volunteer, campaigns, and beneficiaries.
 - Admin registering different franchises holding multiple projects, volunteers and campaigns as well as beneficiaries. 
