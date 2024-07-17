@@ -59,28 +59,28 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;  
+    grid-template-rows: 1fr;
     color: #ffffff;
     padding: 20px;
     height: 95vh;
     width: 97vw;
 }
 
-.donate-for-afterlife{
-    margin-top:110px;
+.donate-for-afterlife {
+    margin-top: 110px;
     padding: 20px;
 }
 
 .charity-header {
     font-size: 85px;
-    font-weight: 800; 
+    font-weight: 800;
     color: rgb(255, 255, 255);
 }
 
 .afterlife-charity-header {
     color: rgb(142, 167, 135);
-    font-size: 55px; 
-    font-weight: 800; 
+    font-size: 55px;
+    font-weight: 800;
     -webkit-text-stroke: none;
 }
 
@@ -91,8 +91,8 @@
     text-align: center;
 }
 
-.how-to-help { 
-    margin-top:140px;
+.how-to-help {
+    margin-top: 140px;
     display: flex;
     flex-direction: column;
 }
@@ -177,7 +177,7 @@
 }
 
 .volunteer-header {
-    border: 3px #003807e4 solid;   
+    border: 3px #003807e4 solid;
     font-size: 22px;
     background-color: #e5ffec;
     color: #002b0c;
@@ -185,36 +185,36 @@
 }
 
 
-.volunteer-row-1 { 
-    border: 12px #ffffff solid;   
+.volunteer-row-1 {
+    border: 12px #ffffff solid;
     font-size: 22px;
     background-color: #002b0c;
 }
 
-.volunteer-row-2 { 
-    border: 12px #ffffff solid;   
+.volunteer-row-2 {
+    border: 12px #ffffff solid;
     font-size: 22px;
     background-color: #003f11 !important;
 }
 
-.volunteer-row-3 { 
-    border: 12px #ffffff solid;   
+.volunteer-row-3 {
+    border: 12px #ffffff solid;
     font-size: 22px;
     background-color: #175d2b;
 }
 
 .volunteer-row-4 {
-    border: 12px #ffffff solid;   
+    border: 12px #ffffff solid;
     font-size: 22px;
     background-color: #28663b !important;
 }
 
 .volunteer-row-5 {
-    border: 12px #ffffff solid;   
+    border: 12px #ffffff solid;
     font-size: 22px;
     background-color: #4ba46c;
 }
- 
+
 @media screen and (max-width: 880px) {
 
     .charity-container {
@@ -225,11 +225,13 @@
         width: 97vw;
         padding: 12px;
     }
+
     .donate-for-afterlife {
         margin-top: 20px;
         padding: 10px;
     }
-    .charity-header { 
+
+    .charity-header {
         font-size: 65px;
     }
 
@@ -238,9 +240,11 @@
         margin-left: 15px;
         width: 85vw;
     }
+
     .how-to-help {
         margin-top: -35px;
     }
+
     .svg-container {
         height: 120px;
     }
@@ -282,4 +286,4 @@
     .card {
         background-color: rgb(240, 255, 244);
     }
-}
+} 

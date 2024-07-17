@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fs, useFirebaseAuth } from "../Config/Config";
+import { fs, useFirebaseAuth } from "../../Config/Config";
 
-import "./Styles/complains.css";
+import "./complains.css";
 
 const Complains = () => {
   const { currentUser } = useFirebaseAuth();

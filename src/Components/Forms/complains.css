@@ -1,0 +1,128 @@
+.complain {
+    padding: 20px;
+    max-width: 950px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+.complain-head {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #00381a;
+    text-align: center;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-detail {
+    flex: 1;
+    margin-right: 10px;
+} 
+
+.user-detail:last-child {
+    margin-right: 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #00381abb;
+}
+
+.detail-value {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    background-color: #00381ae4;
+}
+
+.complain-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.complain-title {
+    font-size: 25px;
+    color: #00381abb;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.comp-desc {
+    height: 180px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: large;
+    border: 2px solid green;
+    resize: none;
+}
+
+.comp-desc::placeholder{
+    font-weight: 200;
+    font-style: oblique;
+}
+
+.submit-complain, .show-complain {
+    padding: 10px 20px;
+    background-color: #00381ae4;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.submit-complain:hover, .show-complain:hover {
+    background-color: #45a049;
+}
+
+.warning-message {
+    color: red;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.testimonial-card {
+    padding: 20px;
+    background-color: #00381ae4;
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+@media (min-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

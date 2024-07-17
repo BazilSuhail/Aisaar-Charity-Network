@@ -1,17 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../Config/Config';
-import Footer from "./Footer";
+import { fs } from '../../Config/Config';
+import Footer from "../Pages/Footer";
 //import TopVolunteers from './topVolunteers'; // Import the TopVolunteers component
 
-import Loader from './Loader';
-import "./Styles/tables.css";
-import "./Styles/gallery.css";
-import "./Styles/tables.css";
-import Svg1 from './Styles/photos/charitycup.svg';
-import Svg2 from './Styles/photos/karekamal.svg';
-import Svg3 from './Styles/photos/unicef.svg';
-import Svg4 from './Styles/photos/sundas.svg';
-import Svg5 from './Styles/photos/local.svg';
+import Loader from '../Loader';
+import "../Styles/tables.css";
+import "./gallery.css";
+import "../Styles/tables.css";
+import Svg1 from '../Styles/photos/charitycup.svg';
+import Svg2 from '../Styles/photos/karekamal.svg';
+import Svg3 from '../Styles/photos/unicef.svg';
+import Svg4 from '../Styles/photos/sundas.svg';
+import Svg5 from '../Styles/photos/local.svg';
+
+
+const AnimatedCounter = ({ value, duration, start, incrementByHundred, val }) => {
+    const [displayValue, setDisplayValue] = useState(0);
+
+    useEffect(() => {
+        let currentValue = 0;
+        const endValue = parseInt(value);
+        let incrementTime;
+
+        if (incrementByHundred) {
+            incrementTime = start;
+        } else {
+            incrementTime = Math.max(duration / Math.abs(endValue - currentValue), start);
+        }
+
+        const animation = () => {
+            if (currentValue < endValue) {
+                currentValue += incrementByHundred ? val : 1;
+                setDisplayValue(currentValue);
+                setTimeout(animation, incrementTime);
+            }
+        };
+
+        animation();
+
+        return () => clearTimeout(animation);
+    }, [value, duration, start, incrementByHundred, val]);
+
+    return <div className="total">{displayValue}</div>;
+};
 
 const Gallery = () => {
     const [totalProjects, setTotalProjects] = useState(0);
@@ -118,36 +149,6 @@ const Gallery = () => {
 
         fetchVolunteers();
     }, []);
-
-    const AnimatedCounter = ({ value, duration, start, incrementByHundred, val }) => {
-        const [displayValue, setDisplayValue] = useState(0);
-
-        useEffect(() => {
-            let currentValue = 0;
-            const endValue = parseInt(value);
-            let incrementTime;
-
-            if (incrementByHundred) {
-                incrementTime = start;
-            } else {
-                incrementTime = Math.max(duration / Math.abs(endValue - currentValue), start);
-            }
-
-            const animation = () => {
-                if (currentValue < endValue) {
-                    currentValue += incrementByHundred ? val : 1;
-                    setDisplayValue(currentValue);
-                    setTimeout(animation, incrementTime);
-                }
-            };
-
-            animation();
-
-            return () => clearTimeout(animation);
-        }, [value, duration, start, incrementByHundred, val]);
-
-        return <div className="total">{displayValue}</div>;
-    };
 
     return (
         <div className='gallery'>
@@ -270,20 +271,7 @@ const Gallery = () => {
                                 ))}
                             </tbody>
                         </table>
-                    </div>
-
-                    {/*
-                    <div>{topVolunteers.map((volunteer, index) => (
-                        <div key={index} className={`volunteer-row-${index + 1}`}>
-                            <div>{index + 1}</div>
-                            <div>{volunteer.displayName}</div>
-                            <div>{volunteer.phoneNumber}</div>
-                            <div>{volunteer.Projectscompleted}</div>
-                        </div>
-                    ))}</div>
-                        */}
-
-
+                    </div> 
                 </div>
 
             )}

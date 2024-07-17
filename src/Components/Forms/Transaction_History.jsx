@@ -1,9 +1,9 @@
 // TransactionHistory.js
 import React, { useState, useEffect } from "react";
-import { fs, useFirebaseAuth } from "../Config/Config";
-import Footer from "./Footer";
+import { fs, useFirebaseAuth } from "../../Config/Config";
+import Footer from "../Pages/Footer";
 import { useNavigate } from "react-router-dom";
-import "./Styles/tables.css";
+import "../Styles/tables.css";
 const TransactionHistory = () => {
   const navigate = useNavigate();
 

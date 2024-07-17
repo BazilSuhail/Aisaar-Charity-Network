@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { auth, fs } from '../Config/Config';
+import { auth, fs } from '../../Config/Config';
 import { useNavigate } from "react-router-dom";
-import Footer from "./Footer";
-
-import "./Styles/donor.css"
-import "./Styles/form.css"
+import Footer from "../Pages/Footer"; 
+import "./donor.css"; 
+import "../Styles/form.css";
 
 const Donor = () => {
   const navigate = useNavigate();

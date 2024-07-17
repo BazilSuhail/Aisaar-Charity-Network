@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fs, useFirebaseAuth } from "../Config/Config";
-
-import "./Styles/complains.css";
+import { fs, useFirebaseAuth } from "../../Config/Config";
+import "./complains.css";
 
 const Testimonial = () => {
     const { currentUser } = useFirebaseAuth();
@@ -102,6 +101,18 @@ const Testimonial = () => {
                 <div className="warning-message">Abby Kanjoos 100,000 kheraat to krdy, Phr Laga den ge tera Testimonial bhi Home Page pr!!</div>
             ) : (
                 <>
+                    <div className="complain-title">Donor Details: </div>
+                    <div className="user-info">
+                        <div className="user-detail">
+                            <label>Name:</label>
+                            <div className="detail-value">{testimonialData.displayName}</div>
+                        </div>
+                        <div className="user-detail">
+                            <label>Email:</label>
+                            <div className="detail-value">{testimonialData.email}</div>
+                        </div>
+                    </div>
+
                     <form className="complain-form" onSubmit={handleSubmit}>
                         <div className="complain-title">Feedback: </div>
                         <textarea className="comp-desc" name="feedback" placeholder="Enter Your Feedback" value={testimonialData.feedback} onChange={handleChange} required />
@@ -114,21 +125,12 @@ const Testimonial = () => {
                     </button>
 
                     {showTable && (
-                        <div className="table-container">
-                            <table className="table-body">
-                                <thead className="head">
-                                    <tr>
-                                        <th>Previous Feedbacks</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="body">
-                                    {testimonials.map((testimonial, index) => (
-                                        <tr key={index}>
-                                            <td>{testimonial.feedback}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className="card-container">
+                            {testimonials.map((testimonial, index) => (
+                                <div key={index} className="testimonial-card">
+                                    <p>{testimonial.feedback}</p>
+                                </div>
+                            ))}
                         </div>
                     )}
                 </>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, fs } from "../Config/Config";
+import { auth, fs } from "../../Config/Config";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "./Styles/loginsignup.css";
+import "./loginsignup.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

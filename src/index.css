@@ -7,7 +7,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Vertical Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 2px; /* Width of the vertical scrollbar */
+  height: 2px; /* Height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #073300; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounding corners of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #073300; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounding corners of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #073300; /* Color of the scrollbar thumb when hovered */
+}
+
+::-webkit-scrollbar-corner {
+  background: #f1f1f1; /* Background of the scrollbar corner */
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { auth, fs } from "../Config/Config";
+import { auth, fs } from "../../Config/Config";
 
-import "./Styles/donor.css";
-import "./Styles/tables.css";
-import "./Styles/form.css";
+import "../Profiles/donor.css";
+import "../Styles/tables.css";
+import "../Styles/form.css";
 
 const AppliedProj = () => {
   const [loggedInVolunteer, setLoggedInVolunteer] = useState(null);

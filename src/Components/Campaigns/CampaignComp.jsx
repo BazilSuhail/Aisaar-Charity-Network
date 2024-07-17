@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../Config/Config';
-import "./Styles/campaignList.css";
+import { fs } from '../../Config/Config';
+import "./campaignList.css";
 
 const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
     const [localDonationAmount, setLocalDonationAmount] = useState(0);
     const [donationComplete, setDonationComplete] = useState(false);
     const [franchiseTitle, setFranchiseTitle] = useState("");
+    const [donationDisabled, setDonationDisabled] = useState(false); // State to manage the disable state of the donate button
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchFranchiseTitle = async () => {
             if (campaign.franchiseID) {
                 const franchiseRef = fs.collection("franchise").doc(campaign.franchiseID);
@@ -17,9 +18,16 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
                 }
             }
         };
- 
+
         fetchFranchiseTitle();
     }, [campaign.franchiseID]);
+
+    useEffect(() => {
+        if (campaign) {
+            const remainingAmount = parseInt(campaign.targetAmount) - parseInt(campaign.collectedAmount);
+            setDonationDisabled(localDonationAmount > remainingAmount);
+        }
+    }, [localDonationAmount, campaign]);
 
     const handleDonateClick = () => {
         handleDonate(campaign.id, localDonationAmount, campaign.name);
@@ -74,7 +82,7 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
                 {userInDonorsCollection && !donationComplete && (
                     <div className='c-don-cont'>
                         <input className='c-donations' type="number" placeholder="Enter amount" onChange={(e) => setLocalDonationAmount(e.target.value)} />
-                        <button className='c-handle-donations' onClick={handleDonateClick} disabled={localDonationAmount <= 0}>
+                        <button className='c-handle-donations' onClick={handleDonateClick} disabled={donationDisabled}>
                             Donate
                         </button>
                     </div>

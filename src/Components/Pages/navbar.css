@@ -1,0 +1,254 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #073300;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+.menu-icon {
+  font-size: 24px;
+  font-weight: 100;
+  cursor: pointer;
+  display: none;
+  color: white;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+
+}
+
+.auth-links {
+  margin-left: -95px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+
+}
+
+.nav-links,
+.sign-links,
+.logout-button {
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border: 2px solid #073300;
+}
+
+.nav-links:hover,
+.sign-links:hover,
+.logout-button:hover {
+  border-color: white;
+  border-radius: 25px;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-container-volunteer,
+.profile-container-donor {
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  font-size: 25px;
+  padding: 5px;
+  border-radius: 50%;
+  color: white;
+}
+
+.profile-container-volunteer:hover,
+.profile-container-donor:hover {
+  background-color: white;
+  color: #073300;
+}
+
+.profile {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.logout-button {
+  display: flex;
+  margin: -5px;
+  color: red;
+  background-color: white;
+  margin-right: -10px;
+  font-size: 28px;
+  margin-left: 10px;
+  font-weight: 700;
+  padding: -3px 0px;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.logout-button:hover {
+  background-color: red;
+  color: white;
+  border-color: #073300;
+  border-radius: 12px;
+
+}
+
+.logout-mobile {
+  display: none;
+}
+
+/* Active Link Styling */
+.nav-links.active {
+  background-color: white;
+  color: #073300;
+  border-radius: 25px;
+}
+
+/* Mobile Styles */
+@media (max-width: 955px) {
+
+  .links,
+  .auth-links {
+    display: none;
+  }
+
+  .logo-container {
+    width: 100%;
+  }
+
+  .menu-icon {
+    display: block;
+    margin-left: auto;
+  }
+
+  .navbar.open .vertical-menu {
+    display: flex;
+  }
+
+  .logout-mobile {
+    display: inline;
+  }
+}
+
+.vertical-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 70vw;
+  background-color: rgba(7, 51, 0, 0.7);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: white;
+  z-index: 1000;
+  backdrop-filter: blur(25px);
+}
+
+.vertical-line {
+  height: 3px;
+  width: 98%;
+  margin: 20px auto;
+  background-color: rgb(233, 255, 232);
+  margin-bottom: 0px;
+}
+
+.vertical-line2 {
+  height: 3px;
+  width: 98%;
+  margin: 0px auto;
+  background-color: rgb(233, 255, 232);
+  margin-bottom: 20px;
+}
+
+.vertical-menu .vertical-logo {
+  margin-left: 15px;
+}
+
+.vertical-menu .menu-vertical {
+  display: flex;
+  width: auto;
+  margin-top: 15px;
+  flex-direction: column;
+}
+
+.vertical-menu .nav-links.active {
+  color: #073300;
+  width: 110px;
+}
+
+.vertical-menu .menu-icon {
+  align-self: flex-end;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+}
+
+.vertical-menu .nav-links {
+  margin-bottom: 15px;
+  font-size: 18px;
+  border: none;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.vertical-menu .profile {
+  margin-left: 10px;
+  font-size: 25px;
+}
+
+.vertical-menu .logout-button {
+  background-color: transparent;
+  border: none;
+  margin-top: 15px;
+  margin-left: -2px;
+  cursor: pointer;
+  padding: 3px 6px;
+  font-size: 32px;
+  display: flex;
+  font-weight: 500;
+  background-color: white;
+  align-items: center;
+  color: rgb(255, 60, 60);
+  transition: color 0.3s ease;
+}
+
+.vertical-menu .sign-links {
+  border: none;
+  background-color: white;
+  color: #073300;
+  width: 100px;
+  border-radius: 25px;
+}
+
+.vertical-menu .logout-button:hover {
+  color: #dc3545;
+}
+
+.vertical-menu .logout-mobile {
+  margin-left: 4px;
+  font-size: 25px;
+}

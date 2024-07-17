@@ -6,7 +6,6 @@
 .cover {
   padding: 30px;
   height: 495px;
-  ;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -38,20 +37,22 @@
 }
 
 .tagline {
-  font-size: 60px;
-  font-weight: 950;
+  margin-top: 10px;
+  font-size: 55px;
+  padding: 5px 20px;
+  font-weight: 400;
   text-align: center;
-  color: rgb(0, 83, 37);
-  margin-top: 54px;
+  color: #ffffff;
+  border-radius: 15px;
+  background-color: rgb(0, 83, 37);
   margin-bottom: 5px;
 }
 
 .typewriter {
   font-size: 55px;
-  font-weight: 500;
+  font-weight: 800;
   text-align: center;
-  background-color: #0a4927;
-  color: white;
+  color: #073300;
   border-radius: 15px;
   padding: 8px;
 }
@@ -71,11 +72,23 @@
   }
 }
 
+
 .aboutheading {
   font-size: 35px;
   background-color: rgb(48, 85, 55);
   font-weight: 900;
   color: rgb(255, 255, 255);
+  padding: 10px;
+  width: 98.4vw;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.otherheading {
+  font-size: 35px;
+  border: 3px solid rgb(48, 85, 55);
+  font-weight: 800;
+  color: rgb(48, 85, 55);
   padding: 10px;
   width: 98.4vw;
   border-radius: 50px;
@@ -106,6 +119,65 @@
   border-radius: 15px;
 }
 
+/* ----------------- */
+.choose-us {
+  background-color: #073300;
+  margin-top: 35px;
+  padding-bottom: 20px;
+}
+
+.choose-head {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.choose-heading {
+  font-size: 45px;
+  font-weight: 800;
+  background-color: #073300;
+  color: white;
+  padding: 15px;
+  margin: 0px auto;
+}
+
+.choose-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+  gap: 32px;
+}
+
+.choose-div {
+  padding: 16px;
+}
+
+.choose-div-heading {
+  font-size: 32px;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.choose-icon {
+  color: white;
+  font-weight: 900;
+  margin-right: 8px;
+  font-size: 35px;
+}
+
+.choose-body {
+  color: #e2ffdc;
+  margin-top: -5px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+
+/* ----------------- */
 .numbers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -208,6 +280,11 @@
     height: 490px;
   }
 
+  .choose-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
   .tagline {
     font-size: 45px;
   }
@@ -236,6 +313,11 @@
     padding: 12px;
     height: 68vh;
     margin-bottom: 10px;
+  }
+
+  .choose-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 
   .coverImage {

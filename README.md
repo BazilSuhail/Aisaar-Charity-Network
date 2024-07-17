@@ -1,13 +1,8 @@
-## Aisaar
+# Aisaar
 #### `Aisaar` a "Charity Management Network" network whose aim is to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
 
-## Run Locally
+# Run Locally
 
-At first create a React App using following command:
-
-```bash
-   npx create-react-app charity-system
-```
  Clone the project using following command
 ```bash
   git clone https://github.com/BazilSuhail/ClientSide-Charity-Network.git
@@ -16,22 +11,14 @@ Go to the project directory
 ```bash
 cd my-project
 ```
-Just for convenience copy all contents in the cloned repository and paste them into the directory where You have 
-created you **React App**.`A faster way to continue with this.`
-
-## Install dependencies:
-Naviagate to you **React App** after pasting the content or any way you set it up.
-Afterwards simply run this command to install all required dependancies and packages at once.
-```bash
-npm i firebase react-icons react-router-dom react-toastify  react-responsive-carousel react-simple-typewriter
-```
-Start the server
-
+Then **Run** this cpmmand in you terminal:
 ```bash
   npm start
 ```
 
-# `A`
+
+
+# Functionalities
 ### To create such a network to streamline Such Functionalities I implemented following features to cater the problem:
 - Creation and management of franchises, projects, volunteer, campaigns, and beneficiaries.
 - Admin registering different franchises holding multiple projects, volunteers and campaigns as well as beneficiaries. 
@@ -47,6 +34,32 @@ Start the server
 - Maintaining record of completed Projects and franchises.  
 - Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other). 
 
+## In case this doesnt work, follow these steps as an alternative and Install required Dependancies
+At first create a React App using following command:
+
+```bash
+   npx create-react-app charity-system
+```
+ Clone the project using following command
+```bash
+  git clone https://github.com/BazilSuhail/ClientSide-Charity-Network.git
+```
+Go to the project directory
+```bash
+cd my-project
+```
+Just for convenience copy all contents in the cloned repository and paste them into the directory where You have 
+created your **React App**.
+ 
+Afterwards simply run this command to install all required dependancies and packages at once.
+```bash
+npm i firebase react-icons react-router-dom react-toastify  react-responsive-carousel react-simple-typewriter
+```
+Start the server
+
+```bash
+  npm start
+```
 # `Live Demo` 
 ## Check out the latest demo of Project [Aisaar-Client](https://aisaar.netlify.app). 
  

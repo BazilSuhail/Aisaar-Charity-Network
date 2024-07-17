@@ -5,7 +5,7 @@ import { CiHome } from "react-icons/ci";
 import { LuGalleryHorizontalEnd } from "react-icons/lu";
 import { AiOutlineProject } from "react-icons/ai";
 import { SiCampaignmonitor } from "react-icons/si";
-import "./Styles/footer.css";
+import "./footer.css";
 
 const Footer = () => {
     return (

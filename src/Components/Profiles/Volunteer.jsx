@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, fs } from "../Config/Config";
-import Footer from "./Footer";
-import "./Styles/donor.css";
-import "./Styles/tables.css";
-import "./Styles/form.css";
+import { auth, fs } from "../../Config/Config";
+import Footer from "../Pages/Footer"; 
+import "./donor.css";
+import "../Styles/tables.css";
+import "../Styles/form.css";
 
 const Volunteer = () => {
   const navigate = useNavigate();

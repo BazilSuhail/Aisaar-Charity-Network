@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fs, auth } from "../Config/Config";
-import { FieldValue } from "../Config/Config";
+import { fs, auth, FieldValue } from "../../Config/Config";
 
-import Footer from "./Footer";
+import Footer from "../Pages/Footer.jsx";
 import CampaignComp from "./CampaignComp.jsx";
-import "./Styles/campaignList.css";
-import Loader from "./Loader";
+import "./campaignList.css";
+import Loader from "../Loader";
 
 const Listcampaigns = () => {
   const [campaigns, setCampaigns] = useState([]);
