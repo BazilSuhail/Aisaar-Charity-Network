@@ -1,11 +1,21 @@
-.desc-details {
-    border: 1px solid #ccc;
+.desc-container-full {
+    background: linear-gradient(to right, rgb(0, 65, 59), rgb(0, 53, 0), rgb(44, 0, 0));
+    /* Replace with your custom gradient colors */
+    height: 100vh;
+    /* Equivalent to h-screen for full viewport height */
+    width: 100vw;
+    /* Equivalent to w-screen for full viewport width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.desc-details { 
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-    background: linear-gradient(135deg, #bdffab, rgb(230, 242, 224), #bdffab);
-    width: 55%;
-    margin: 30px auto;
+    background-color: rgb(229, 255, 238);
+    width: 55%; 
     padding: 15px;
 }
 
@@ -22,6 +32,7 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 15px;
     font-size: large;
 }
 
@@ -44,10 +55,9 @@
 .desc-line {
     height: 3px;
     width: 95%;
-    margin: -5px auto;
+    margin: 10px auto;
     background-color: #0b5400;
     border-radius: 15px;
-    margin-bottom: -4px;
 }
 
 .desc-dates {
@@ -93,14 +103,14 @@
 }
 
 .desc-required {
-    margin-top: auto;
+    margin-top: 15px;
 }
 
 .desc-target {
     font-weight: bold;
     margin-bottom: 20px;
     color: red;
-    margin-right: 8px;
+    margin-right: 32px;
     font-size: 19px;
 }
 
@@ -120,6 +130,7 @@
 }
 
 .desc-amount-collected {
+    margin-top: 15px;
     background-color: rgba(0, 88, 10);
     color: white;
     padding: 5px 8px;
@@ -177,11 +188,12 @@
 .donation-error {
     color: red;
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 /* Gradient Background for Description */
-.desc-description { 
+.desc-description {
+    margin: 18px 0px;
     background-color: #0b54009b;
     border: 2px solid rgb(0, 92, 15);
     padding: 10px;
@@ -191,15 +203,45 @@
     border-radius: 4px;
 }
 
-@media screen and (max-width:910px) {
-    .desc-details {
-        width: 75%;
+.desc-loader {
+    width: 22%;
+    height: 55px;
+    margin-left: 10px;
+    margin-top: 20px;
+    background: linear-gradient(-45deg, #002b02, #033900e4, #002b02);
+    align-self: center;
+    color: #00b533;
+    text-align: center;
+    align-content: center;
+    font-weight: 900;
+    border-radius: 12px;
+    animation: expandLoader 2s forwards;
+}
+
+@keyframes expandLoader {
+    from {
+        width: 25%;
+    }
+
+    to {
+        width: 95%;
     }
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width:910px) {
+    .desc-container-full{
+        height: auto;
+    }
     .desc-details {
-        width: 85%;
+        width: 75%;
+        margin-bottom: 35px;
+    }
+}
+
+@media screen and (max-width:648px) {
+    .desc-details {
+        width: 95%;
+        margin-top: 35px;
     }
 
     .desc-volunteer-profile {

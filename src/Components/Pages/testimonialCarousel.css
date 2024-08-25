@@ -9,7 +9,7 @@
 .testimonial-carousel-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   height: 400px;
   width: 85%;
   margin: 0px auto;
@@ -32,7 +32,7 @@
 .testimonial-item {
   flex: 0 0 auto;
   height: 360px;
-  width: 350px; 
+  width: 350px;
   margin-right: 20px;
   /* Margin between cards */
   padding: 20px;
@@ -80,10 +80,22 @@
 }
 
 
+@media screen and (max-width:1400px) {
+  .testimonial-carousel-wrapper { 
+    width: 90%;
+    padding-left: 680px;
+  }
+}
+
 @media screen and (max-width: 880px) {
   .testimonial-carousel-wrapper {
     width: 95%;
-    padding-left: 640px;
+    padding-left: 760px;
   }
+
+  .testimonial-item {
+    height: 400px;
+  }
+
 
 }

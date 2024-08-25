@@ -3,7 +3,7 @@
 .login-container {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     /*
     background-image: url("../login.png");
     background-size: cover;*/
@@ -15,18 +15,19 @@
 .accType {
     font-size: x-large;
     color: rgb(0, 44, 10);
-    font-weight: 700; 
+    font-weight: 700;
     font-style: oblique;
     margin-bottom: 10px;
 }
+
 .signup {
     color: rgb(19, 53, 28);
     border: 3px green solid;
-    padding: 20px;
+    padding: 4px 20px;
     font-size: xx-large;
     font-weight: 900;
     margin-top: 25px;
-    border-radius: 15px;
+    border-radius: 8px;
     width: 35vw;
     text-align: center;
 }
@@ -50,15 +51,15 @@
     justify-content: center;
     background-color: #003d036b;
     backdrop-filter: blur(15px);
-    padding: 35px;
-    border-radius: 20px;
-    width: 33.5vw;
+    padding: 25px 35px;
+    border-radius: 10px;
+    width: 35.5vw;
     box-shadow: 0 5 40px white;
-} 
+}
 
 .text {
     color: #004b19;
-    font-size: large; 
+    font-size: large;
     font-weight: 900;
     margin-bottom: 17px;
 }
@@ -66,22 +67,22 @@
 .link {
     text-decoration: none;
     padding: 4px 11px;
-    border-radius: 15px; 
+    border-radius: 15px;
     color: rgb(11, 125, 45);
-    font-size: x-large; 
+    font-size: x-large;
     text-decoration: underline;
-    font-weight: 600; 
+    font-weight: 600;
 }
 
 .link:hover {
-    color: #233e2c; 
+    color: #233e2c;
 }
 
 .selection {
     padding: 10px;
-    width: 75%;
+    width: 76%;
     margin: 8px;
-    border-radius: 15px;
+    border-radius: 8px;
     color: aliceblue;
     background-color: #002b01;
     font-size: medium;
@@ -90,18 +91,20 @@
     border: 2px rgb(183, 255, 205) solid;
 }
 
-.display-name,.email,.password {
+.display-name,
+.email,
+.password {
     padding: 10px;
-    width: 70%;
+    width: 76%;
     margin: 8px;
-    border-radius: 15px;
+    border-radius: 8px;
     color: rgb(240, 248, 255);
     font-size: large;
     background-color: #002b01;
     border: 2px rgb(183, 255, 205) solid;
 }
 
-.form-data input::placeholder{
+.form-data input::placeholder {
     color: #80987e;
     font-weight: 400;
     font-size: large;
@@ -111,7 +114,7 @@
 
 .login-btn {
     background-color: #002b01;
-    margin-top: 20px;
+    margin-top: 8px;
     color: rgb(232, 250, 232);
     font-family: Arial, Helvetica, sans-serif;
     border: 3px rgb(1, 87, 0) solid;
@@ -136,13 +139,13 @@
 
 @media screen and (max-width: 1230px) {
     .form-data {
-        width: 75vw;
-        padding: 25px; 
+        width: 76vw;
+        padding: 25px;
     }
 
     .signup,
     .signup-tagline {
-        width: 75vw;
+        width: 76vw;
     }
 
     .accType {
@@ -157,9 +160,10 @@
     }
 
 
-    .login-btn { 
-        width: 75%;
+    .login-btn {
+        width: 76%;
     }
+
     .selection {
         width: 94%;
     }
@@ -169,40 +173,60 @@
     .signup {
         font-size: 30px;
     }
-
+.accType{
+    font-size: large;
+}
     .form-data {
-        width: 75vw;
+        width: 82vw;
     }
 
     .form-data {
         padding: 25px;
     }
-    .text{
+
+    .text {
         text-align: center;
     }
-    .link { 
-        font-size: larger; 
+
+    .link {
+        font-size: larger;
     }
 
-    .login-btn { 
-        width: 97%;
+    .login-btn {
+        width: 98%;
+        font-size: x-large;
+        padding: 4px 0px;
     }
+
     .display-name,
     .email,
     .password,
     .form-container button {
-        width: 92%;
+        width: 99%;
     }
 
     .selection {
         width: 100%;
     }
 }
+
 @media (max-width: 768px) {
     .Toastify__toast-container {
-      top: 45px; /* Adjust the top position for mobile screens */
-      left: 12%;  
-      width: 75vw; 
+        top: 45px;
+        /* Adjust the top position for mobile screens */
+        left: 12%;
+        width: 76vw;
     }
-  }
-  
+
+    .signup-tagline {
+        margin: 15px;
+        width: 75vw;
+        padding: 15px;
+        font-size: medium;
+        font-weight: 500;
+        color: rgb(196, 255, 207);
+        text-align: center;
+        background-color: #004b19;
+        border-radius: 15px;
+    }
+}

@@ -90,7 +90,13 @@
   font-size: 20px;
   margin-left: 5px;
 }
-
+.get-started{
+  font-weight: 500;
+  font-size: larger;
+  border: 2px white solid;
+  border-radius: 15px;
+  padding: 4px 8px;
+}
 .logout-button {
   display: flex;
   margin: -5px;

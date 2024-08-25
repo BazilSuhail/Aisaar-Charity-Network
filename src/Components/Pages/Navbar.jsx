@@ -104,7 +104,7 @@ const Navbar = () => {
   const renderAuthLinks = () => {
     if (!userType) {
       return (
-        <NavLink to="/login" className="sign-links">Get Started</NavLink>
+        <NavLink to="/login" className="get-started">Get Started</NavLink>
       );
     } else {
       return (

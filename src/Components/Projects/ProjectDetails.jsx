@@ -6,6 +6,7 @@ import './projectDetails.css';
 const ProjectDetails = () => {
     const { id: projectId } = useParams();
     const navigate = useNavigate();
+    const [donationComplete, setDonationComplete] = useState(false);
     const [project, setProject] = useState(null);
     const [volunteerName, setVolunteerName] = useState("");
     const [volunteerContact, setVolunteerContact] = useState("");
@@ -188,6 +189,13 @@ const ProjectDetails = () => {
             console.error("Error donating:", error);
         }
     };
+    const handleDonateClick = () => {
+        handleDonate();
+        setDonationComplete(true);
+        setTimeout(() => { 
+            setDonationComplete(false);
+        }, 2000);
+    };
 
     useEffect(() => {
         if (project) {
@@ -203,50 +211,54 @@ const ProjectDetails = () => {
     }
 
     return (
-        <div className='desc-details'>
-            <h1 className='desc-title'>{project.title}</h1>
-            <div className='desc-container'>
-                <div className="desc-volunteer-profile">
-                    <p className='desc-volunteer'>Volunteer: <span className='volunteer-name'> {volunteerName}</span> </p>
-                    <p className='desc-contact'>Volunteer-Contact: <span className='volunteer-name'>{volunteerContact}</span> </p>
-                </div>
-                <div className='desc-line'></div>
-                <div className="desc-volunteer-profile">
-                    <p className='desc-volunteer'>Franchise: <span className='volunteer-name'> {franchiseTitle}</span> </p>
-                    <p className='desc-contact'>Franchise-Contact: <span className='volunteer-name'>{franchiseContact}</span> </p>
-                </div>
-                <div className="desc-dates">
-                    <div className="desc-start">Start Date</div>
-                    <div className="desc-end">End Date</div>
+        <section className='desc-container-full'>
+            <div className='desc-details'>
+                <h1 className='desc-title'>{project.title}</h1>
+                <div className='desc-container'>
+                    <div className="desc-volunteer-profile">
+                        <p className='desc-volunteer'>Volunteer: <span className='volunteer-name'> {volunteerName}</span> </p>
+                        <p className='desc-contact'>Volunteer-Contact: <span className='volunteer-name'>{volunteerContact}</span> </p>
+                    </div>
+                    <div className='desc-line'></div>
+                    <div className="desc-volunteer-profile">
+                        <p className='desc-volunteer'>Franchise: <span className='volunteer-name'> {franchiseTitle}</span> </p>
+                        <p className='desc-contact'>Franchise-Contact: <span className='volunteer-name'>{franchiseContact}</span> </p>
+                    </div>
+                    <div className="desc-dates">
+                        <div className="desc-start">Start Date</div>
+                        <div className="desc-end">End Date</div>
 
+                    </div>
+                    <div className="desc-dates">
+                        <div className="desc-start-date">{project.startDate}</div>
+                        <div className="desc-end-date">{project.endDate}</div>
+                    </div>
+
+                    <p className='desc-description'>{project.description}</p>
+
+
+                    <p className='desc-required'><span className='desc-target '>Target Amount:</span><span className='desc-amount'> ${project.targetAmount}</span></p>
+                    <p className='desc-required'><span className='desc-target-collected'>Collected Amount:</span><span className='desc-amount-collected'> ${project.collectedAmount}</span></p>
                 </div>
-                <div className="desc-dates">
-                    <div className="desc-start-date">{project.startDate}</div>
-                    <div className="desc-end-date">{project.endDate}</div>
-                </div>
 
-                <p className='desc-description'>{project.description}</p>
-
-
-                <p className='desc-required'><span className='desc-target '>Target Amount:</span><span className='desc-amount'> ${project.targetAmount}</span></p>
-                <p className='desc-required'><span className='desc-target-collected'>Collected Amount:</span><span className='desc-amount-collected'> ${project.collectedAmount}</span></p>
+                {/* Donation Section */}
+                {currentUser && userInDonorsCollection && !donationComplete && (
+                    <div className='donation-section'>
+                        <input
+                            className='donation-input'
+                            type="number"
+                            placeholder="Enter donation amount"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                        />
+                        <button className='donate-button' onClick={handleDonateClick} disabled={donationDisabled}>Donate</button>
+                        {donationDisabled && <p className='donation-error'>Cannot donate more than the remaining amount.</p>}
+                    </div>
+                )}
+                
+                {donationComplete && (<div className="desc-loader">DONATING !!</div>)}
             </div>
-
-            {/* Donation Section */}
-            {currentUser && userInDonorsCollection && (
-                <div className='donation-section'>
-                    <input
-                        className='donation-input'
-                        type="number"
-                        placeholder="Enter donation amount"
-                        value={donationAmount}
-                        onChange={(e) => setDonationAmount(e.target.value)}
-                    />
-                    <button className='donate-button' onClick={handleDonate} disabled={donationDisabled}>Donate</button>
-                    {donationDisabled && <p className='donation-error'>Cannot donate more than the remaining amount.</p>}
-                </div>
-            )}
-        </div>
+        </section>
 
     );
 };

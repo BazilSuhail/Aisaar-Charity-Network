@@ -170,7 +170,7 @@ const Gallery = () => {
                         <div className='help-heading'>Volunteer:</div>
                         <p>Join our team of dedicated volunteers. Your time and skills can make a significant difference.</p>
                     </div>
-                    <div className="help-section">
+                    <div className="hidden md:block help-section ">
                         <div className='help-heading'>Spread the Word:</div>
                         <p>Help us raise awareness about our mission and work. Share our story with your network to inspire others to get involved.</p>
                     </div>

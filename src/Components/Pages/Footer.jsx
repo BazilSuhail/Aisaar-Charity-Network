@@ -26,10 +26,10 @@ const Footer = () => {
                 </div>
 
                 <div className="links-nav">
-                    <NavLink to="/" className="f-link"><CiHome className='f-icon' />Home</NavLink>
-                    <NavLink to="/gallery" className="f-link"><LuGalleryHorizontalEnd className='f-icon' />Gallery</NavLink>
-                    <NavLink to="/listedprojects" className="f-link"><AiOutlineProject className='f-icon' />Projects</NavLink>
-                    <NavLink to="/listcampaigns" className="f-link"><SiCampaignmonitor className='f-icon' />Campaigns</NavLink>
+                    <NavLink to="/" className="f-link flex"><CiHome className='f-icon' size={25}/><span className='ml-[-8px]'>Home</span></NavLink>
+                    <NavLink to="/gallery" className="f-link flex"><LuGalleryHorizontalEnd size={25} className='f-icon' /><span className='ml-[-8px]'>Gallery</span></NavLink>
+                    <NavLink to="/listedprojects" className="f-link flex"><AiOutlineProject  size={25} className='f-icon' /><span className='ml-[-8px]'>Projects</span></NavLink>
+                    <NavLink to="/listcampaigns" className="f-link flex"><SiCampaignmonitor  size={25} className='f-icon' /><span className='ml-[-8px]'>Campaigns</span></NavLink>
                 </div>
             </div>
 
