@@ -26,3 +26,54 @@
 ::-webkit-scrollbar-corner {
   background: #f1f1f1; /* Background of the scrollbar corner */
 }
+
+
+.button-container {
+  font-weight: 600;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  width: 100px; 
+  border: none; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.button-container:hover{
+  color:#bdd9b9
+}
+
+.button-container .span-mother {
+  display: flex;
+  overflow: hidden;
+}
+
+.button-container:hover .span-mother {
+  position: absolute;
+}
+
+.button-container:hover .span-mother span {
+  transform: translateY(1.5em);
+}
+
+.button-container .span-mother2 {
+  display: flex;
+  position: absolute;
+  color: #073300;
+  overflow: hidden;
+}
+
+.button-container .span-mother2 span {
+  transform: translateY(-1.5em);
+  color: white;
+}
+
+.button-container:hover .span-mother2 span {
+  transform: translateY(0);
+}
+.button-container .span-mother span,
+.button-container .span-mother2 span {
+  transition: transform 0.2s ease;
+}
