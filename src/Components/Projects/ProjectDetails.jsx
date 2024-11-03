@@ -1,26 +1,23 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fs, auth, FieldValue } from '../../Config/Config';
-import './projectDetails.css';
 
-const ProjectDetails = () => {
-    const { id: projectId } = useParams();
+const ProjectDetails = ({ onClose, id }) => {
+    const projectId = useMemo(() => id, [id]);
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
-    const [volunteerName, setVolunteerName] = useState("");
-    const [volunteerContact, setVolunteerContact] = useState("");
-    const [franchiseTitle, setFranchiseTitle] = useState("");
-    const [franchiseContact, setFranchiseContact] = useState("");
+    const [volunteer, setVolunteer] = useState({});
+    const [franchise, setFranchise] = useState({});
     const [currentUser, setCurrentUser] = useState(null);
-    const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
-    const [donationAmount, setDonationAmount] = useState(""); // State for donation amount input
-    const [donationDisabled, setDonationDisabled] = useState(false); // State to manage the disable state of the donate button
-    const [projectCompleted, setProjectCompleted] = useState(false); // State to show project completion message
+    const [donationAmount, setDonationAmount] = useState("");
+    const [donationDisabled, setDonationDisabled] = useState(false);
+    const [projectCompleted, setProjectCompleted] = useState(false);
 
     const fetchProjectDetails = useCallback(async () => {
         try {
             const projectRef = fs.collection("projects").doc(projectId);
             const projectDoc = await projectRef.get();
+
             if (projectDoc.exists) {
                 const projectData = projectDoc.data();
                 setProject(projectData);
@@ -29,8 +26,7 @@ const ProjectDetails = () => {
                     const volunteerRef = fs.collection("volunteer").doc(projectData.volunteerID);
                     const volunteerDoc = await volunteerRef.get();
                     if (volunteerDoc.exists) {
-                        setVolunteerName(volunteerDoc.data().displayName);
-                        setVolunteerContact(volunteerDoc.data().phoneNumber);
+                        setVolunteer(volunteerDoc.data());
                     }
                 }
 
@@ -38,8 +34,7 @@ const ProjectDetails = () => {
                     const franchiseRef = fs.collection("franchise").doc(projectData.franchiseID);
                     const franchiseDoc = await franchiseRef.get();
                     if (franchiseDoc.exists) {
-                        setFranchiseTitle(franchiseDoc.data().name);
-                        setFranchiseContact(franchiseDoc.data().contact);
+                        setFranchise(franchiseDoc.data());
                     }
                 }
             }
@@ -53,55 +48,23 @@ const ProjectDetails = () => {
 
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            checkUserInDonorsCollection(user);
         });
 
         return () => unsubscribe();
-    }, [fetchProjectDetails, projectId]);
+    }, [fetchProjectDetails]);
 
-    const checkUserInDonorsCollection = async (user) => {
-        if (!user) {
-            setUserInDonorsCollection(false);
+    const handleDonate = useCallback(async () => {
+        setDonationAmount("");
+        if (!currentUser) return;
+
+        const amount = parseInt(donationAmount);
+        if (isNaN(amount) || amount <= 0 || amount > project.targetAmount - project.collectedAmount) {
+            alert(`Please enter a valid donation up to $${project.targetAmount - project.collectedAmount}`);
             return;
         }
+        const projectToUpdate = project;
+
         try {
-            const donorId = user.uid;
-            const donorRef = fs.collection("donors").doc(donorId);
-            const donorSnapshot = await donorRef.get();
-            setUserInDonorsCollection(donorSnapshot.exists);
-        } catch (error) {
-            console.error("Error checking user in donors collection:", error);
-        }
-    };
-
-    const handleDonate = async () => {
-        setDonationAmount("");
-        try {
-            if (!currentUser) {
-                throw new Error("User not logged in");
-            }
-
-            if (!userInDonorsCollection) {
-                throw new Error("User not in donors collection");
-            }
-
-            const amount = parseInt(donationAmount);
-            if (isNaN(amount) || amount <= 0) {
-                throw new Error("Invalid donation amount");
-            }
-
-            const projectToUpdate = project;
-
-            if (!projectToUpdate) {
-                throw new Error("Project not found");
-            }
-
-            const remainingAmount = parseInt(projectToUpdate.targetAmount) - parseInt(projectToUpdate.collectedAmount);
-
-            if (amount > remainingAmount) {
-                throw new Error(`You can only donate up to $${remainingAmount}`);
-            }
-
             const updatedCollectedAmount = amount + parseInt(projectToUpdate.collectedAmount);
 
             await fs.collection("projects").doc(projectId).update({
@@ -183,71 +146,73 @@ const ProjectDetails = () => {
             } else {
                 fetchProjectDetails();
             }
-
         } catch (error) {
             console.error("Error donating:", error);
         }
-    };
+    }, [donationAmount, project, projectId, currentUser,fetchProjectDetails , navigate]);
 
     useEffect(() => {
         if (project) {
-            const remainingAmount = parseInt(project.targetAmount) - parseInt(project.collectedAmount);
-            setDonationDisabled(donationAmount > remainingAmount);
+            setDonationDisabled(donationAmount > project.targetAmount - project.collectedAmount);
         }
     }, [donationAmount, project]);
 
-    if (!project) return <div>Loading...</div>;
+    if (!project) return <div className="flex items-center justify-center h-full">Loading...</div>;
 
     if (projectCompleted) {
-        return <div>Project completed. Thank you for donating!</div>;
+        return <div className="text-center text-green-600 mt-4">Project completed. Thank you for donating!</div>;
     }
 
     return (
-        <div className='desc-details'>
-            <h1 className='desc-title'>{project.title}</h1>
-            <div className='desc-container'>
-                <div className="desc-volunteer-profile">
-                    <p className='desc-volunteer'>Volunteer: <span className='volunteer-name'> {volunteerName}</span> </p>
-                    <p className='desc-contact'>Volunteer-Contact: <span className='volunteer-name'>{volunteerContact}</span> </p>
-                </div>
-                <div className='desc-line'></div>
-                <div className="desc-volunteer-profile">
-                    <p className='desc-volunteer'>Franchise: <span className='volunteer-name'> {franchiseTitle}</span> </p>
-                    <p className='desc-contact'>Franchise-Contact: <span className='volunteer-name'>{franchiseContact}</span> </p>
-                </div>
-                <div className="desc-dates">
-                    <div className="desc-start">Start Date</div>
-                    <div className="desc-end">End Date</div>
+        <div className="flex fixed items-center justify-center z-50 inset-0 bg-black bg-opacity-50 p-4">
+            <div className="bg-white p-6 rounded-md w-full max-w-lg shadow-lg">
+                <button className="text-gray-500 hover:text-gray-800 text-lg mb-4" onClick={onClose}>Close</button>
+                <h1 className="text-2xl font-semibold mb-4">{project.title}</h1>
 
-                </div>
-                <div className="desc-dates">
-                    <div className="desc-start-date">{project.startDate}</div>
-                    <div className="desc-end-date">{project.endDate}</div>
+                <div className="border-b border-gray-300 pb-4 mb-4">
+                    <p><strong>Volunteer:</strong> {volunteer.displayName || "N/A"}</p>
+                    <p><strong>Contact:</strong> {volunteer.phoneNumber || "N/A"}</p>
                 </div>
 
-                <p className='desc-description'>{project.description}</p>
+                <div className="border-b border-gray-300 pb-4 mb-4">
+                    <p><strong>Franchise:</strong> {franchise.name || "N/A"}</p>
+                    <p><strong>Contact:</strong> {franchise.contact || "N/A"}</p>
+                </div>
 
+                <div className="mb-4">
+                    <p><strong>Start Date:</strong> {project.startDate}</p>
+                    <p><strong>End Date:</strong> {project.endDate}</p>
+                    <p className="mt-2"><strong>Description:</strong> {project.ription}</p>
+                </div>
 
-                <p className='desc-required'><span className='desc-target '>Target Amount:</span><span className='desc-amount'> ${project.targetAmount}</span></p>
-                <p className='desc-required'><span className='desc-target-collected'>Collected Amount:</span><span className='desc-amount-collected'> ${project.collectedAmount}</span></p>
+                <div className="mb-4">
+                    <p><strong>Target Amount:</strong> ${project.targetAmount}</p>
+                    <p><strong>Collected Amount:</strong> ${project.collectedAmount}</p>
+                </div>
+
+                {currentUser && (
+                    <div className="mt-4">
+                        <input
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300 mb-2"
+                            type="number"
+                            placeholder="Enter donation amount"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                        />
+                        <button
+                            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 disabled:opacity-50"
+                            onClick={handleDonate}
+                            disabled={donationDisabled}
+                        >
+                            Donate
+                        </button>
+                        {donationDisabled && (
+                            <p className="text-red-500 mt-2">Cannot donate more than the remaining amount.</p>
+                        )}
+                    </div>
+                )}
             </div>
-
-            {/* Donation Section */}
-            {currentUser && userInDonorsCollection && (
-                <div className='donation-section'>
-                    <input
-                        className='donation-input'
-                        type="number"
-                        placeholder="Enter donation amount"
-                        value={donationAmount}
-                        onChange={(e) => setDonationAmount(e.target.value)}
-                    />
-                    <button className='donate-button' onClick={handleDonate} disabled={donationDisabled}>Donate</button>
-                    {donationDisabled && <p className='donation-error'>Cannot donate more than the remaining amount.</p>}
-                </div>
-            )}
         </div>
-
     );
 };
 

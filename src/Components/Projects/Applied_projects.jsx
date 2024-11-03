@@ -13,10 +13,10 @@ const AppliedProj = () => {
     startDate: "",
     endDate: "",
     targetAmount: "0",
-    status: "Active", // Set default status to "Active"
+    status: "Active",  
     volunteerID: "",
-    franchiseID: "", // Add franchiseID field
-    collectedAmount: "0", // Initialize collectedAmount to "0"
+    franchiseID: "",  
+    collectedAmount: "0", 
   });
 
   const [appliedProjects, setAppliedProjects] = useState([]);
