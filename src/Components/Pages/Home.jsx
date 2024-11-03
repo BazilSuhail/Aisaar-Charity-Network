@@ -8,10 +8,6 @@ import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
-import { FaHandsHelping, FaPeopleCarry, FaHandshake, FaChalkboardTeacher } from 'react-icons/fa';
-import { GiNetworkBars, GiHeartKey } from 'react-icons/gi';
-
-
 import "./testimonialCarousel.css";
 
 import { useTransform, useScroll } from 'framer-motion';
@@ -19,7 +15,7 @@ import { useTransform, useScroll } from 'framer-motion';
 import { Link } from "react-router-dom";
 import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurrencyDollar, HiOutlineUsers, HiOutlineLightBulb } from 'react-icons/hi';
 
- 
+
 import { motion } from 'framer-motion';
 
 // Sample data for the carousel
@@ -32,7 +28,7 @@ const carouselData = [
   { id: 6, title: "Slide 6", description: "Description for slide 6" },
 ];
 
-const Carousel = ({testimonial}) => {
+const Carousel = ({ testimonial }) => {
   const [index, setIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
 
@@ -211,7 +207,7 @@ const Home = () => {
     }
   };
   return (
-    <div className="home">
+    <div className="home pt-[80px]">
 
       <section className="cover">
         <div className="profileText">
@@ -262,98 +258,24 @@ const Home = () => {
         <img src={mainlogo} alt="Example" className="coverImage" />
       </section>
 
-      <section className="choose-us">
-        <div className="choose-head">
-          <h2 className="choose-heading">Why Trust Us</h2>
-        </div>
-        <div className="choose-container">
+      <section className="bg-green-950 px-[15px] md:px-[25px] py-[38px]"> 
+          <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2> 
+        <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-[30px] gap-y-[55px] mb-[55px]">
           {chooseUsData.map((item, index) => (
             <motion.div
-              className="choose-div"
+              className="flex items-center px-[8px]"
               style={{ scale, y, opacity }}
               key={index}
             >
-              <h3 className="choose-div-heading">
-              {renderIcon(index)} {item.heading}</h3>
-              <p className="choose-body">{item.body}</p>
+              <div className='scale-[1.2] mr-[15px]'>{renderIcon(index)}</div>
+              <div>
+              <h3 className="text-[22px] font-[600] text-green-200">{item.heading}</h3>
+              <p className="text-white text-[15px]">{item.body}</p>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
-
-      <section className="bg-green-50 px-5 lg:px-20 py-12">
-      <h2 className="text-2xl md:text-4xl font-bold mb-4 text-green-900 text-center">
-        Our Mission
-      </h2>
-      <div className="flex flex-wrap justify-center gap-8 mt-6">
-        
-        {/* Community Support */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <FaHandsHelping className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Community Support</h3>
-            <p className="text-gray-600">
-              Empowering local communities through targeted programs and resources.
-            </p>
-          </div>
-        </div>
-        
-        {/* Volunteer Network */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <FaPeopleCarry className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Volunteer Network</h3>
-            <p className="text-gray-600">
-              Mobilizing dedicated volunteers to drive positive change.
-            </p>
-          </div>
-        </div>
-
-        {/* Transparency */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <GiHeartKey className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Transparency</h3>
-            <p className="text-gray-600">
-              Upholding transparency and integrity in every action.
-            </p>
-          </div>
-        </div>
-
-        {/* Custom Support Programs */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <GiNetworkBars className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Tailored Programs</h3>
-            <p className="text-gray-600">
-              Developing customized support programs to meet specific community needs.
-            </p>
-          </div>
-        </div>
-
-        {/* Creative Initiatives */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <FaChalkboardTeacher className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Creative Initiatives</h3>
-            <p className="text-gray-600">
-              Implementing innovative projects that inspire hope and unity.
-            </p>
-          </div>
-        </div>
-
-        {/* Support Services */}
-        <div className="card bg-white p-6 rounded-lg shadow-md flex items-center">
-          <FaHandshake className="text-green-500 text-5xl mr-4" />
-          <div>
-            <h3 className="text-xl font-semibold">Support Services</h3>
-            <p className="text-gray-600">
-              Offering compassionate support to individuals and families in need.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
       {/*Franchises */}
       <p className="aboutheading" >Active Franchises</p>
@@ -380,8 +302,8 @@ const Home = () => {
         </div>
       </section>
 
-      
-<Carousel testimonial={testimonials}/>
+
+      <Carousel testimonial={testimonials} />
       {/*Testimonial */}
 
       <p className="otherheading">Top Donor's Testimonials</p>
@@ -415,7 +337,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-     
+
       {/*Continue*/}
 
       <p className="aboutheading" >Let's Get Involved</p>
