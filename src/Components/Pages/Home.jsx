@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config';
-import "./home.css";
-import "../Styles/tables.css";
-import Footer from "../Pages/Footer";
-import mainlogo from "../Logo.png"; // Import the image
+import { fs } from '../../Config/Config'; 
 import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
-import "./testimonialCarousel.css";
 
 import { useTransform, useScroll } from 'framer-motion';
 
@@ -17,6 +12,7 @@ import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurren
 
 
 import { motion } from 'framer-motion';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 
 // Sample data for the carousel
 const carouselData = [
@@ -58,7 +54,7 @@ const Carousel = ({ testimonial }) => {
   const translateX = -(index * (100 / itemsPerView));
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto overflow-hidden">
+    <div className="relative w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden">
       {/* Carousel Content */}
       <motion.div
         className="flex"
@@ -69,12 +65,17 @@ const Carousel = ({ testimonial }) => {
         {testimonial.map((item) => (
           <motion.div
             key={item.id}
-            className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-2"
+            className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-4"
             style={{ flexBasis: `${100 / itemsPerView}%` }}
           >
-            <div className="bg-white h-[285px] shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-600">{item.feedback}</p>
+            <div className="bg-green-950 flex flex-col items-center h-[355px] rounded-lg p-6">
+              <FaQuoteRight size={35} className='text-green-200 mx-auto'/>
+              <h3 className="text-[14px] text-center font-serif mt-[15px] text-green-50">{item.feedback}</h3> 
+              <div className='mt-auto mb-[8px]'>
+                <div className='w-[50px] h-[50px] mx-auto mb-[6px] rounded-full bg-green-700'></div>
+              <div className="text-white text-[18px] text-center">{item.displayName}</div>
+                  <div className="text-green-200 text-[12px] font-[600]">{item.email}</div>
+              </div>
             </div>
           </motion.div>
         ))}
@@ -83,15 +84,15 @@ const Carousel = ({ testimonial }) => {
       {/* Navigation Buttons */}
       <button
         onClick={handlePrev}
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-green-950 p-2 w-[35px] h-[35px] rounded-full shadow-md"
+        className="absolute  top-1/2 left-6 transform -translate-y-1/2 bg-white text-green-800 p-2 w-[40px] h-[40px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
       >
-        &lt;
+        <AiOutlineLeft size={20} />
       </button>
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md"
+        className="absolute  top-1/2 right-6 transform -translate-y-1/2 bg-white text-green-800 p-2 w-[40px] h-[40px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
       >
-        &gt;
+        <AiOutlineRight size={20} />
       </button>
     </div>
   );
@@ -183,7 +184,7 @@ const Home = () => {
   }, []);
 
   const [toDisplay] = useTypewriter({
-    words: ['Save Lives', 'Provide Shelter', 'Give Food', 'Create Happiness'],
+    words: ['Shelter', 'Food', 'Happiness', 'Support'],
     loop: true,
     typeSpeed: 120,
     deleteSpeed: 50
@@ -206,60 +207,47 @@ const Home = () => {
         return null;
     }
   };
-  return (
-    <div className="home pt-[80px]">
+  // إيثار
 
-      <section className="cover">
-        <div className="profileText">
-          <motion.p
-            className="naam"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            إيثار
-          </motion.p>
-          <motion.p
-            className="tagline"
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            Together We can
-          </motion.p>
-          <motion.div
-            className="typewriter"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          >
-            {toDisplay}
-            <Cursor cursorStyle='|' />
-          </motion.div>
+  return (
+    <div className="w-full overflow-x-hidden pt-[80px]">
+
+      <section className="grid w-full overflow-x-hidden h-[90vh] lg:grid-cols-2 grid-cols-1">
+        <div className="flex items-center justify-center flex-col">
+          <div>
+            <motion.div
+              className="font-[800] text-[75px] text-green-800"
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              Together We
+              <div className='text-green-700 mt-[-15px]'>Can Provide</div>
+
+            </motion.div>
+            <motion.div
+              className="font-[800] text-[65px] text-green-950"
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              {toDisplay}
+              <Cursor cursorStyle='|' />
+            </motion.div>
+
+          </div>
         </div>
-        <motion.img
-          className="coverImage"
-          src={coverImage}
-          alt="Poor Connection!!"
+        <motion.img className="coverImage" src={coverImage} alt="Poor Connection!!"
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
         />
       </section>
 
-      <p className="aboutheading"  >Welcome To إيثار</p>
-      {/*about section*/}
-      <section className="about">
-        <div className="abouttext">
-          إيثار is a non-profitable Charity Organization which helps those in need through various humanitarian initiatives.
-          With a dedicated team of volunteers and supporters, we strive to make a meaningful impact in the
-          lives of individuals and communities facing adversity.Our mission is to provide essential aid and empower communities
-        </div>
-        <img src={mainlogo} alt="Example" className="coverImage" />
-      </section>
 
-      <section className="bg-green-950 px-[15px] md:px-[25px] py-[38px]"> 
-          <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2> 
+
+      <section className="bg-green-950 w-full px-[15px] md:px-[25px] py-[38px]">
+        <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2>
         <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-[30px] gap-y-[55px] mb-[55px]">
           {chooseUsData.map((item, index) => (
             <motion.div
@@ -269,8 +257,8 @@ const Home = () => {
             >
               <div className='scale-[1.2] mr-[15px]'>{renderIcon(index)}</div>
               <div>
-              <h3 className="text-[22px] font-[600] text-green-200">{item.heading}</h3>
-              <p className="text-white text-[15px]">{item.body}</p>
+                <h3 className="text-[22px] font-[600] text-green-200">{item.heading}</h3>
+                <p className="text-white text-[15px]">{item.body}</p>
               </div>
             </motion.div>
           ))}
@@ -304,6 +292,7 @@ const Home = () => {
 
 
       <Carousel testimonial={testimonials} />
+
       {/*Testimonial */}
 
       <p className="otherheading">Top Donor's Testimonials</p>
@@ -346,9 +335,6 @@ const Home = () => {
         <Link to="/signup" className="navButton">Donate Now</Link>
         <Link to="/signup" className="navButton">Volunteer Project</Link>
       </div>
-
-      <Footer />
-
     </div>
   );
 };

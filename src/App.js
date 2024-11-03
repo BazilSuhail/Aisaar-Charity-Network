@@ -5,6 +5,7 @@ import Navbar from "./Components/Pages/Navbar";
 import "../src/Components/Styles/loader.css";
 import Loader from "./Components/Loader";
 import AddDummyDataToFirestore from "./Components/insertProjects";   
+import Footer from "./Components/Pages/Footer";
 // Lazy loading components
 const Home = React.lazy(() => import("./Components/Pages/Home"));
 const Donor = React.lazy(() => import("./Components/Profiles/Donor"));
@@ -28,7 +29,6 @@ const App = () => {
 
       <Navbar />
       <Suspense fallback={<Loader typeOfloader="skeleton" />}>
-
         <Routes>
           {/*  <Route path="/" element={<Loader typeOfloader="a" />} />*/}
           <Route path="/" element={<Home />} />
@@ -47,12 +47,11 @@ const App = () => {
           <Route path="/complains" element={<Complains/>} /> 
           <Route path="/testimonial" element={<Testimonial/>} />  
 
-          
           <Route exact path="/dummy" element={<AddDummyDataToFirestore />} />
         </Routes>
-
-
       </Suspense>
+      
+      <Footer />
     </Router>
   );
 };
