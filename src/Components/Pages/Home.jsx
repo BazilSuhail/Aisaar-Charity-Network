@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config'; 
+import { fs } from '../../Config/Config';
 import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
-import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { FaQuoteRight } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 
@@ -13,6 +13,7 @@ import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurren
 
 import { motion } from 'framer-motion';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import FAQPage from './faq';
 
 // Sample data for the carousel
 const carouselData = [
@@ -69,12 +70,12 @@ const Carousel = ({ testimonial }) => {
             style={{ flexBasis: `${100 / itemsPerView}%` }}
           >
             <div className="bg-green-950 flex flex-col items-center h-[355px] rounded-lg p-6">
-              <FaQuoteRight size={35} className='text-green-200 mx-auto'/>
-              <h3 className="text-[14px] text-center font-serif mt-[15px] text-green-50">{item.feedback}</h3> 
+              <FaQuoteRight size={35} className='text-green-200 mx-auto' />
+              <h3 className="text-[14px] text-center font-serif mt-[15px] text-green-50">{item.feedback}</h3>
               <div className='mt-auto mb-[8px]'>
                 <div className='w-[50px] h-[50px] mx-auto mb-[6px] rounded-full bg-green-700'></div>
-              <div className="text-white text-[18px] text-center">{item.displayName}</div>
-                  <div className="text-green-200 text-[12px] font-[600]">{item.email}</div>
+                <div className="text-white text-[18px] text-center">{item.displayName}</div>
+                <div className="text-green-200 text-[12px] font-[600]">{item.email}</div>
               </div>
             </div>
           </motion.div>
@@ -210,7 +211,7 @@ const Home = () => {
   // إيثار
 
   return (
-    <div className="w-full overflow-x-hidden pt-[80px]">
+    <div className="w-full. overflow-x-hidden pt-[80px]">
 
       <section className="grid w-full overflow-x-hidden h-[90vh] lg:grid-cols-2 grid-cols-1">
         <div className="flex items-center justify-center flex-col">
@@ -292,8 +293,11 @@ const Home = () => {
 
 
       <Carousel testimonial={testimonials} />
-
-      {/*Testimonial */}
+      <div className='grid grid-cols-2'>
+        <div></div>
+        <FAQPage />
+      </div>
+      {/*Testimonial 
 
       <p className="otherheading">Top Donor's Testimonials</p>
       <div className="testimonial-carousel-container">
@@ -326,6 +330,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      */}
 
       {/*Continue*/}
 
