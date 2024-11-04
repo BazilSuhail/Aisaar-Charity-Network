@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
 import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
-import { FaQuoteRight } from "react-icons/fa";
+import { FaHandHoldingHeart, FaHandsHelping, FaQuoteRight, FaRegComments } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 
@@ -55,7 +55,7 @@ const Carousel = ({ testimonial }) => {
   const translateX = -(index * (100 / itemsPerView));
 
   return (
-    <div className="relative w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden">
+    <div className="relative mt-[115px] w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden">
       {/* Carousel Content */}
       <motion.div
         className="flex"
@@ -190,6 +190,7 @@ const Home = () => {
     typeSpeed: 120,
     deleteSpeed: 50
   });
+
   const renderIcon = (index) => {
     switch (index) {
       case 0:
@@ -245,7 +246,30 @@ const Home = () => {
         />
       </section>
 
-
+      <section  className="pb-16 lg:px-4">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div className="md:w-1/2">
+              <img
+                src={coverImage}
+                alt="Texleath Industries"
+                className="w-full h-auto object-cover rounded-lg shadow-lg"
+              />
+            </div>
+            <div className="md:w-1/2 md:p-8 ">
+              <h2 className="text-4xl font-bold mb-6 text-green-600">
+                About Us
+              </h2>
+              <p className="text-lg mb-6 font-[500] text-green-700">
+                Texleath Industries is a leading name in the world of premium clothing. Our dedication to quality and innovation sets us apart. From high-end clothing sales to state-of-the-art manufacturing processes, and a seamless export service, we are committed to excellence at every step.
+              </p>
+              <p className="text-lg font-[500] text-green-700">
+                Founded on the principles of quality and customer satisfaction, we pride ourselves on delivering products that exceed expectations. Our team of experts ensures that every garment meets the highest standards of craftsmanship and style.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section >
 
       <section className="bg-green-950 w-full px-[15px] md:px-[25px] py-[38px]">
         <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2>
@@ -266,7 +290,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/*Franchises */}
+      {/*Franchises
       <p className="aboutheading" >Active Franchises</p>
       <section className="back">
         <div className="table-container">
@@ -290,10 +314,37 @@ const Home = () => {
           </table>
         </div>
       </section>
+ */}
 
+      <section className="py-16 mt-[55px] px-6 lg:px-[100px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
+            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaHandHoldingHeart className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Easy Donation Process</h3>
+            <p className="text-gray-400 font-serif text-center">Donate securely through our website. Every contribution goes directly to projects making a difference.</p>
+          </div>
 
+          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
+            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaHandsHelping className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Volunteer Opportunities</h3>
+            <p className="text-gray-400 font-serif text-center">Join as a volunteer and make an impact. Apply for projects that match your skills and interests.</p>
+          </div>
+
+          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
+            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaRegComments className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Support & Guidance</h3>
+            <p className="text-gray-400 font-serif text-center">Our team is here to help you with any questions, 24/7. Together, we make a difference.</p>
+          </div>
+        </div>
+      </section>
       <Carousel testimonial={testimonials} />
-      <div className='grid grid-cols-2'>
+      <div className='grid mt-[85px] grid-cols-2'>
         <div></div>
         <FAQPage />
       </div>

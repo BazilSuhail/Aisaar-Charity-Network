@@ -151,8 +151,9 @@ const Gallery = () => {
     }, []);
 
     return (
-        <div className='gallery'>
-            <div className="charity-container">
+        <div className='w-full overflow-x-hidden pt-[70px]'>
+            
+            <div className="charity-container bg-green-400 w-screen">
                 <div className='donate-for-afterlife'>
                     <div className="charity-header">Donate For</div>
                     <div className="afterlife-charity-header">AfterLife</div>
@@ -273,10 +274,7 @@ const Gallery = () => {
                         </table>
                     </div> 
                 </div>
-
-            )}
-
-            <Footer />
+            )} 
         </div>
     );
 };

@@ -1,9 +1,3 @@
-.gallery {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -52,11 +46,6 @@
 }
 
 .charity-container {
-
-    background: url('/src/Components/Styles/photos/galleryback.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
