@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config';
-import Footer from "../Pages/Footer";
+import { fs } from '../../Config/Config'; 
 //import TopVolunteers from './topVolunteers'; // Import the TopVolunteers component
 
 import Loader from '../Loader';
@@ -152,7 +151,7 @@ const Gallery = () => {
 
     return (
         <div className='w-full overflow-x-hidden pt-[70px]'>
-            
+
             <div className="charity-container bg-green-400 w-screen">
                 <div className='donate-for-afterlife'>
                     <div className="charity-header">Donate For</div>

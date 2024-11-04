@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from 'framer-motion';
 //import "./navbar.css";
-import { fs, auth } from "../../Config/Config"; 
+import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
 
 const AnimatedButton = ({ text }) => {
@@ -130,13 +130,11 @@ const Navbar = () => {
           </NavLink>
         }
         {!userType ? <></> : <button onClick={handleLogout} className='py-[7px] flex bg-gray-50 mx-[10px] rounded-lg text-red-600 justify-center items-center w-[43px] '><IoLogOutOutline size={23} /></button>}
-
-
       </div>
 
       {/* Hamburger menu for mobile screens */}
-      <div className="relative md:hidden">
-        <div className="flex items-center h-[70px] justify-between px-4 py-3 relative">
+      <div className="relative md:hidden z-50">
+        <div className="flex items-center z-50 bg-green-950 h-[70px] justify-between px-4 py-3 relative">
           <div className="h-16 z-50 flex items-center justify-center">
             <NavLink to="/">
               <img src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
@@ -163,25 +161,34 @@ const Navbar = () => {
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                initial={{ y: -100, height: 0 }}
-                animate={{ y: 0, height: "100vh", transition: { duration: 0.5 } }}
-                exit={{ y: -100, height: 0, transition: { duration: 0.5, delay: 0.5 } }}
-                className="fixed inset-0 bg-green-950 flex flex-col h-screen px-4 py-3 z-40"
+                initial={{ opacity: 0, height: "100vh" }}
+                animate={{ opacity: 1, height: "100vh", transition: { duration: 0.5 } }}
+                exit={{ opacity: 0, height: "100vh", transition: { duration: 0.5, delay: 0.5 } }}
+                className="fixed inset-0 backdrop-blur-md bg-opacity-50 bg-black flex flex-col h-screen px-4 py-3 z-40"
                 onClick={handleMenuToggle}
               >
                 <div className='my-[25px]'></div>
                 <motion.div
-                  initial={{ y: -100, opacity: 0 }}
+                  initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }}
-                  exit={{ y: -100, opacity: 0, transition: { duration: 0.2 } }}
+                  exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }}
                   className="flex flex-col justify-center items-center mt-10"
                   onClick={handleMenuToggle}
                 >
-                  <NavLink to="/pages/AppList" className="font-medium w-[85%] rounded-lg bg-gray-700 mx-auto py-[5px] pl-[15px] text-[18px] text-slate-300 mb-[15px] cursor-pointer">Discover</NavLink>
-                  <NavLink to="/pages/AppDetails" className="font-medium w-[85%] rounded-lg bg-gray-700 mx-auto py-[5px] pl-[15px] text-[18px] text-slate-300 mb-[15px] cursor-pointer">Apps</NavLink>
+                  <NavLink to="/pages/AppDetails" className="font-medium w-[85%] text-center py-[5px] pl-[15px] text-[18px] text-slate-300 cursor-pointer">Apps</NavLink>
                 </motion.div>
- 
-              
+
+                <motion.div
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }}
+                  exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }}
+                  className="flex flex-col justify-center items-center mt-10"
+                  onClick={handleMenuToggle}
+                >
+                  <NavLink to="/pages/AppList"  className="font-medium w-[85%] text-center py-[5px] pl-[15px] text-[18px] text-slate-300 cursor-pointer">Discover</NavLink>
+                </motion.div>
+
+
               </motion.div>
             )}
           </AnimatePresence>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, fs } from "../../Config/Config";
-import Footer from "../Pages/Footer"; 
+import { auth, fs } from "../../Config/Config"; 
 import "./donor.css";
 import "../Styles/tables.css";
 import "../Styles/form.css";
@@ -232,9 +231,7 @@ const Volunteer = () => {
             </div>
           </div>
         </div>
-      )}
-
-      <Footer />
+      )} 
     </div>
   );
 };

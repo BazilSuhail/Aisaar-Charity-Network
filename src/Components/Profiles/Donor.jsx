@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { auth, fs } from '../../Config/Config';
-import { useNavigate } from "react-router-dom";
-import Footer from "../Pages/Footer"; 
+import { useNavigate } from "react-router-dom"; 
 import "./donor.css"; 
 import "../Styles/form.css";
 
@@ -131,8 +130,7 @@ const Donor = () => {
             Check Transaction History
           </button>
         </>
-      )}
-      <Footer />
+      )} 
     </div>
   );
 };

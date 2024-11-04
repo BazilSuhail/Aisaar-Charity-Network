@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 //import { useNavigate } from "react-router-dom";
-import { fs } from "../../Config/Config";
-import Footer from "../Pages/Footer";
+import { fs } from "../../Config/Config"; 
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { HiOutlineEye } from "react-icons/hi";
@@ -70,7 +69,7 @@ const Listedprojects = () => {
   };
 
   return (
-    <div className="project">
+    <div className="project min-h-screen pt-[75px]">
       <div className="proj-heading">Ongoing Projects</div>
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
@@ -109,10 +108,7 @@ const Listedprojects = () => {
                 </button>
               </div>
             ))}
-          </div>
-          <Footer />
-
-          {/* Render ProjectDetails modal outside of the map function */}
+          </div> 
           {modalVisible && selectedProjectId && (
             <ProjectDetails onClose={closeModal} id={selectedProjectId} />
           )}
