@@ -3,7 +3,6 @@
 @tailwind utilities;
    
 
-
 .coverImage {
   width: 580px;
   height: 420px;
@@ -32,6 +31,8 @@
   color: white;
   border-radius: 2rem;
   cursor: pointer;
+  
+  position: fixed;
   width: 100px; 
   border: none; 
   display: flex;

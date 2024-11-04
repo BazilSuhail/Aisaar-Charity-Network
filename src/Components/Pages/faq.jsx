@@ -32,7 +32,7 @@ const faqs = [
 
 const FAQPage = () => {
     const [openIndex, setOpenIndex] = useState(null);
- 
+
 
     const handleToggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -40,52 +40,39 @@ const FAQPage = () => {
 
     return (
         <div className='py-8 px-4 md:px-8'>
-            <div className='p-6'>
-                <h1 className='text-2xl md:text-3xl font-bold mb-6 text-green-700'>
-                    <FaQuestionCircle className='inline mr-2' />
-                    Frequently Asked Questions
-                </h1>
-
-            
-                <div className='h-[3px] w-[89%] mb-[28px] bg-green-800 '></div>
-                
-                <p className='text-lg text-green-800 font-medium mb-6'>
-                    Welcome to the FAQ section of Texleath Industries. Here you'll find answers to common questions about our products, services, and policies. If you have any other inquiries, feel free to reach out to our customer support team.
-                </p>
-                <div>
-                    {faqs.map((faq, index) => (
-                        <div key={index} className='mb-4'>
-                            <button
-                                className='w-full text-left text-lg font-semibold text-green-800 py-2 px-4 bg-green-100 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-between'
-                                onClick={() => handleToggle(index)}
-                                type='button'
+            <div>
+                {faqs.map((faq, index) => (
+                    <div key={index} className='mb-4'>
+                        <button
+                            className='w-full text-left text-lg font-semibold text-green-800 py-2 px-4 bg-green-100 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-between'
+                            onClick={() => handleToggle(index)}
+                            type='button'
+                        >
+                            <span>{faq.question}</span>
+                            <motion.div
+                                initial={{ scale: 1.2 }}
+                                animate={{ scale: openIndex === index ? 0.8 : 1.2 }}
+                                transition={{ duration: 0.5 }}
+                                className='text-green-800'
                             >
-                                <span>{faq.question}</span>
+                                {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+                            </motion.div>
+                        </button>
+                        <AnimatePresence>
+                            {openIndex === index && (
                                 <motion.div
-                                    initial={{ scale: 1.2 }}
-                                    animate={{ scale: openIndex === index ? 0.8 : 1.2 }}
-                                    transition={{ duration: 0.5 }}
-                                    className='text-green-800'
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className='mt-2 px-4'
                                 >
-                                    {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+                                    <p className='text-green-700'>{faq.answer}</p>
                                 </motion.div>
-                            </button>
-                            <AnimatePresence>
-                                {openIndex === index && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className='mt-2 px-4'
-                                    >
-                                        <p className='text-green-700'>{faq.answer}</p>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    ))}
-                </div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                ))}
             </div>
         </div>
     );

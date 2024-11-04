@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
 import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
-import { FaHandHoldingHeart, FaHandsHelping, FaQuoteRight, FaRegComments } from "react-icons/fa";
+import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 
 
@@ -246,7 +246,7 @@ const Home = () => {
         />
       </section>
 
-      <section  className="pb-16 lg:px-4">
+      <section className="pb-16 lg:px-4">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <div className="md:w-1/2">
@@ -344,44 +344,24 @@ const Home = () => {
         </div>
       </section>
       <Carousel testimonial={testimonials} />
-      <div className='grid mt-[85px] grid-cols-2'>
-        <div></div>
-        <FAQPage />
-      </div>
-      {/*Testimonial 
+      <section>
 
-      <p className="otherheading">Top Donor's Testimonials</p>
-      <div className="testimonial-carousel-container">
-        <div className="testimonial-carousel-wrapper">
-          <div className="testimonial-carousel">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="testimonial-item"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="left-comma">
-                  <FaQuoteLeft />
-                </div>
-                <div className="testimonial-feedback">
-                  <b>{testimonial.feedback}</b>
-                </div>
-                <div className="right-comma">
-                  <FaQuoteRight />
-                </div>
-                <div className="testimonial-info">
-                  <div className="testimonial-name">{testimonial.displayName}</div>
-                  <div className="testimonial-email">{testimonial.email}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className='xl:px-[78px] md:px-[25px] px-[15px] mt-[85px]'>
+          <h1 className='text-2xl md:text-3xl font-bold mb-6 text-green-700'>
+            <FaQuestionCircle className='inline mr-2' />
+            Frequently Asked Questions
+          </h1>
+          <div className='h-[3px] w-[89%] mb-[28px] bg-green-800 '></div>
+          <p className='text-lg text-green-800 font-medium mb-6'>
+            Welcome to the FAQ section of Texleath Industries. Here you'll find answers to common questions about our products, services, and policies. If you have any other inquiries, feel free to reach out to our customer support team.
+          </p>
         </div>
-      </div>
-      */}
+        <div className='grid mt-[85px] lg:grid-cols-2'>
+          <div></div>
+          <FAQPage />
+        </div>
+      </section>
+
 
       {/*Continue*/}
 

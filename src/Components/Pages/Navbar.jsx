@@ -133,29 +133,31 @@ const Navbar = () => {
       </div>
 
       {/* Hamburger menu for mobile screens */}
-      <div className="relative md:hidden z-50">
-        <div className="flex items-center z-50 bg-green-950 h-[70px] justify-between px-4 py-3 relative">
-          <div className="h-16 z-50 flex items-center justify-center">
-            <NavLink to="/">
-              <img src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
-            </NavLink>
-          </div>
-          <div className="md:hidden z-50">
-            <motion.div
-              key={isMenuOpen ? 'close' : 'menu'}
-              initial={{ opacity: 0, rotate: isMenuOpen ? 180 : -180 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: isMenuOpen ? -180 : 180 }}
-              transition={{ duration: 0.3 }}
-              className="cursor-pointer text-gray-300"
-              onClick={handleMenuToggle}
-            >
-              {isMenuOpen ? (
-                <IoClose size={35} />
-              ) : (
-                <IoMenu size={35} />
-              )}
-            </motion.div>
+      <div className="relative md:hidden">
+        <div>
+          <div className="flex items-center bg-green-950 h-[70px] z-50 justify-between px-4 py-3 relative">
+            <div className="h-16 flex items-center justify-center">
+              <NavLink to="/">
+                <img src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
+              </NavLink>
+            </div>
+            <div className="md:hidden z-50">
+              <motion.div
+                key={isMenuOpen ? 'close' : 'menu'}
+                initial={{ opacity: 0, rotate: isMenuOpen ? 180 : -180 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: isMenuOpen ? -180 : 180 }}
+                transition={{ duration: 0.3 }}
+                className="cursor-pointer text-gray-300"
+                onClick={handleMenuToggle}
+              >
+                {isMenuOpen ? (
+                  <IoClose size={35} />
+                ) : (
+                  <IoMenu size={35} />
+                )}
+              </motion.div>
+            </div>
           </div>
 
           <AnimatePresence>
@@ -164,36 +166,30 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: "100vh" }}
                 animate={{ opacity: 1, height: "100vh", transition: { duration: 0.5 } }}
                 exit={{ opacity: 0, height: "100vh", transition: { duration: 0.5, delay: 0.5 } }}
-                className="fixed inset-0 backdrop-blur-md bg-opacity-50 bg-black flex flex-col h-screen px-4 py-3 z-40"
+                className="fixed inset-0 backdrop-blur-md bg-opacity-70 bg-black flex flex-col items-center justify-center space-y-[12px] underline font-[700] text-[#d9f5c5] text-[35px] h-screen z-40"
                 onClick={handleMenuToggle}
               >
-                <div className='my-[25px]'></div>
-                <motion.div
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }}
-                  exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }}
-                  className="flex flex-col justify-center items-center mt-10"
-                  onClick={handleMenuToggle}
-                >
-                  <NavLink to="/pages/AppDetails" className="font-medium w-[85%] text-center py-[5px] pl-[15px] text-[18px] text-slate-300 cursor-pointer">Apps</NavLink>
-                </motion.div>
 
-                <motion.div
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }}
-                  exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }}
-                  className="flex flex-col justify-center items-center mt-10"
-                  onClick={handleMenuToggle}
-                >
-                  <NavLink to="/pages/AppList"  className="font-medium w-[85%] text-center py-[5px] pl-[15px] text-[18px] text-slate-300 cursor-pointer">Discover</NavLink>
+                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.3 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                  <NavLink to="/" className="">Home</NavLink>
+                </motion.div>
+                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                  <NavLink to="/gallery" className="">Gallery</NavLink>
+                </motion.div>
+                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.7 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                  <NavLink to="/listedprojects" className="">Projects</NavLink>
+                </motion.div>
+                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.9 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                  <NavLink to="/listcampaigns" className="">Campaigns</NavLink>
                 </motion.div>
 
 
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
+            )
+            }
+          </AnimatePresence >
+        </div >
+      </div >
     </nav >
   );
 };
