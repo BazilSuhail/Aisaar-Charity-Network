@@ -11,7 +11,7 @@ import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurren
 
 import { motion } from 'framer-motion';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import FAQPage from './faq'; 
+import FAQPage from './faq';
 import { TbFileArrowRight } from 'react-icons/tb';
 
 
@@ -111,9 +111,9 @@ const Home = () => {
 
 
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.28, 0.36], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0.28, 0.36], [0.8, 1]);
-  const y = useTransform(scrollYProgress, [0.28, 0.36], [20, 0]); 
+  const opacity = useTransform(scrollYProgress, [0.15, 0.24], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0.15, 0.24], [0.8, 1]);
+  const y = useTransform(scrollYProgress, [0.15, 0.24], [20, 0]);
 
   const [testimonials, setTestimonials] = useState([]);
 
@@ -221,7 +221,7 @@ const Home = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center justify-center">
+        <div className="flex lg:scale-[1] scale-[0.7] md:scale-[0.85] items-center justify-center">
           <motion.img className="coverImage" src={coverImage} alt="Poor Connection!!"
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -229,7 +229,7 @@ const Home = () => {
           />
         </div>
       </div>
-     
+
       <section className="pb-16 lg:px-4">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -237,7 +237,7 @@ const Home = () => {
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOlqw6p12mTeLBtC-lYcK7mppWZIbveZ_nxA&s"
                 alt="Texleath Industries"
-                className="w-full h-auto object-cover rounded-lg shadow-lg"
+                className="w-full h-[370px] object-cover rounded-lg shadow-lg"
               />
             </div>
             <div className="md:w-1/2 md:p-8 ">
@@ -370,19 +370,29 @@ const Home = () => {
             Welcome to the FAQ section of Texleath Industries. Here you'll find answers to common questions about our products, services, and policies. If you have any other inquiries, feel free to reach out to our customer support team.
           </p>
         </div>
-        <div className='grid mt-[85px] lg:grid-cols-2'>
-          <div></div>
+        <div className='grid mt-[85px] xl:px-[85px] lg:grid-cols-2'>
+          <div className="flex items-center  justify-center overflow-hidden">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9S0cJrYw26C5lag_cvgFY7sVKCJFspo6uJCUaH6BWaqEvQHCSv_g5cHY19_YOFoJykTg&usqp=CAU"
+              alt="Placeholder"
+              className="w-[450px] mt-[-45px] h-[360px] rounded-lg"
+            />
+          </div>
           <FAQPage />
         </div>
       </section>
 
+      <section className="bg-green-700 xl:mx-[80px] mt-[35px] rounded-[20px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
+        <div className="text-center md:text-left">
+          <h1 className="text-2xl md:text-4xl font-bold mb-4">Let's Change The World<b /> With Humanity</h1>
+        </div>
+        <div className="mt-4 md:mt-0">
+          <Link to="/signup" className="inline-block bg-white text-green-700 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100">
+            Become A Volunteer
+          </Link>
+        </div>
+      </section>
 
-      <p className="aboutheading" >Let's Get Involved</p>
-      <div className="continue">
-        <p className='getinvolve'>There are many ways to support our cause. Choose how you'd like to make a difference today:</p>
-        <Link to="/signup" className="navButton">Donate Now</Link>
-        <Link to="/signup" className="navButton">Volunteer Project</Link>
-      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config'; 
+import { fs } from '../../Config/Config';
 //import TopVolunteers from './topVolunteers'; // Import the TopVolunteers component
 
 import Loader from '../Loader';
@@ -151,33 +151,47 @@ const Gallery = () => {
 
     return (
         <div className='w-full overflow-x-hidden pt-[70px]'>
-
-            <div className="charity-container bg-green-400 w-screen">
-                <div className='donate-for-afterlife'>
-                    <div className="charity-header">Donate For</div>
-                    <div className="afterlife-charity-header">AfterLife</div>
-                    <div className="charity-content">
-                        At <b>إيثار</b>, a non-profit charitable organization, our mission is to extend a helping hand to those in need through
-                        a range of humanitarian initiatives , with the unwavering support of our dedicated team of volunteers and supporters.
-                    </div>
+            <section className="flex h-screen flex-col lg:flex-row items-center px-6 py-12 lg:py-20 lg:px-16 bg-white">
+                <div className="lg:w-1/2">
+                    <h3 className="text-green-500 font-semibold mb-2">About Our Foundation</h3>
+                    <h2 className="text-4xl font-bold text-green-700 mb-4">
+                        We Are In A Mission To <br /> Help Helpless
+                    </h2>
+                    <p className="text-gray-700 mb-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,mod tempor
+                        incididunt ut labore et dolore magna aliqua. Utnixm, quis nostrud
+                        exercitation ullamc.
+                    </p>
+                    <p className="text-gray-700 mb-6">
+                        Lorem ipvsum dolor sit amext, consectetur adipisicing elit, smod
+                        tempor incididunt ut labore et dolore.
+                    </p>
+                    <button className="bg-green-500 text-white px-6 py-2 font-semibold rounded">
+                        About US
+                    </button>
                 </div>
 
-                <div className="how-to-help">
-                    <h2>How You Can Help</h2>
-                    <div className="help-section">
-                        <div className='help-heading'>Donate:</div>
-                        <p>Your financial support enables us to provide essential aid and expand our initiatives.</p>
-                    </div>
-                    <div className="help-section">
-                        <div className='help-heading'>Volunteer:</div>
-                        <p>Join our team of dedicated volunteers. Your time and skills can make a significant difference.</p>
-                    </div>
-                    <div className="help-section">
-                        <div className='help-heading'>Spread the Word:</div>
-                        <p>Help us raise awareness about our mission and work. Share our story with your network to inspire others to get involved.</p>
+                <div className="lg:w-1/2 mt-10 lg:mt-0 lg:ml-10 flex flex-col items-end">
+                    <div className="relative flex space-x-4">
+                        {/* Image 1 */}
+                        <div className="w-[350px] h-[450px] bg-gray-200 rounded-md mr-[-95px] overflow-hidden">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAbg3oIKDgvPRcYj7_JoXUckQIInvF8xtuUBHbG_qo7DEj2anvUSU4Y0ij7JV--W-xX0w&usqp=CAU"
+                                alt="Placeholder"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        {/* Image 2 */}
+                        <div className="w-[240px] h-[310px] mt-[-45px] bg-gray-200 rounded-md overflow-hidden">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9S0cJrYw26C5lag_cvgFY7sVKCJFspo6uJCUaH6BWaqEvQHCSv_g5cHY19_YOFoJykTg&usqp=CAU"
+                                alt="Placeholder"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <p className="statheading">Generosity in Action</p>
             <div className="donation-stats">
@@ -266,14 +280,14 @@ const Gallery = () => {
                                             ? (<div >Info Not entered</div>)
                                             : (<div>{volunteer.Projectscompleted}</div>)}
                                         </td>
- 
+
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                 </div>
-            )} 
+            )}
         </div>
     );
 };
