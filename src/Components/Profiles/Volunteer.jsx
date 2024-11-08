@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, fs } from "../../Config/Config"; 
+import { auth, fs } from "../../Config/Config";
 import "./donor.css";
 import "../Styles/tables.css";
 import "../Styles/form.css";
@@ -62,14 +62,13 @@ const Volunteer = () => {
       }
     };
 
-    // Call fetchData when the component mounts or when the authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         fetchData();
       }
     });
 
-    return unsubscribe; // Cleanup function to unsubscribe from the auth state listener
+    return unsubscribe;
   }, []);
 
 
@@ -231,7 +230,7 @@ const Volunteer = () => {
             </div>
           </div>
         </div>
-      )} 
+      )}
     </div>
   );
 };

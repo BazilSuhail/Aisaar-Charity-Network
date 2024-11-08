@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaQuestionCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
@@ -39,12 +39,12 @@ const FAQPage = () => {
     };
 
     return (
-        <div className='py-8 px-4 md:px-8'>
+        <div className='pb-8 px-4 md:px-8'>
             <div>
                 {faqs.map((faq, index) => (
                     <div key={index} className='mb-4'>
                         <button
-                            className='w-full text-left text-lg font-semibold text-green-800 py-2 px-4 bg-green-100 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center justify-between'
+                            className='w-full text-left text-lg font-semibold text-green-50 py-2 px-4 bg-green-900 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 flex items-center justify-between'
                             onClick={() => handleToggle(index)}
                             type='button'
                         >
@@ -53,7 +53,7 @@ const FAQPage = () => {
                                 initial={{ scale: 1.2 }}
                                 animate={{ scale: openIndex === index ? 0.8 : 1.2 }}
                                 transition={{ duration: 0.5 }}
-                                className='text-green-800'
+                                className='text-green-50'
                             >
                                 {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
                             </motion.div>
@@ -67,7 +67,7 @@ const FAQPage = () => {
                                     transition={{ duration: 0.3 }}
                                     className='mt-2 px-4'
                                 >
-                                    <p className='text-green-700'>{faq.answer}</p>
+                                    <p className='text-green-950 font-[600]'>{faq.answer}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>

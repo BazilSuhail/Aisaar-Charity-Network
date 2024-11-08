@@ -3,8 +3,6 @@ import { fs } from '../../Config/Config';
 import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
 import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-
-
 import { useTransform, useScroll } from 'framer-motion';
 
 import { Link } from "react-router-dom";
@@ -13,45 +11,32 @@ import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurren
 
 import { motion } from 'framer-motion';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import FAQPage from './faq';
+import FAQPage from './faq'; 
+import { TbFileArrowRight } from 'react-icons/tb';
 
-// Sample data for the carousel
-const carouselData = [
-  { id: 1, title: "Slide 1", description: "Description for slide 1" },
-  { id: 2, title: "Slide 2", description: "Description for slide 2" },
-  { id: 3, title: "Slide 3", description: "Description for slide 3" },
-  { id: 4, title: "Slide 4", description: "Description for slide 4" },
-  { id: 5, title: "Slide 5", description: "Description for slide 5" },
-  { id: 6, title: "Slide 6", description: "Description for slide 6" },
-];
 
 const Carousel = ({ testimonial }) => {
   const [index, setIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
 
   useEffect(() => {
-    // Function to calculate items per view based on screen width
     const updateItemsPerView = () => {
       if (window.innerWidth >= 1024) {
-        setItemsPerView(3); // Large screens
+        setItemsPerView(3);
       } else if (window.innerWidth >= 640) {
-        setItemsPerView(2); // Medium screens
+        setItemsPerView(2);
       } else {
-        setItemsPerView(1); // Small screens
+        setItemsPerView(1);
       }
     };
 
-    // Initial check and add event listener for window resize
     updateItemsPerView();
     window.addEventListener("resize", updateItemsPerView);
     return () => window.removeEventListener("resize", updateItemsPerView);
   }, []);
 
-  // Handle next and previous for wrapping effect
-  const handlePrev = () => setIndex((prev) => (prev - 1 + carouselData.length) % carouselData.length);
-  const handleNext = () => setIndex((prev) => (prev + 1) % carouselData.length);
-
-  // Calculate the translation percentage based on items per view
+  const handlePrev = () => setIndex((prev) => (prev - 1 + testimonial.length) % testimonial.length);
+  const handleNext = () => setIndex((prev) => (prev + 1) % testimonial.length);
   const translateX = -(index * (100 / itemsPerView));
 
   return (
@@ -71,7 +56,7 @@ const Carousel = ({ testimonial }) => {
           >
             <div className="bg-green-950 flex flex-col items-center h-[355px] rounded-lg p-6">
               <FaQuoteRight size={35} className='text-green-200 mx-auto' />
-              <h3 className="text-[14px] text-center font-serif mt-[15px] text-green-50">{item.feedback}</h3>
+              <h3 className="text-[14px] text-center h-[150px] overflow-hidden font-serif mt-[15px] text-green-50"> {item.feedback.length > 200 ? item.feedback.slice(0, 200) + '...' : item.feedback}</h3>
               <div className='mt-auto mb-[8px]'>
                 <div className='w-[50px] h-[50px] mx-auto mb-[6px] rounded-full bg-green-700'></div>
                 <div className="text-white text-[18px] text-center">{item.displayName}</div>
@@ -81,78 +66,54 @@ const Carousel = ({ testimonial }) => {
           </motion.div>
         ))}
       </motion.div>
-
-      {/* Navigation Buttons */}
-      <button
-        onClick={handlePrev}
-        className="absolute  top-1/2 left-6 transform -translate-y-1/2 bg-white text-green-800 p-2 w-[40px] h-[40px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
+      <button onClick={handlePrev}
+        className="absolute  top-1/2 left-6 transform -translate-y-1/2 bg-green-200 text-green-800 p-2 w-[34px] h-[34px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
       >
-        <AiOutlineLeft size={20} />
+        <AiOutlineLeft size={15} />
       </button>
-      <button
-        onClick={handleNext}
-        className="absolute  top-1/2 right-6 transform -translate-y-1/2 bg-white text-green-800 p-2 w-[40px] h-[40px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
+      <button onClick={handleNext}
+        className="absolute  top-1/2 right-6 transform -translate-y-1/2 bg-green-200 text-green-800 p-2 w-[34px] h-[34px] rounded-full shadow-md flex items-center justify-center hover:bg-green-700 hover:text-white transition duration-300"
       >
-        <AiOutlineRight size={20} />
+        <AiOutlineRight size={15} />
       </button>
     </div>
   );
 };
 
-
 const chooseUsData = [
   {
-    heading: "Transparency",
+    id: 1, heading: "Transparency",
     body: "We believe in transparency. Every donation you make goes directly to the cause, and we ensure detailed reports are available to our donors."
   },
   {
-    heading: "Impactful Projects",
+    id: 2, heading: "Impactful Projects",
     body: "Our focus is on impactful projects that bring positive change to communities. We carefully select and support initiatives that make a difference."
   },
   {
-    heading: "Accountability",
+    id: 3, heading: "Accountability",
     body: "Accountability is key. We maintain rigorous standards to ensure your contributions are used effectively and responsibly."
   },
   {
-    heading: "Community Engagement",
+    id: 4, heading: "Community Engagement",
     body: "We foster community engagement through our programs, encouraging participation and involvement in social causes."
   },
   {
-    heading: "Long-Term Sustainability",
+    id: 5, heading: "Long-Term Sustainability",
     body: "Sustainability is at the heart of our mission. We aim to create lasting impacts that extend beyond immediate solutions."
   },
   {
-    heading: "Ethical Practices",
+    id: 6, heading: "Ethical Practices",
     body: "We adhere to ethical practices in all our operations, ensuring integrity and trust in everything we do."
   }
 ];
 
 const Home = () => {
 
-  const [franchises, setFranchises] = useState([]);
-
 
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0.28, 0.36], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.28, 0.36], [0.8, 1]);
-  const y = useTransform(scrollYProgress, [0.28, 0.36], [20, 0]);
-
-  useEffect(() => {
-
-    const fetchFranchises = async () => {
-      try {
-        const organizationsRef = fs.collection('franchise');
-        const snapshot = await organizationsRef.get();
-        const orgData = snapshot.docs.map(doc => doc.data());
-        setFranchises(orgData);
-      } catch (error) {
-        console.error('Error fetching franchises:', error.message);
-      }
-    };
-
-    fetchFranchises();
-  }, []);
-
+  const y = useTransform(scrollYProgress, [0.28, 0.36], [20, 0]); 
 
   const [testimonials, setTestimonials] = useState([]);
 
@@ -194,64 +155,87 @@ const Home = () => {
   const renderIcon = (index) => {
     switch (index) {
       case 0:
-        return <HiCubeTransparent className='choose-icon' />;
+        return <HiCubeTransparent size={50} />;
       case 1:
-        return <HiOutlineHeart className='choose-icon' />;
+        return <HiOutlineHeart size={50} />;
       case 2:
-        return <HiOutlineBadgeCheck className='choose-icon' />;
+        return <HiOutlineBadgeCheck size={50} />;
       case 3:
-        return <HiOutlineCurrencyDollar className='choose-icon' />;
+        return <HiOutlineCurrencyDollar size={50} />;
       case 4:
-        return <HiOutlineUsers className='choose-icon' />;
+        return <HiOutlineUsers size={50} />;
       case 5:
-        return <HiOutlineLightBulb className='choose-icon' />;
+        return <HiOutlineLightBulb size={50} />;
       default:
         return null;
     }
   };
+
+  const causesData = [
+    {
+      title: "Ensure Education For Every Poor Children",
+      raised: "$20,000",
+      goal: "$35,000",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5c5qVqxZpdDgg7kv9oXX5urao-gtU6MN8iA&s",
+      progress: 70,
+    },
+    {
+      title: "Providing Healthy Food For The Children",
+      raised: "$20,000",
+      goal: "$35,000",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrjcQy2wRFz4PgcJ-LnWAALHtswSED-eOjTWnx4wGzQeiEiB52WUpxNpH7rI3xC3P8NTU&usqp=CAU",
+      progress: 25,
+    },
+    {
+      title: "Supply Drinking Water For The People",
+      raised: "$20,000",
+      goal: "$35,000",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTyvIlO9iB-Bt2kp7i8iAusQXv8qfXIjleAXGH2ncehPAnEFIF_u1WINCq-gnUvIxuBKc&usqp=CAU",
+      progress: 50,
+    },
+  ];
   // إيثار
 
   return (
-    <div className="w-full. overflow-x-hidden pt-[80px]">
+    <div className="w-full overflow-x-hidden pt-[80px]">
 
-      <section className="grid w-full overflow-x-hidden h-[90vh] lg:grid-cols-2 grid-cols-1">
-        <div className="flex items-center justify-center flex-col">
-          <div>
-            <motion.div
-              className="font-[800] text-[75px] text-green-800"
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              Together We
-              <div className='text-green-700 mt-[-15px]'>Can Provide</div>
-
-            </motion.div>
-            <motion.div
-              className="font-[800] text-[65px] text-green-950"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              {toDisplay}
-              <Cursor cursorStyle='|' />
-            </motion.div>
-
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen w-full px-4 xl:px-[85px] py-16 md:px-8 lg:px-16 bg-white">
+        {/* Left Section */}
+        <div className="flex justify-center flex-col">
+          <motion.h1 className="  text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}>
+            Togather We Can <br /> Provide <span className='text-green-600'>{toDisplay}<Cursor cursorStyle='|' /></span>
+          </motion.h1>
+          <motion.p className="text-green-700 text-[18px]  mb-6"
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}>
+            We at Aisaar are dedicated to empowering communities and creating lasting change. Through transparent, impactful projects in education, healthcare, and sustainability, we work to build a brighter future for those in need. Together, we can make a difference.
+          </motion.p>
+          <Link to="/listedprojects" className="mt-[25px] scale-[0.9] md:scale-[1] relative w-[160px]  flex items-center justify-start bg-transparent text-black rounded-lg group">
+            <div className="absolute h-[38px] w-[38px] rounded-full bg-green-900 transition-all duration-300 ease-in-out group-hover:w-full"></div>
+            <span className="relative z-10 ml-[6px] flex items-center"><TbFileArrowRight className='text-green-50 mb-[2px] ml-[1px] group-hover:text-green-400' size={24} /><span className='ml-[12px] group-hover:text-green-100 text-[17px] text-green-800 font-[600]'>Donate Now</span></span>
+          </Link>
         </div>
-        <motion.img className="coverImage" src={coverImage} alt="Poor Connection!!"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        />
-      </section>
 
+        {/* Right Section */}
+        <div className="flex items-center justify-center">
+          <motion.img className="coverImage" src={coverImage} alt="Poor Connection!!"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          />
+        </div>
+      </div>
+     
       <section className="pb-16 lg:px-4">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <div className="md:w-1/2">
               <img
-                src={coverImage}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOlqw6p12mTeLBtC-lYcK7mppWZIbveZ_nxA&s"
                 alt="Texleath Industries"
                 className="w-full h-auto object-cover rounded-lg shadow-lg"
               />
@@ -274,13 +258,13 @@ const Home = () => {
       <section className="bg-green-950 w-full px-[15px] md:px-[25px] py-[38px]">
         <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2>
         <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-[30px] gap-y-[55px] mb-[55px]">
-          {chooseUsData.map((item, index) => (
+          {chooseUsData.map((item) => (
             <motion.div
               className="flex items-center px-[8px]"
               style={{ scale, y, opacity }}
-              key={index}
+              key={item.id}
             >
-              <div className='scale-[1.2] mr-[15px]'>{renderIcon(index)}</div>
+              <div className='text-green-100 mr-[15px]'>{renderIcon(item.id - 1)}</div>
               <div>
                 <h3 className="text-[22px] font-[600] text-green-200">{item.heading}</h3>
                 <p className="text-white text-[15px]">{item.body}</p>
@@ -290,35 +274,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/*Franchises
-      <p className="aboutheading" >Active Franchises</p>
-      <section className="back">
-        <div className="table-container">
-          <table className="table-body">
-            <thead className="head">
-              <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-              </tr>
-            </thead>
-            <tbody>
-              {franchises.map((franchise, index) => (
-                <tr key={index}>
-                  <td>{franchise.name}</td>
-                  <td>{franchise.location}</td>
-                  <td>{franchise.city}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
- */}
-
       <section className="py-16 mt-[55px] px-6 lg:px-[100px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
             <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
               <FaHandHoldingHeart className="text-white rounded-full text-[105px]" />
             </div>
@@ -326,16 +284,16 @@ const Home = () => {
             <p className="text-gray-400 font-serif text-center">Donate securely through our website. Every contribution goes directly to projects making a difference.</p>
           </div>
 
-          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
-            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
+            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
               <FaHandsHelping className="text-white rounded-full text-[105px]" />
             </div>
             <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Volunteer Opportunities</h3>
             <p className="text-gray-400 font-serif text-center">Join as a volunteer and make an impact. Apply for projects that match your skills and interests.</p>
           </div>
 
-          <div className="bg-white px-6 pb-[15px] rounded-lg shadow-lg">
-            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
+            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
               <FaRegComments className="text-white rounded-full text-[105px]" />
             </div>
             <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Support & Guidance</h3>
@@ -343,9 +301,65 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <Carousel testimonial={testimonials} />
-      <section>
 
+      <h1 className='text-2xl md:text-[45px] text-center font-bold mb-[25px] text-green-800'>Testimonials</h1>
+      <p className='text-lg text-green-800 font-medium text-center mb-[-35px]'>
+        Hear from out Top donors, what they have to say about us.
+      </p>
+      <Carousel testimonial={testimonials} />
+
+      <section className="bg-white mt-[65px] py-12 px-4 md:px-8 lg:px-16">
+        <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
+          Explore Our Latest Causes <br /> That We Work For
+        </h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {causesData.map((cause, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-lg p-4 border border-gray-200"
+            >
+              {/* Placeholder Image */}
+              <div className="w-full h-48 bg-gray-300 rounded-t-lg overflow-hidden">
+                <img
+                  src={cause.img}
+                  alt="Cause placeholder"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Cause Content */}
+              <div className="p-4">
+                <h3 className="text-xl font-semibold text-blue-900 mb-2">
+                  {cause.title}
+                </h3>
+
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
+                  <div
+                    className="bg-green-500 h-3 rounded-full"
+                    style={{ width: `${cause.progress}%` }}
+                  ></div>
+                </div>
+                <p className="text-green-500 font-semibold text-sm mb-2">
+                  {cause.progress}%
+                </p>
+
+                {/* Raised and Goal */}
+                <div className="flex justify-between text-gray-700 text-sm font-medium">
+                  <p>
+                    Raised: <span className="text-black">{cause.raised}</span>
+                  </p>
+                  <p>
+                    Goal: <span className="text-black">{cause.goal}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
         <div className='xl:px-[78px] md:px-[25px] px-[15px] mt-[85px]'>
           <h1 className='text-2xl md:text-3xl font-bold mb-6 text-green-700'>
             <FaQuestionCircle className='inline mr-2' />
@@ -362,8 +376,6 @@ const Home = () => {
         </div>
       </section>
 
-
-      {/*Continue*/}
 
       <p className="aboutheading" >Let's Get Involved</p>
       <div className="continue">
