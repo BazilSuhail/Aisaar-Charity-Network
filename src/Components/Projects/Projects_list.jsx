@@ -21,7 +21,7 @@ const VolunteerName = ({ volunteerID }) => {
     fetchVolunteerName();
   }, [volunteerID]);
 
-  return <p className='ml-auto text-[14px] my-[8px] bg-green-900 rounded-[20px] w-[110px] text-center py-[3px] text-white'>{volunteerName.split(" ")[0]}</p>;
+  return <p className='text-[14px] my-[8px] bg-green-900 rounded-[20px] w-[110px] text-center py-[3px] text-white'>{volunteerName.split(" ")[0]}</p>;
 };
 
 const Listedprojects = () => {
@@ -100,10 +100,12 @@ const Listedprojects = () => {
                   <span className="text-sm text-green-800 font-[600]">Goal: ${project.targetAmount.toLocaleString()}</span>
                 </div>
 
-                <VolunteerName volunteerID={project.volunteerID} />
-                <button onClick={() => openModal(project.id)} className="w-[180px] text-green-900 py-[3px] border-[2px] border-green-800 hover:text-white  px-4 rounded-[6px] font-semibold hover:bg-green-900">
-                  Donate Now
-                </button>
+                <div className="flex justify-between items-center">
+                  <VolunteerName volunteerID={project.volunteerID} />
+                  <button onClick={() => openModal(project.id)} className="w-[180px] text-green-900 py-[3px] border-[2px] border-green-800 hover:text-white  px-4 rounded-[6px] font-semibold hover:bg-green-900">
+                    Donate Now
+                  </button>
+                </div>
               </div>
             ))}
 

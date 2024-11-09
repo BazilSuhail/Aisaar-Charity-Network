@@ -40,7 +40,7 @@ const Carousel = ({ testimonial }) => {
   const translateX = -(index * (100 / itemsPerView));
 
   return (
-    <div className="relative mt-[115px] w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden"> 
+    <div className="relative mt-[115px] w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden">
       <motion.div
         className="flex"
         initial={{ x: `${translateX}%` }}
@@ -197,14 +197,15 @@ const Home = () => {
   // إيثار
 
   return (
-    <main className="w-full overflow-x-hidden pt-[80px]">
-
-      <section className="grid grid-cols-1 lg:grid-cols-2 h-screen overflow-hidden w-full mb-[25px] bg-white"> 
-          <motion.img className="mt-[-10px]" src={coverImage} alt="Poor Connection!!"
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          /> 
+    <main className="w-full overflow-x-hidden pt-[70px]">
+      <section className="grid grid-cols-1 lg:grid-cols-2 w-full mb-[25px] bg-white">
+       <div className='w-full h-full'>
+       <motion.img className="h-full w-full" src={coverImage} alt="Poor Connection!!"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        />
+       </div>
         <div className="xl:scale-[1] scale-[0.9] flex px-[35px] justify-center flex-col">
           <motion.h1 className="text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
             initial={{ x: -100, opacity: 0 }}
@@ -228,14 +229,14 @@ const Home = () => {
       <section className='lg:px-[55px] w-full xl:px-[200px] sm:scale-[1] scale-[0.8]'>
         <div className="slider" style={{ '--width': '210px', '--height': '132px', '--quantity': 8 }}>
           <div className="list">
-            <div className="stack" style={{ '--position': 1 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-1.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 2 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-2.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 3 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-3.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 4 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-4.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 5 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-5.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 6 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-6.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 7 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-7.png" alt="Partner1" /></div></div> 
-            <div className="stack" style={{ '--position': 8 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-8.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 1 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-1.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 2 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-2.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 3 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-3.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 4 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-4.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 5 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-5.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 6 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-6.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 7 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-7.png" alt="Partner1" /></div></div>
+            <div className="stack" style={{ '--position': 8 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-8.png" alt="Partner1" /></div></div>
           </div>
         </div>
       </section>
@@ -393,9 +394,9 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-green-700 xl:mx-[80px] mt-[35px] rounded-[20px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
+      <section className= "border-[3px] border-green-950 xl:mx-[80px] mt-[35px] rounded-[6px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
         <div className="text-center md:text-left">
-          <h1 className="text-2xl md:text-4xl font-bold mb-4">Let's Change The World<b /> With Humanity</h1>
+          <h1 className="text-xl text-green-900 md:text-4xl font-bold mb-4">Let's Change The World<b /> With Humanity</h1>
         </div>
         <div className="mt-4 md:mt-0">
           <Link to="/signup" className="inline-block bg-white text-green-700 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100">
