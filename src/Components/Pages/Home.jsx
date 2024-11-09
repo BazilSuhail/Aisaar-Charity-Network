@@ -199,13 +199,13 @@ const Home = () => {
   return (
     <main className="w-full overflow-x-hidden pt-[70px]">
       <section className="grid grid-cols-1 lg:grid-cols-2 w-full mb-[25px] bg-white">
-       <div className='w-full h-full'>
-       <motion.img className="h-full w-full" src={coverImage} alt="Poor Connection!!"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        />
-       </div>
+        <div className='w-full h-full'>
+          <motion.img className="h-full w-full" src={coverImage} alt="Poor Connection!!"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          />
+        </div>
         <div className="xl:scale-[1] scale-[0.9] flex px-[35px] justify-center flex-col">
           <motion.h1 className="text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
             initial={{ x: -100, opacity: 0 }}
@@ -226,6 +226,10 @@ const Home = () => {
         </div>
       </section>
 
+      <h2 className=" text-xl font-[500] text-end mr-[15px] xl:mr-[45px] text-green-900 mb-8">
+        Donate services to people in <br />
+        <span className='text-green-600 ml-[8px]'>times of need</span>
+      </h2>
       <section className='lg:px-[55px] w-full xl:px-[200px] sm:scale-[1] scale-[0.8]'>
         <div className="slider" style={{ '--width': '210px', '--height': '132px', '--quantity': 8 }}>
           <div className="list">
@@ -286,40 +290,6 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16 mt-[55px] px-6 lg:px-[100px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
-            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
-              <FaHandHoldingHeart className="text-white rounded-full text-[105px]" />
-            </div>
-            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Easy Donation Process</h3>
-            <p className="text-gray-400 font-serif text-center">Donate securely through our website. Every contribution goes directly to projects making a difference.</p>
-          </div>
-
-          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
-            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
-              <FaHandsHelping className="text-white rounded-full text-[105px]" />
-            </div>
-            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Volunteer Opportunities</h3>
-            <p className="text-gray-400 font-serif text-center">Join as a volunteer and make an impact. Apply for projects that match your skills and interests.</p>
-          </div>
-
-          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
-            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
-              <FaRegComments className="text-white rounded-full text-[105px]" />
-            </div>
-            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Support & Guidance</h3>
-            <p className="text-gray-400 font-serif text-center">Our team is here to help you with any questions, 24/7. Together, we make a difference.</p>
-          </div>
-        </div>
-      </section>
-
-      <h1 className='text-2xl md:text-[45px] text-center font-bold mb-[25px] text-green-800'>Testimonials</h1>
-      <p className='text-lg text-green-800 font-medium text-center mb-[-35px]'>
-        Hear from out Top donors, what they have to say about us.
-      </p>
-      <Carousel testimonial={testimonials} />
-
       <section className="bg-white mt-[65px] py-12 px-4 md:px-8 lg:px-16">
         <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
           Explore Our Latest Causes <br /> That We Work For
@@ -371,6 +341,42 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="py-16 mt-[55px] px-6 lg:px-[100px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
+            <div className='w-[175px] mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaHandHoldingHeart className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Easy Donation Process</h3>
+            <p className="text-gray-400 font-serif text-center">Donate securely through our website. Every contribution goes directly to projects making a difference.</p>
+          </div>
+
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
+            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaHandsHelping className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Volunteer Opportunities</h3>
+            <p className="text-gray-400 font-serif text-center">Join as a volunteer and make an impact. Apply for projects that match your skills and interests.</p>
+          </div>
+
+          <div className="bg-white px-6 pb-[15px] md:scale-[0.9] scale-[0.85] rounded-lg shadow-lg">
+            <div className='w-[175px] md:mt-[-70px] mb-[20px] mx-auto h-[175px] flex justify-center items-center rounded-full bg-green-900'>
+              <FaRegComments className="text-white rounded-full text-[105px]" />
+            </div>
+            <h3 className="text-3xl font-bold text-green-950 text-center mb-2">Support & Guidance</h3>
+            <p className="text-gray-400 font-serif text-center">Our team is here to help you with any questions, 24/7. Together, we make a difference.</p>
+          </div>
+        </div>
+      </section>
+
+      <h1 className='text-2xl md:text-[45px] text-center font-bold mb-[25px] text-green-800'>Testimonials</h1>
+      <p className='text-lg text-green-800 font-medium text-center mb-[-35px]'>
+        Hear from out Top donors, what they have to say about us.
+      </p>
+      <Carousel testimonial={testimonials} />
+
+
+
       <section>
         <div className='xl:px-[78px] md:px-[25px] px-[15px] mt-[85px]'>
           <h1 className='text-2xl md:text-3xl font-bold mb-6 text-green-700'>
@@ -394,7 +400,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className= "border-[3px] border-green-950 xl:mx-[80px] mt-[35px] rounded-[6px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
+      <section className="border-[3px] border-green-950 xl:mx-[80px] mt-[35px] rounded-[6px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
         <div className="text-center md:text-left">
           <h1 className="text-xl text-green-900 md:text-4xl font-bold mb-4">Let's Change The World<b /> With Humanity</h1>
         </div>

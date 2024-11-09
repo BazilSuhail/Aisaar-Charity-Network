@@ -65,8 +65,10 @@ const Listedprojects = () => {
   };
 
   return (
-    <div className="project bg-gray-100 min-h-screen pt-[75px]">
-      <div className="proj-heading">Ongoing Projects</div>
+    <div className="project bg-gray-100 min-h-screen pt-[75px]"> 
+      <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
+        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
+      </h2>
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
