@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
 
-import Loader from '../Loader'; 
-import "./gallery.css";
-import Svg1 from '../Styles/photos/charitycup.svg';
-import Svg2 from '../Styles/photos/karekamal.svg';
-import Svg3 from '../Styles/photos/unicef.svg';
-import Svg4 from '../Styles/photos/sundas.svg';
-import Svg5 from '../Styles/photos/local.svg';
-
-
+import Loader from '../Loader';   
 
 const Counter = ({ value, duration }) => {
     const [count, setCount] = useState(0);
@@ -184,18 +176,7 @@ const Gallery = () => {
                 </div>
             </section>
 
-            <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
-                Our Honorable Partners
-            </h2>
-            <div className='w-[85%] mx-auto h-[2.5px] bg-green-900 rounded-xl '></div>
-            <div className="svg-container mb-[45px]">
-                <img src={Svg1} alt="SVG 1" className="animated-svg" />
-                <img src={Svg2} alt="SVG 2" className="animated-svg" />
-                <img src={Svg3} alt="SVG 3" className="animated-svg" />
-                <img src={Svg4} alt="SVG 4" className="animated-svg" />
-                <img src={Svg5} alt="SVG 5" className="animated-svg" />
-            </div>
-
+         
             <h2 className="text-3xl mt-[25px] font-bold text-center text-green-900 mb-8">
                 Geneoristy In Action
             </h2>
