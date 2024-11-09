@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, fs } from "../../Config/Config";
-import "./loginsignup.css";
+import { auth, fs } from "../../Config/Config"; 
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'; 
 
 const SignUp = () => {
   const [email, setEmail] = useState("");

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
-//import TopVolunteers from './topVolunteers'; // Import the TopVolunteers component
 
-import Loader from '../Loader';
-import "../Styles/tables.css";
+import Loader from '../Loader'; 
 import "./gallery.css";
-import "../Styles/tables.css";
 import Svg1 from '../Styles/photos/charitycup.svg';
 import Svg2 from '../Styles/photos/karekamal.svg';
 import Svg3 from '../Styles/photos/unicef.svg';
@@ -13,39 +10,34 @@ import Svg4 from '../Styles/photos/sundas.svg';
 import Svg5 from '../Styles/photos/local.svg';
 
 
-const AnimatedCounter = ({ value, duration, start, incrementByHundred, val }) => {
-    const [displayValue, setDisplayValue] = useState(0);
 
+const Counter = ({ value, duration }) => {
+    const [count, setCount] = useState(0);
     useEffect(() => {
-        let currentValue = 0;
-        const endValue = parseInt(value);
-        let incrementTime;
-
-        if (incrementByHundred) {
-            incrementTime = start;
-        } else {
-            incrementTime = Math.max(duration / Math.abs(endValue - currentValue), start);
-        }
-
-        const animation = () => {
-            if (currentValue < endValue) {
-                currentValue += incrementByHundred ? val : 1;
-                setDisplayValue(currentValue);
-                setTimeout(animation, incrementTime);
+        let start = 0;
+        const increment = value / (duration / 10);
+        const interval = setInterval(() => {
+            start += increment;
+            if (start >= value) {
+                setCount(value);
+                clearInterval(interval);
+            } else {
+                setCount(Math.round(start));
             }
-        };
+        }, 10);
 
-        animation();
+        return () => clearInterval(interval);
+    }, [value, duration]);
 
-        return () => clearTimeout(animation);
-    }, [value, duration, start, incrementByHundred, val]);
-
-    return <div className="total">{displayValue}</div>;
+    return (
+        <div className='text-[85px] md:text-[55px] mr-[5px] font-[700]'>
+            {count}
+        </div>
+    );
 };
 
 const Gallery = () => {
     const [totalProjects, setTotalProjects] = useState(0);
-    const [totalCampaigns, setTotalCampaigns] = useState(0);
     const [totalFranchises, setTotalFranchises] = useState(0);
     const [projects, setProjects] = useState([]);
     const [campaigns, setCampaigns] = useState([]);
@@ -69,7 +61,6 @@ const Gallery = () => {
                 const campaignsRef = fs.collection('campaigns');
                 const campaignsSnapshot = await campaignsRef.get();
                 setCampaigns(campaignsSnapshot.docs.map(doc => doc.data()));
-                setTotalCampaigns(campaignsSnapshot.size);
 
                 const completedProjectsRef = fs.collection('completedProjects');
                 const completedProjectsSnapshot = await completedProjectsRef.get();
@@ -193,23 +184,11 @@ const Gallery = () => {
                 </div>
             </section>
 
-            <p className="statheading">Generosity in Action</p>
-            <div className="donation-stats">
-                <div className="card">
-                    <div className="title">Overall Donations</div>
-                    <AnimatedCounter value={overallDonation} duration={20} start={10} incrementByHundred={true} val={10000} />
-                </div>
-                <div className="card">
-                    <div className="title">Donations From Projects</div>
-                    <AnimatedCounter value={projDonations} duration={20} start={10} incrementByHundred={true} val={2500} />
-                </div>
-                <div className="card">
-                    <div className="title">Donations From Campaigns</div>
-                    <AnimatedCounter value={campDonations} duration={20} start={10} incrementByHundred={true} val={2000} />
-                </div>
-            </div>
-            <p className="logos-heading">Our Honourable Partners</p>
-            <div className="svg-container">
+            <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
+                Our Honorable Partners
+            </h2>
+            <div className='w-[85%] mx-auto h-[2.5px] bg-green-900 rounded-xl '></div>
+            <div className="svg-container mb-[45px]">
                 <img src={Svg1} alt="SVG 1" className="animated-svg" />
                 <img src={Svg2} alt="SVG 2" className="animated-svg" />
                 <img src={Svg3} alt="SVG 3" className="animated-svg" />
@@ -217,33 +196,48 @@ const Gallery = () => {
                 <img src={Svg5} alt="SVG 5" className="animated-svg" />
             </div>
 
-            <p className="statheading">Our Work</p>
-            <div className="stats">
-                <div className="card">
-                    <div className="title">Total Franchises</div>
-                    <AnimatedCounter value={totalFranchises} duration={1500} start={50} incrementByHundred={false} val={1} />
+            <h2 className="text-3xl mt-[25px] font-bold text-center text-green-900 mb-8">
+                Geneoristy In Action
+            </h2>
+            <section className="grid md:scale-[1] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]">
+                <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={overallDonation} duration={100} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">OverAll Donations</div>
                 </div>
-                <div className="card">
-                    <div className="title">Total Projects</div>
-                    <AnimatedCounter value={totalProjects} duration={1500} start={500} incrementByHundred={false} val={1} />
+                <div className="flex flex-col items-center justify-center mx-auto text-white py-[30px] ">
+                    <Counter value={projDonations} duration={100} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Project  Donations</div>
                 </div>
-                <div className="card">
-                    <div className="title">Total Campaigns</div>
-                    <AnimatedCounter value={totalCampaigns} duration={1500} start={500} incrementByHundred={false} val={1} />
+                <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={campDonations} duration={50} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Campaigns  Donations</div>
                 </div>
-                <div className="card">
-                    <div className="title">Total Volunteers</div>
-                    <AnimatedCounter value={totalVolunteers} duration={1500} start={50} incrementByHundred={false} val={1} />
+                <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={totalBeneficiaries} duration={50} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Beneficaires</div>
                 </div>
-                <div className="card">
-                    <div className="title">Total Donors</div>
-                    <AnimatedCounter value={totalDonors} duration={1500} start={50} incrementByHundred={false} val={1} />
+            </section>
+
+            <section className="grid md:scale-[1] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]">
+                <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={totalFranchises} duration={100} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Franchises</div>
                 </div>
-                <div className="card">
-                    <div className="title">Total Beneficiaries</div>
-                    <AnimatedCounter value={totalBeneficiaries} duration={1500} start={50} incrementByHundred={false} val={1} />
+                <div className="flex flex-col  items-center justify-center mx-auto text-white py-[30px] ">
+                    <Counter value={totalProjects} duration={100} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total projects</div>
                 </div>
-            </div>
+                <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={totalDonors} duration={50} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Donors</div>
+                </div>
+                <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
+                    <Counter value={totalVolunteers} duration={50} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Volunteers</div>
+                </div>
+            </section>
+
+
 
             <p className="logos-heading">Top Volunteers</p>
             {loading ? (

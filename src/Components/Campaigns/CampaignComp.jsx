@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config';
-import "./campaignList.css";
+import { fs } from '../../Config/Config'; 
 
 const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
     const [localDonationAmount, setLocalDonationAmount] = useState(0);

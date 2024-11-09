@@ -329,7 +329,7 @@ const Home = () => {
 
               {/* Cause Content */}
               <div className="p-4">
-                <h3 className="text-xl font-semibold text-blue-900 mb-2">
+                <h3 className="text-xl font-semibold text-green-900 mb-2">
                   {cause.title}
                 </h3>
 

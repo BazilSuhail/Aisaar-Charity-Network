@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
-import { motion, AnimatePresence } from 'framer-motion';
-//import "./navbar.css";
+import { motion, AnimatePresence } from 'framer-motion'; 
 import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
 
@@ -85,7 +84,7 @@ const Navbar = () => {
   const firstname = getFirstName(displayName);
 
   return (
-    <nav className='fixed w-full bg-green-950 text-white shadow-lg z-50'>
+    <nav className='fixed w-full top-0 bg-green-950 text-white shadow-lg z-50'>
       {/* Full navbar for larger screens */}
       <div className="w-full z-50 md:flex hidden items-center h-[70px]">
         <NavLink to="/">

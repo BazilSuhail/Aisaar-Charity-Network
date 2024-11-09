@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, fs } from "../../Config/Config";
-import "./donor.css";
-import "../Styles/tables.css";
-import "../Styles/form.css";
-
+import { auth, fs } from "../../Config/Config"; 
 const Volunteer = () => {
   const navigate = useNavigate();
   const [volunteerData, setVolunteerData] = useState({});

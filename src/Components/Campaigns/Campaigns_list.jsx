@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fs, auth, FieldValue } from "../../Config/Config";
 
 import Footer from "../Pages/Footer.jsx";
-import CampaignComp from "./CampaignComp.jsx";
-import "./campaignList.css";
+import CampaignComp from "./CampaignComp.jsx"; 
 import Loader from "../Loader";
 
 const Listcampaigns = () => {
