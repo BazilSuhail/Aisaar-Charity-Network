@@ -148,7 +148,7 @@ const InsertCampaigns = () => {
     };
 
     return (
-        <div>
+        <div className='mt-[88]px'>
             <button onClick={addDataToFirestore} disabled={loading}>
                 {loading ? "Adding Data..." : "Add Dummy Data"}
             </button>

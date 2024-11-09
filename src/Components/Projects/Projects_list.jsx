@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 //import { useNavigate } from "react-router-dom";
-import { fs } from "../../Config/Config"; 
-import { FaHandHoldingHeart } from "react-icons/fa";
-import { MdAttachMoney } from "react-icons/md";
-import { HiOutlineEye } from "react-icons/hi";
+import { fs } from "../../Config/Config";
 import Loader from "../Loader";
 import ProjectDetails from "./ProjectDetails";
+
 
 
 const VolunteerName = ({ volunteerID }) => {
@@ -25,7 +23,7 @@ const VolunteerName = ({ volunteerID }) => {
     fetchVolunteerName();
   }, [volunteerID]);
 
-  return <p className='ml-[58px] mt-[-8px] '><span className="px-[10px] text-white bg-green-800 py-[3px] rounded-md">Volunteer</span><span className="ml-[8px] text-green-900 font-[600] underline text-[19px]">{volunteerName}</span></p>;
+  return <p className='ml-auto text-[14px] my-[8px] bg-green-900 rounded-[20px] w-[110px] text-center py-[3px] text-white'>{volunteerName.split(" ")[0]}</p>;
 };
 
 const Listedprojects = () => {
@@ -69,14 +67,49 @@ const Listedprojects = () => {
   };
 
   return (
-    <div className="project min-h-screen pt-[75px]">
+    <div className="project bg-gray-100 min-h-screen pt-[75px]">
       <div className="proj-heading">Ongoing Projects</div>
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
         <>
-          <div className="grid lg:grid-cols-2 grid-cols-1">
+          <div className="grid lg:grid-cols-3 gap-[15px] grid-cols-1">
             {projects.map((project) => (
+              <div key={project.id} className="mx-[25px] p-6 bg-white border rounded-sm">
+                <img
+                  src="https://templates.envytheme.com/leud/rtl/assets/images/causes/causes-1.jpg"
+                  alt="Charity"
+                  className="w-full h-90 object-cover rounded-t-lg mb-4"
+                />
+
+                <h2 className="text-2xl font-bold text-center mb-2">{project.title}</h2>
+                <p className="text-gray-500 text-center mb-4">{project.description}</p>
+
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-gray-800 font-semibold">{Math.round(Math.min((project.collectedAmount / project.targetAmount) * 100, 100))}%</span>
+                  <span className="text-sm text-gray-400">{100 - (Math.round(Math.min((project.collectedAmount / project.targetAmount) * 100, 100)))}%</span>
+                </div>
+
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                  <div
+                    className="bg-green-500 h-2 rounded-full"
+                    style={{ width: `${Math.min((project.collectedAmount / project.targetAmount) * 100, 100)}%` }}
+                  ></div>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-sm text-gray-400">Raised: ${project.collectedAmount.toLocaleString()}</span>
+                  <span className="text-sm text-green-800 font-[600]">Goal: ${project.targetAmount.toLocaleString()}</span>
+                </div>
+
+                <VolunteerName volunteerID={project.volunteerID} />
+                <button onClick={() => openModal(project.id)} className="w-[180px] text-green-900 py-[3px] border-[2px] border-green-800 hover:text-white  px-4 rounded-[6px] font-semibold hover:bg-green-900">
+                  Donate Now
+                </button>
+              </div>
+            ))}
+
+            {/* {projects.map((project) => (
               <div key={project.id} className="lg:scale-[0.95] shadow-lg rounded-lg border-l-4 bg-[#f8fff3] border-green-600 p-6 m-4 transition-transform duration-700 transform hover:scale-[0.98]  hover:shadow-xl">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-semibold text-green-700 flex items-center">
@@ -108,7 +141,8 @@ const Listedprojects = () => {
                 </button>
               </div>
             ))}
-          </div> 
+      */}
+          </div>
           {modalVisible && selectedProjectId && (
             <ProjectDetails onClose={closeModal} id={selectedProjectId} />
           )}

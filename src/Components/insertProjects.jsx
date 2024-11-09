@@ -159,7 +159,7 @@ const AddDummyDataToFirestore = () => {
     };
 
     return (
-        <div>
+        <div className='mt-[154px]'>
             <button onClick={addDataToFirestore} disabled={loading}>
                 {loading ? "Adding Data..." : "Add Dummy Data"}
             </button>

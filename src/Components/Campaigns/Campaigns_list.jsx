@@ -135,7 +135,7 @@ const Listcampaigns = () => {
   };
 
   return (
-    <div className="campaign">
+    <div className="campaign  min-h-screen">
       <div className="camp-heading">Registered Campaigns</div>
       {loadProjects ? (
         <Loader typeOfloader={"a"} />

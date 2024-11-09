@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
-import coverImage from "../Styles/photos/coverimage.jpg"; // Import the image
+import coverImage from "../Styles/photos/coverimage.png"; // Import the image
 import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { useTransform, useScroll } from 'framer-motion';
@@ -199,16 +199,22 @@ const Home = () => {
   return (
     <div className="w-full overflow-x-hidden pt-[80px]">
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen w-full px-4 xl:px-[85px] py-16 md:px-8 lg:px-16 bg-white">
-        {/* Left Section */}
-        <div className="flex justify-center flex-col">
-          <motion.h1 className="  text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
+      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen w-full mb-[25px] bg-white">
+      <div className="w-full  h-full">
+          <motion.img className="mt-[-15px]" src={coverImage} alt="Poor Connection!!"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          />
+        </div>
+        <div className="flex px-[35px] justify-center flex-col">
+          <motion.h1 className="text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}>
             Togather We Can <br /> Provide <span className='text-green-600'>{toDisplay}<Cursor cursorStyle='|' /></span>
           </motion.h1>
-          <motion.p className="text-green-700 text-[18px]  mb-6"
+          <motion.p className="text-green-700  mt-[30px] text-[18px]  mb-2"
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}>
@@ -218,15 +224,6 @@ const Home = () => {
             <div className="absolute h-[38px] w-[38px] rounded-full bg-green-900 transition-all duration-300 ease-in-out group-hover:w-full"></div>
             <span className="relative z-10 ml-[6px] flex items-center"><TbFileArrowRight className='text-green-50 mb-[2px] ml-[1px] group-hover:text-green-400' size={24} /><span className='ml-[12px] group-hover:text-green-100 text-[17px] text-green-800 font-[600]'>Donate Now</span></span>
           </Link>
-        </div>
-
-        {/* Right Section */}
-        <div className="flex lg:scale-[1] scale-[0.7] md:scale-[0.85] items-center justify-center">
-          <motion.img className="coverImage" src={coverImage} alt="Poor Connection!!"
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-          />
         </div>
       </div>
 

@@ -118,7 +118,7 @@ const Navbar = () => {
 
 
         {!userType ? <NavLink to="/login" className="ml-auto mr-[15px] bg-green-950 px-[18px] text-white py-[6px] rounded-lg">Get Started</NavLink> :
-          <NavLink to={userType === 'donor' ? '/donor' : '/volunteer'} className=" ml-auto scale-[0.85]">
+          <NavLink to={userType === 'Donor' ? '/donor' : '/volunteer'} className=" ml-auto scale-[0.85]">
             <div className='flex items-center  rounded-xl py-[8px]'>
               <div className="h-[45px] w-[45px] flex items-center justify-center text-white bg-green-800 rounded-full"><IoMdPerson size={26} /></div>
               <div className='ml-[12px]'>

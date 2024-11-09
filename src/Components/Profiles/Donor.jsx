@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { auth, fs } from '../../Config/Config';
 import { useNavigate } from "react-router-dom";
 import { FiEdit, FiSave } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FaMedal } from 'react-icons/fa';
 
 const Donor = () => {
   const navigate = useNavigate();
@@ -9,7 +11,6 @@ const Donor = () => {
   const [editMode, setEditMode] = useState(false);
 
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -17,7 +18,8 @@ const Donor = () => {
     phoneNumber: "",
     city: "",
     donations: "",
-    idtype: "Donor"
+    idtype: "Donor",
+    photoURL: ""
   });
 
   useEffect(() => {
@@ -93,25 +95,32 @@ const Donor = () => {
   };
 
   const selectAvatar = (index) => {
-    setSelectedAvatar(index); // Set selected avatar to the index
-    closeAvatarModal(); // Close modal after selecting an avatar
+    setFormData((prevData) => ({
+      ...prevData,
+      photoURL: index
+    }));
+    closeAvatarModal();
   };
 
   return (
-    <div className='mt-[35px] xsx:pl-[265px] bg-white flex flex-col'>
-      <div className='bg-white border border-gray-300 shadow-lg rounded-lg p-6'>
-        {/* Greeting Section */}
-        <div className="mb-[15px] bg-gradient-to-r from-cyan-100 via-blue-100 to-purple-100 border-2 border-blue-300 p-6 rounded-xl shadow-md">
+    <div className='mt-[60px]  min-h-screen bg-white flex flex-col'>
+      <div className='p-6 '> 
+        <div className="mb-[15px] flex lg:items-center flex-col lg:flex-row lg:justify-between bg-green-900 border-2 border-green-300 p-6 rounded-xl shadow-md">
           <div className="flex items-end space-x-4">
             <img
               src={`/Assets/${formData.photoURL}.jpg`}
               alt="Profile Avatar"
-              className="w-20 h-20 lg:w-24 lg:h-24 rounded-full border border-gray-300 shadow-md"
+              className="w-20 h-20 lg:w-32 lg:h-32 rounded-full border border-gray-300 shadow-md"
             />
-            <div className="flex lg:flex-row flex-col lg:items-end text-[25px] lg:text-[35px] font-extrabold text-blue-700">
+            <div className="flex lg:flex-row flex-col lg:items-end text-[25px] lg:text-[35px] font-extrabold text-green-200">
               Hello,
-              <p className="lg:ml-[15px] text-[30px]  lg:text-[45px] text-blue-900">{formData.displayName}</p>
+              <p className="lg:ml-[15px] text-[30px] lg:text-[45px] text-white">{formData.displayName}</p>
             </div>
+          </div>
+          <div className=" lg:order-1 order-2 flex flex-col py-[25px] items-center space-x-2 text-white rounded-lg bg-[#27760f85] px-[35px]">
+            <FaMedal className="text-yellow-500 lg:text-[115px]"/>
+            <span className="font-semibold text-green-200 mt-[15px]">Total Donations:</span>
+            <span className="font-bold text-[35px]">${donorData.donations}</span>
           </div>
         </div>
 
@@ -124,7 +133,7 @@ const Donor = () => {
                 {/* Profile Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* name Section */}
-                  <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-blue-600 text-white rounded-full">
                       {/* Custom Email SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-8 h-8">
@@ -138,7 +147,7 @@ const Donor = () => {
                   </div>
 
                   {/* Email Section */}
-                  <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-blue-600 text-white rounded-full">
                       {/* Custom Email SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
@@ -153,7 +162,7 @@ const Donor = () => {
                   </div>
 
                   {/* Phone Section */}
-                  <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-green-600 text-white rounded-full">
                       {/* Custom Phone SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
@@ -167,7 +176,7 @@ const Donor = () => {
                   </div>
 
                   {/* Gender Section */}
-                  <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-pink-600 text-white rounded-full">
                       {/* Custom Gender SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
@@ -180,35 +189,30 @@ const Donor = () => {
                     </div>
                   </div>
 
-                  {/* Date of Birth Section */}
-                  <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm">
-                    <div className="p-3 bg-yellow-600 text-white rounded-full">
-                      {/* Custom Date of Birth SVG */}
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 0v4m-4 12a4 4 0 100-8 4 4 0 000 8zm-4 1h8a2 2 0 012 2v1H6v-1a2 2 0 012-2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-800">Date of Birth</h2>
-                      <p className="text-gray-600">{new Date(formData.dob).toLocaleDateString()}</p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
             </div>
-            <button onClick={handleEdit}
-              className='bg-blue-500 mt-[25px] text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2'
-            >
-              <FiEdit className='w-5 h-5' /> {/* Professional Edit Icon */}
-              <span>Edit Profile</span>
-            </button>
+            <div className='flex mt-[40px] items-center'>
+              <button onClick={handleEdit}
+                className='bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
+              >
+                <FiEdit className='w-5 h-5' /> {/* Professional Edit Icon */}
+                <span>Edit Profile</span>
+              </button>
+              <button onClick={gotoTransactionHistory}
+                className='bg-green-900 ml-[10px]  text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
+              >
+                <FiEdit className='w-5 h-5' /> {/* Professional Edit Icon */}
+                <span>Check Donations</span>
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className='space-y-4'>
             <div className='flex items-end mb-4'>
               <img
-                src={`/Assets/${selectedAvatar}.jpg`} // Display the currently selected avatar
+                src={`/Assets/${donorData.photoURL}.jpg`} // Display the currently selected avatar
                 alt="Profile Avatar"
                 className="w-24 h-24 rounded-full border border-gray-300 shadow-md"
               />
@@ -223,28 +227,25 @@ const Donor = () => {
             <input
               type="text"
               name="name"
-              value={formData.name}
+              value={formData.displayName}
               onChange={handleChange}
-              placeholder="Name"
+              placeholder="Enter Name"
               className="w-full p-2 border border-gray-300 rounded-md"
               required
             />
-            <select
-              name="gender"
-              value={formData.gender}
+            <input
+              type="text"
+              name="name"
+              value={formData.city}
               onChange={handleChange}
+              placeholder="Enter City"
               className="w-full p-2 border border-gray-300 rounded-md"
               required
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
+            />
             <input
               type="text"
               name="phone"
-              value={formData.phone}
+              value={formData.phoneNumber}
               onChange={handleChange}
               placeholder="Phone"
               className="w-full p-2 border border-gray-300 rounded-md"
@@ -255,15 +256,7 @@ const Donor = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Email"
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-            <input
-              type="date"
-              name="dob"
-              value={formData.dob.split('T')[0]}
-              onChange={handleChange}
+              placeholder="Enter Email"
               className="w-full p-2 border border-gray-300 rounded-md"
               required
             />
@@ -276,19 +269,13 @@ const Donor = () => {
                 <FiSave className='w-5 h-5' /> {/* Save Icon */}
                 <span>Update Profile</span>
               </button>
-              <button
-                handleEdit
-                type="button"
-                className='bg-red-700 ml-[15px] text-white px-4 py-2 rounded-md shadow-md hover:bg-red-900'
-              >
-                Cancel
-              </button>
             </div>
           </form>
         )}
       </div>
 
       {/* Avatar Selection Modal 
+      */}
       {isAvatarModalOpen && (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
           <motion.div
@@ -318,7 +305,6 @@ const Donor = () => {
           </motion.div>
         </div>
       )}
-      */}
     </div>
   );
 };

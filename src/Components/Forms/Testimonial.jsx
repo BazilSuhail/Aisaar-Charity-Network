@@ -94,7 +94,7 @@ const Testimonial = () => {
     }
 
     return (
-        <div className="complain">
+        <div className="complain min-h-screen">
             <div className="complain-head">Write a Testimonial</div>
 
             {donationTooLow ? (
