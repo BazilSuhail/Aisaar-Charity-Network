@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { auth, fs } from "../../Config/Config";
- 
 
 const AppliedProj = () => {
   const [loggedInVolunteer, setLoggedInVolunteer] = useState(null);
@@ -10,10 +9,10 @@ const AppliedProj = () => {
     startDate: "",
     endDate: "",
     targetAmount: "0",
-    status: "Active",  
+    status: "Active",
     volunteerID: "",
-    franchiseID: "",  
-    collectedAmount: "0", 
+    franchiseID: "",
+    collectedAmount: "0",
   });
 
   const [appliedProjects, setAppliedProjects] = useState([]);
@@ -33,9 +32,8 @@ const AppliedProj = () => {
         console.error("Error fetching logged-in volunteer:", error.message);
       }
     };
-
     fetchLoggedInVolunteer();
-  }, []); // Pass an empty dependency array to run only once on mount
+  }, []);
 
   const fetchAppliedProjects = async (volunteerID) => {
     try {
@@ -85,9 +83,9 @@ const AppliedProj = () => {
         startDate: "",
         endDate: "",
         targetAmount: "0",
-        status: "Active", // Set default status to "Active"
+        status: "Active",
         volunteerID: loggedInVolunteer,
-        franchiseID: "", // Reset franchiseID
+        franchiseID: "",
         collectedAmount: "0",
       });
       alert("Project proposed successfully!");
@@ -98,121 +96,132 @@ const AppliedProj = () => {
   };
 
   return (
-    <div>
-      <div className="back">
-        <div className="headings">Applied Projects </div>
-        <div className="table-container">
-          <table className="table-body">
-            <thead className="head">
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Target Amount</th>
-                <th>Status</th>
+    <div className="container bg-gray-100 pt-[95px] min-h-screen xl:px-[185px] lg:px-[65px]  mx-auto p-4">
+      <div className="text-center text-2xl font-bold mb-6">Applied Projects</div>
+      <div className="overflow-x-auto rounded-xl">
+        <table className="min-w-full bg-white rounded-md shadow-md">
+          <thead className="bg-green-900 text-white">
+            <tr>
+              <th className="py-2 whitespace-nowrap px-4">Title</th>
+              <th className="py-2 whitespace-nowrap px-4">Description</th>
+              <th className="py-2 whitespace-nowrap px-4">Start Date</th>
+              <th className="py-2 whitespace-nowrap px-4">End Date</th>
+              <th className="py-2 whitespace-nowrap px-4">Target Amount</th>
+              <th className="py-2 whitespace-nowrap px-4">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {appliedProjects.map((project) => (
+              <tr key={project.id} className="border-b">
+                <td className="py-2 text-green-900 font-[600] px-4">{project.title}</td>
+                <td className="py-2 px-4">{project.description}</td>
+                <td className="py-2 whitespace-nowrap px-4">{project.startDate}</td>
+                <td className="py-2 whitespace-nowrap px-4">{project.endDate}</td>
+                <td className="py-2 whitespace-nowrap px-4">{project.targetAmount}</td>
+                <td className="py-2 whitespace-nowrap text-[14px] px-4"><p className="bg-green-900 rounded-xl px-[5px] py-[3px] text-white text-center">{project.status}</p></td>
               </tr>
-            </thead>
-            <tbody className="body">
-              {appliedProjects.map((project) => (
-                <tr key={project.id}>
-                  <td>{project.title}</td>
-                  <td>{project.description}</td>
-                  <td>{project.startDate}</td>
-                  <td>{project.endDate}</td>
-                  <td>{project.targetAmount}</td>
-                  <td>{project.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <br />
-      <div className="placeForm">
-        <button
-          className="tooglebutton"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? "Cancel Application" : "Apply Project"}
-        </button>
-        {showForm && (
-          <div className="form">
-            <form className="formData" onSubmit={handleSubmit}>
-              <div className="attribute">Name: </div>
+
+      <button
+        className="mt-6 px-6 py-2 bg-green-800 text-white rounded-md hover:bg-green-600 transition"
+        onClick={() => setShowForm(!showForm)}
+      >
+        {showForm ? "Cancel Application" : "Apply for Project"}
+      </button>
+
+      {showForm && (
+        <div className="mt-8 p-6 bg-white rounded-md border">
+          <form onSubmit={handleSubmit} className="grid gap-4">
+            <div>
+              <label className="block text-gray-700 font-semibold">Name:</label>
               <input
                 type="text"
                 name="title"
                 value={proposedProjectData.title}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               />
-
-              <div className="attribute">Description:</div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Description:</label>
               <input
                 type="text"
                 name="description"
                 value={proposedProjectData.description}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               />
-
-              <div className="attribute">Start Date: </div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Start Date:</label>
               <input
                 type="date"
                 name="startDate"
                 value={proposedProjectData.startDate}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               />
-
-              <div className="attribute">End Date: </div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">End Date:</label>
               <input
                 type="date"
                 name="endDate"
                 value={proposedProjectData.endDate}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               />
-
-              <div className="attribute">Target Amount : </div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Target Amount:</label>
               <input
                 type="text"
                 name="targetAmount"
                 value={proposedProjectData.targetAmount}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               />
-
-              <div className="attribute">
-                Select Franchise to which to Propose :{" "}
-              </div>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Select Franchise:</label>
               <select
-                className="form-selection-fields"
                 name="franchiseID"
                 value={proposedProjectData.franchiseID}
                 onChange={handleChange}
-                required
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
               >
                 <option value="">Select Organization</option>
                 {franchises.map((branch) => (
-                  <option
-                    className="selection"
-                    key={branch.id}
-                    value={branch.id}
-                  >
+                  <option key={branch.id} value={branch.id}>
                     {branch.name}
                   </option>
                 ))}
               </select>
-
-              <div className="attribute"> Status: </div>
-
-              <select className="form-selection-fields" name="status" value={proposedProjectData.status} onChange={handleChange}    >
-                <option className="selection" value="Active">Active</option>
-                <option className="selection" value="In Progress"> In Progress</option>
+            </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Status:</label>
+              <select
+                name="status"
+                value={proposedProjectData.status}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-green-500"
+              >
+                <option value="Active">Active</option>
+                <option value="In Progress">In Progress</option>
               </select>
-<br />
-              <button className="save" type="submit">    Save  </button>
-            </form>
-          </div>
-        )}
-      </div>
+            </div>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-green-900 text-white rounded-md hover:bg-green-600 transition"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

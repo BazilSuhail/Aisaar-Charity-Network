@@ -166,6 +166,9 @@ const Volunteer = () => {
             <button onClick={openAppliedProjectsModal} className="bg-green-900 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
               View Applied Projects
             </button>
+            <button onClick={handle_proposal} className="bg-green-900 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
+              Appy for Project
+            </button>
           </div>
         </div>
       ) : (

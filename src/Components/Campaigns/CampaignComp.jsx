@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fs } from '../../Config/Config'; 
+import { fs } from '../../Config/Config';
 
 const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
     const [localDonationAmount, setLocalDonationAmount] = useState(0);
@@ -23,7 +23,7 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
 
     useEffect(() => {
         if (campaign) {
-            const remainingAmount = parseInt(campaign.targetAmount) - parseInt(campaign.collectedAmount);
+            const remainingAmount = parseInt(campaign.targetAmount) - parseInt(campaign.currentAmountRaised);
             setDonationDisabled(localDonationAmount > remainingAmount);
         }
     }, [localDonationAmount, campaign]);
@@ -38,84 +38,75 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
     };
 
     return (
-        <div className='c-render'>
+        <div className="mx-[25px] p-6 bg-white border rounded-sm shadow-md">
+            <h2 className="text-2xl font-bold text-center mb-2">{campaign.name}</h2>
+            <p className="text-center text-sm text-gray-500 mb-2">
+                Regulating Franchise: <span className="font-semibold">{franchiseTitle}</span>
+            </p>
 
-            <div className="camp-details">
-                <div className='c-title'>{campaign.title}</div>
-                <div className='c-franchise'>Regulating Franchise : <div className="franchise-name">{franchiseTitle}</div></div>
-
-                <div className="franchise-props">
-                    <div className='cont-loc'>Contact</div>
-                    <div className='cont-loc'>Location</div>
+            <div className="flex justify-between mb-4">
+                <div className="text-sm text-gray-600">
+                    <p className="font-semibold">Contact:</p>
+                    <p>0354656846568</p>
                 </div>
-
-                <div className="franchise-props-values">
-                    <div className='cont-loc-values'>0354656846568</div>
-                    <div className='cont-loc-values'>Gulberg 34,berlin</div>
-                </div>
-            </div>
-
-            <div className="camp-description">
-                <div className='c-desc-cont'>
-                    <div className="c-head-desc">Description</div>
-                    <div className="c-actual-desc">{campaign.description}</div>
-                </div>
-
-                <div className="c-dates">
-                    <div className="c-start">Start Date</div>
-                    <div className="c-start-date">{campaign.endDate}</div>
-
-                </div>
-                <div className="c-dates">
-                    <div className="c-end">End Date</div>
-                    <div className="c-end-date">{campaign.startDate}</div>
+                <div className="text-sm text-gray-600">
+                    <p className="font-semibold">Location:</p>
+                    <p>Gulberg 34, Berlin</p>
                 </div>
             </div>
 
-            <div className="camp-donation">
-                <div className='c-target-cont'>Target Amount: <div className="c-target-amt">$ {campaign.targetAmount}</div></div>
-                <div className='c-collected-cont'>Collected Amount: <div className="c-collected-amt">${campaign.currentAmountRaised}</div></div>
-
-                <div className='c-status-cont'>Status:<div className="c-status-actual">{campaign.status}</div></div>
-
-                {userInDonorsCollection && !donationComplete && (
-                    <div className='c-don-cont'>
-                        <input className='c-donations' type="number" placeholder="Enter amount" onChange={(e) => setLocalDonationAmount(e.target.value)} />
-                        <button className='c-handle-donations' onClick={handleDonateClick} disabled={donationDisabled}>
-                            Donate
-                        </button>
-                    </div>
-                )}
-
-                {donationComplete && (<div className="c-loader">DONATING !!</div>)}
+            <div className="mb-4">
+                <h3 className="text-lg font-semibold mb-1">Description</h3>
+                <p className="text-sm text-gray-500">{campaign.description}</p>
             </div>
-        </div>
 
+            <div className="flex justify-between mb-4 text-sm text-gray-600">
+                <div>
+                    <p className="font-semibold">Start Date</p>
+                    <p>{campaign.startDate}</p>
+                </div>
+                <div>
+                    <p className="font-semibold">End Date</p>
+                    <p>{campaign.endDate}</p>
+                </div>
+            </div>
 
-        /*<div className='c-render'>
-            <div className='c-name-cont'><span className='name'>{campaign.name}</span></div>
-            <div><strong>Description:</strong> {campaign.description}</div>
-            <div><strong>Start Date:</strong> {campaign.startDate}</div>
-            <div><strong>End Date:</strong> {campaign.endDate}</div>
-            <div><strong>Target Amount:</strong> {campaign.targetAmount}</div>
-            <div><strong>Franchise  ID:</strong> {campaign.franchiseID}</div>
-            <div><strong>Collected Amount:</strong> {campaign.currentAmountRaised}</div>
-            <div><strong>Status:</strong> {campaign.status}</div>
+            <div className="flex justify-between items-center mb-4">
+                <span className="text-sm text-gray-600">Collected: ${campaign.currentAmountRaised}</span>
+                <span className="text-sm font-semibold text-green-800">Goal: ${campaign.targetAmount}</span>
+            </div>
+
+            <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                <div
+                    className="bg-green-500 h-2 rounded-full"
+                    style={{ width: `${Math.min((campaign.currentAmountRaised / campaign.targetAmount) * 100, 100)}%` }}
+                ></div>
+            </div>
+
+            <div className="text-sm text-gray-600 mb-4">
+                Status: <span className={`font-semibold text-white px-[10px] py-[3px] rounded-lg  ${campaign.status === 'Active' ? 'bg-green-700' : 'bg-yellow-500'}`}>{campaign.status}</span>
+            </div>
 
             {userInDonorsCollection && !donationComplete && (
-                <div className='c-don-cont'>
-                    <input className='c-donations' type="number" placeholder="Enter amount" onChange={(e) => setLocalDonationAmount(e.target.value)} />
-                    <button className='c-handle-donations' onClick={handleDonateClick} disabled={localDonationAmount <= 0}>
+                <div className="flex items-center space-x-2">
+                    <input
+                        className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                        type="number"
+                        placeholder="Enter amount"
+                        onChange={(e) => setLocalDonationAmount(e.target.value)}
+                    />
+                    <button
+                        onClick={handleDonateClick}
+                        disabled={donationDisabled}
+                        className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50"
+                    >
                         Donate
                     </button>
                 </div>
             )}
 
-            {donationComplete && (
-                <div className="c-loader">DONATING !!</div>
-            )}
+            {donationComplete && <div className="text-center font-semibold text-green-600 mt-4">DONATING !!</div>}
         </div>
-        */
     );
 };
 

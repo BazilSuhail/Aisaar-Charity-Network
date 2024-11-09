@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fs, auth, FieldValue } from "../../Config/Config";
-
-import Footer from "../Pages/Footer.jsx";
+ 
 import CampaignComp from "./CampaignComp.jsx"; 
 import Loader from "../Loader";
 
@@ -10,7 +9,7 @@ const Listcampaigns = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userInDonorsCollection, setUserInDonorsCollection] = useState(false);
   const [loadProjects, setLoadProjects] = useState(true);
-  const [updatecampaigns, setUpdatecampaigns] = useState(false); // State to trigger re-fetching projects
+  const [updatecampaigns, setUpdatecampaigns] = useState(false);
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -135,13 +134,15 @@ const Listcampaigns = () => {
   };
 
   return (
-    <div className="campaign  min-h-screen">
-      <div className="camp-heading">Registered Campaigns</div>
+    <div className="project bg-gray-100 min-h-screen pt-[75px]"> 
+    
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
-        <>
-          <div className="render-campaigns">
+        <>  <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
+        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
+      </h2>
+          <div className="grid lg:grid-cols-3 gap-[15px] grid-cols-1">
             {campaigns.map((campaign) => (
               <CampaignComp
                 key={campaign.id}
@@ -150,8 +151,7 @@ const Listcampaigns = () => {
                 userInDonorsCollection={userInDonorsCollection}
               />
             ))}
-          </div>
-          <Footer />
+          </div> 
         </>
       )}
     </div>
