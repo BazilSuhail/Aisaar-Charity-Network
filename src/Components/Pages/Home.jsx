@@ -203,7 +203,7 @@ const Home = () => {
           <motion.img className="h-full w-full" src={coverImage} alt="Poor Connection!!"
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
           />
         </div>
         <div className="xl:scale-[1] scale-[0.9] flex px-[35px] justify-center flex-col">

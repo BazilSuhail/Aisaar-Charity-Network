@@ -66,13 +66,13 @@ const Listedprojects = () => {
 
   return (
     <div className="project bg-gray-100 min-h-screen pt-[75px]"> 
-      <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
-        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
-      </h2>
+    
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
-        <>
+        <>  <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
+        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
+      </h2>
           <div className="grid lg:grid-cols-3 gap-[15px] grid-cols-1">
             {projects.map((project) => (
               <div key={project.id} className="mx-[25px] p-6 bg-white border rounded-sm">
@@ -98,8 +98,8 @@ const Listedprojects = () => {
                 </div>
 
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-gray-400">Raised: ${project.collectedAmount.toLocaleString()}</span>
-                  <span className="text-sm text-green-800 font-[600]">Goal: ${project.targetAmount.toLocaleString()}</span>
+                  <span className="text-sm text-gray-400">Raised: ${project.collectedAmount}</span>
+                  <span className="text-sm text-green-800 font-[600]">Goal: ${project.targetAmount}</span>
                 </div>
 
                 <div className="flex justify-between items-center">

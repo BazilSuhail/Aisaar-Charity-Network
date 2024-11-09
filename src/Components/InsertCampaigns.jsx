@@ -1,6 +1,5 @@
-import React from 'react'
-
-
+import React, { useState } from 'react'
+import { fs } from '../Config/Config';
 
 const InsertCampaigns = () => {
     const [loading, setLoading] = useState(false);
@@ -148,7 +147,7 @@ const InsertCampaigns = () => {
     };
 
     return (
-        <div className='mt-[88]px'>
+        <div className='mt-[88px]'>
             <button onClick={addDataToFirestore} disabled={loading}>
                 {loading ? "Adding Data..." : "Add Dummy Data"}
             </button>

@@ -1,8 +1,8 @@
 // TransactionHistory.js
 import React, { useState, useEffect } from "react";
 import { fs, useFirebaseAuth } from "../../Config/Config";
-import Footer from "../Pages/Footer";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 const TransactionHistory = () => {
   const navigate = useNavigate();
 
@@ -36,45 +36,66 @@ const TransactionHistory = () => {
   }
 
   return (
-    <div className="donor" >
+    (
+      <div className="xl:px-[145px] pt-[85px] lg:px-[55px] px-[15px] mx-auto p-4 bg-gray-50 min-h-screen">
+        <div className="flex justify-between  items-center mb-4">
+          <button
+            onClick={gotoProfile}
+            className="flex items-center gap-2 px-4 py-2 text-white bg-green-900 rounded-lg shadow hover:bg-green-600 transition-colors"
+          >
+            <FaUserCircle className="text-xl" />
+            Go to Profile
+          </button>
+        </div>
 
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Transaction History</h2>
 
-      <button className='show-transaction' onClick={gotoProfile}>
-        Go to Profile
-      </button>
-      <h2>Transaction History</h2>
-      <div className="back">
-        <div className="table-container">
-          <table className="table-body">
-            <thead className="head">
-              <tr>
-                <th>Amount</th>
-                <th>Name</th>
-                <th>Donated To</th>
-                <th>ID</th>
-                <th>Time</th>
-                <th>Date</th>
+        <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+          <table className="min-w-full bg-white">
+            <thead>
+              <tr className="bg-green-900 text-green-100 uppercase text-sm leading-normal">
+                <th className="py-3 px-6 text-left">Amount</th>
+                <th className="py-3 px-6 text-left">Name</th>
+                <th className="py-3 px-6 text-left">Donated To</th>
+                <th className="py-3 px-6 text-left">Transaction IDID</th>
+                <th className="py-3 px-6 text-left">Time</th>
+                <th className="py-3 px-6 text-left">Date</th>
               </tr>
             </thead>
-            <tbody className="body">
+            <tbody className="text-gray-700 text-sm font-light">
               {transactionHistory.map((transaction, index) => (
-                <tr key={index}>
-                  <td>{transaction.amount}</td>
-                  <td>{transaction.projectName}</td>
-                  <td><strong>{transaction.idType}</strong></td>
-                  <td>{transaction.projectId}</td>
-                  <td>{new Date(transaction.timestamp).toLocaleTimeString()}</td>
-                  <td>{new Date(transaction.timestamp).toLocaleDateString()}</td>
+                <tr
+                  key={index}
+                  className="border-b border-gray-200 hover:bg-gray-100 transition-colors"
+                >
+                  <td className="py-3 font-[600] text-green-900 px-6 text-left whitespace-nowrap">
+                    {transaction.amount}
+                  </td>
+                  <td className="py-3 px-6 font-[600] text-green-900 text-left">{transaction.projectName}</td>
+              
+                  <td className="py-3 px-6 text-left">
+  <div
+    className={`py-2 rounded-xl text-center font-semibold text-white ${
+      transaction.idType === "Project" ? "bg-green-700" : "bg-green-900"
+    }`}
+  >
+    {transaction.idType}
+  </div>
+</td>
+                  <td className="py-3 px-6 text-left">{transaction.projectId}</td>
+                  <td className="py-3 px-6 text-left">
+                    {new Date(transaction.timestamp).toLocaleTimeString()}
+                  </td>
+                  <td className="py-3 px-6 text-left">
+                    {new Date(transaction.timestamp).toLocaleDateString()}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-
-      <Footer />
-    </div>
-  );
+    ))
 };
 
 export default TransactionHistory;

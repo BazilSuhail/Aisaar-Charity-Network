@@ -23,8 +23,8 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      let idtypeValue = userType === "donor" ? "Donor" : "Volunteer"; // Determine idtype value based on userType
-      const userData = { displayName, email, idtype: idtypeValue }; // Include idtype in userData
+      let idtypeValue = userType === "donor" ? "Donor" : "Volunteer";
+      const userData = { displayName, email, idtype: idtypeValue }; 
 
       if (userType === "donor") {
         await fs.collection("donors").doc(user.uid).set(userData);

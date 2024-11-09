@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, fs } from "../../Config/Config"; 
+import { auth, fs } from "../../Config/Config";
+import { FiEdit } from "react-icons/fi";
+import { motion } from "framer-motion";
 const Volunteer = () => {
   const navigate = useNavigate();
   const [volunteerData, setVolunteerData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [projects, setProjects] = useState([]);
   const [appliedProjects, setAppliedProjects] = useState([]);
+  const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false);
+  const [isAppliedProjectsModalOpen, setIsAppliedProjectsModalOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -68,7 +72,6 @@ const Volunteer = () => {
   }, []);
 
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -96,135 +99,147 @@ const Volunteer = () => {
   const handle_proposal = () => {
     navigate('/AppliedProject');
   };
+
+
+
+  const openProjectsModal = () => setIsProjectsModalOpen(true);
+  const closeProjectsModal = () => setIsProjectsModalOpen(false);
+  const openAppliedProjectsModal = () => setIsAppliedProjectsModalOpen(true);
+  const closeAppliedProjectsModal = () => setIsAppliedProjectsModalOpen(false);
   return (
-    <div className='donor'>
-      <div className="headings">Volunteer Information </div>
-
-      {editMode ? (
-        <div className='form'>
-          <form className="formData" onSubmit={handleSubmit}>
-
-            <div className='attribute'>Name: </div>
-            <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} />
-            <div className='attribute'>Email:</div>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} />
-            <div className='attribute'>Phone Number: </div>
-            <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-            <div className='attribute'>Address: </div>
-            <input type="text" name="address" value={formData.address} onChange={handleChange} />
-            <div className='attribute'>Date of Birth: </div>
-            <input type="date" name="dob" value={formData.dob} onChange={handleChange} />
-            <div className='attribute'>CNIC: </div>
-            <input type="text" name="cnic" value={formData.cnic} onChange={handleChange} />
-
-            <button className='save' type="submit">Save</button>
-          </form>
-        </div>
-      ) :
-        (
-          <>
-            <div className='props'>
-              <div className='attributes'>Name: </div>
-              <div className='values'>{volunteerData.displayName}</div>
-              <div className='attributes'>Email:</div>
-              <div className='values'>{volunteerData.email}</div>
-
-              <div className='attributes'>Phone Number: </div>
-              <div className='values'>{!volunteerData.phoneNumber
-                ? (<div className='values-placeholder'>Enter your bio</div>)
-                : (<div>{volunteerData.phoneNumber}</div>)}
-              </div>
-
-              <div className='attributes'>Address: </div>
-              <div className='values'>{!volunteerData.address
-                ? (<div className='values-placeholder'>Enter your bio</div>)
-                : (<div>{volunteerData.address}</div>)}
-              </div>
-
-              <div className='attributes'>Date of Birth: </div>
-              <div className='values'>{!volunteerData.dob
-                ? (<div className='values-placeholder'>Enter your bio</div>)
-                : (<div>{volunteerData.dob}</div>)}
-              </div>
-
-              <div className='attributes'>CNIC:</div>
-              <div className='values'>{!volunteerData.cnic
-                ? (<div className='values-placeholder'>Enter your bio</div>)
-                : (<div>{volunteerData.cnic}</div>)}
-              </div>
-
-
-              <button className='edit-btn' onClick={handleEdit}>Edit Info</button>
-              <button className='proposal' onClick={handle_proposal}>Propose a Project</button>
-
-            </div>
-
-          </>
-        )}
-
-      {projects.length > 0 && (
-        <div>
-
-          <div className="back">
-            <div className="headings">Project </div>
-            <div className="table-container">
-              <table className="table-body">
-                <thead className="head">
-                  <tr>
-                    <th>Title</th>
-                    <th>Target Amount</th>
-                    <th>Collected Amount</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-
-                <tbody className="body">
-                  {projects.map((project, index) => (
-                    <tr key={index}>
-                      <td>{project.title}</td>
-                      <td>{project.targetAmount}</td>
-                      <td>{project.collectedAmount}</td>
-                      <td>{project.status}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+    <div className="mt-[60px] min-h-screen bg-white flex flex-col p-6">
+      {/* Header Section */}
+      <div className="mb-[15px] flex lg:items-center flex-col lg:flex-row lg:justify-between bg-green-900 border-2 border-green-300 p-6 rounded-xl shadow-md">
+        <div className="flex items-end space-x-4">
+          <img
+            src={`/Assets/${formData.photoURL}.jpg`}
+            alt="Profile Avatar"
+            className="w-20 h-20 lg:w-32 lg:h-32 rounded-full border border-gray-300 shadow-md"
+          />
+          <div className="flex lg:flex-row flex-col lg:items-end text-[25px] lg:text-[35px] font-extrabold text-green-200">
+            Hello, <p className="lg:ml-[15px] text-[30px] lg:text-[45px] text-white">{formData.displayName}</p>
           </div>
+        </div>
+      </div>
+
+      {/* Display Profile Data */}
+      {!editMode ? (
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Profile Information Cards */}
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">Full Name</h2>
+              <p className="text-gray-600">{volunteerData.displayName}</p>
+            </div>
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">Email</h2>
+              <p className="text-gray-600">{volunteerData.email}</p>
+            </div>
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">CNIC</h2>
+              <p className="text-gray-600">{!volunteerData.cnic ? volunteerData.cnic : 'Update your CNIC'}</p>
+            </div>
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">Address Name</h2>
+              <p className="text-gray-600">{!volunteerData.address ? volunteerData.address : 'Enter Address'}</p>
+            </div>
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">Phone Number</h2>
+              <p className="text-gray-600">{!volunteerData.phoneNumber ? volunteerData.phoneNumber : 'Enter Phone Number'}</p>
+            </div>
+            <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-800">Date of Birth Number</h2>
+              <p className="text-gray-600">{!volunteerData.dob ? volunteerData.dob : 'Enter DOB'}</p>
+            </div>
+            {/* Add more fields similar to above */}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex mt-[40px] items-center space-x-4">
+            <button onClick={handleEdit} className="bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2">
+              <FiEdit className="w-5 h-5" />
+              <span>Edit Profile</span>
+            </button>
+            <button onClick={openProjectsModal} className="bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
+              View Projects
+            </button>
+            <button onClick={openAppliedProjectsModal} className="bg-green-900 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
+              View Applied Projects
+            </button>
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Form Fields for Editing Profile */}
+          <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} placeholder="Enter Name" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="text" name="cnic" value={formData.cnic} onChange={handleChange} placeholder="Enter CNIC" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="text" name="dob" value={formData.dob} onChange={handleChange} placeholder="Enter Date of Birth" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Enter Address" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Enter Phone Number" className="w-full p-2 border border-gray-300 rounded-md" required />
+          {/* Add more fields similar to above */}
+          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2">
+            <span>Update Profile</span>
+          </button>
+        </form>
+      )}
+
+      {/* Projects Modal */}
+      {isProjectsModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div className="bg-white p-6 rounded-lg shadow-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <h2 className="text-xl font-bold mb-4">Projects</h2>
+            <table className="table-auto w-full text-left border">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Title</th>
+                  <th className="border px-4 py-2">Target Amount</th>
+                  <th className="border px-4 py-2">Collected Amount</th>
+                  <th className="border px-4 py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {projects.map((project, index) => (
+                  <tr key={index}>
+                    <td className="border px-4 py-2">{project.title}</td>
+                    <td className="border px-4 py-2">{project.targetAmount}</td>
+                    <td className="border px-4 py-2">{project.collectedAmount}</td>
+                    <td className="border px-4 py-2">{project.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button onClick={closeProjectsModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+              Close
+            </button>
+          </motion.div>
         </div>
       )}
 
-      {appliedProjects.length > 0 && (
-        <div>
-          <div className="back">
-            <div className="headings">Applied Projects </div>
-            <div className="table-container">
-              <table className="table-body">
-                <thead className="head">
-                  <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Target Amount</th>
-                    <th>Status</th>
+      {/* Applied Projects Modal */}
+      {isAppliedProjectsModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <motion.div className="bg-white p-6 rounded-lg shadow-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <h2 className="text-xl font-bold mb-4">Applied Projects</h2>
+            <table className="table-auto w-full text-left border">
+              <thead>
+                <tr>
+                  <th className="border px-4 py-2">Project Name</th>
+                  <th className="border px-4 py-2">Volunteer ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appliedProjects.map((project, index) => (
+                  <tr key={index}>
+                    <td className="border px-4 py-2">{project.name}</td>
+                    <td className="border px-4 py-2">{project.volunteerID}</td>
                   </tr>
-                </thead>
-                <tbody className="body">
-                  {appliedProjects.map((project) => (
-                    <tr key={project.id}>
-                      <td>{project.title}</td>
-                      <td>{project.description}</td>
-                      <td>{project.startDate}</td>
-                      <td>{project.endDate}</td>
-                      <td>{project.targetAmount}</td>
-                      <td>{project.status}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                ))}
+              </tbody>
+            </table>
+            <button onClick={closeAppliedProjectsModal} className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+              Close
+            </button>
+          </motion.div>
         </div>
       )}
     </div>
