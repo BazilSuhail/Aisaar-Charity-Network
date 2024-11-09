@@ -4,8 +4,6 @@ import { fs } from "../../Config/Config";
 import Loader from "../Loader";
 import ProjectDetails from "./ProjectDetails";
 
-
-
 const VolunteerName = ({ volunteerID }) => {
   const [volunteerName, setVolunteerName] = useState("");
 

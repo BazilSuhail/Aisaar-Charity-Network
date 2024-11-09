@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
 import coverImage from "../Styles/photos/coverimage.png"; // Import the image
+import aboutImage from "../Styles/photos/AboutImg.png"; // Import the image
 import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { useTransform, useScroll } from 'framer-motion';
 
 import { Link } from "react-router-dom";
 import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurrencyDollar, HiOutlineUsers, HiOutlineLightBulb } from 'react-icons/hi';
-
 
 import { motion } from 'framer-motion';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
@@ -40,8 +40,7 @@ const Carousel = ({ testimonial }) => {
   const translateX = -(index * (100 / itemsPerView));
 
   return (
-    <div className="relative mt-[115px] w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden">
-      {/* Carousel Content */}
+    <div className="relative mt-[115px] w-full max-w-6xl lg:scale-[1.08] scale-[0.89] md:scale-[0.95] xl:scale-[1.2] mx-auto overflow-hidden"> 
       <motion.div
         className="flex"
         initial={{ x: `${translateX}%` }}
@@ -111,6 +110,7 @@ const Home = () => {
 
 
   const { scrollYProgress } = useScroll();
+
   const opacity = useTransform(scrollYProgress, [0.15, 0.24], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.15, 0.24], [0.8, 1]);
   const y = useTransform(scrollYProgress, [0.15, 0.24], [20, 0]);
@@ -197,17 +197,15 @@ const Home = () => {
   // إيثار
 
   return (
-    <div className="w-full overflow-x-hidden pt-[80px]">
+    <main className="w-full overflow-x-hidden pt-[80px]">
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen w-full mb-[25px] bg-white">
-      <div className="w-full  h-full">
-          <motion.img className="mt-[-15px]" src={coverImage} alt="Poor Connection!!"
+      <section className="grid grid-cols-1 lg:grid-cols-2 h-screen overflow-hidden w-full mb-[25px] bg-white"> 
+          <motion.img className="mt-[-10px]" src={coverImage} alt="Poor Connection!!"
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
-          />
-        </div>
-        <div className="flex px-[35px] justify-center flex-col">
+          /> 
+        <div className="xl:scale-[1] scale-[0.9] flex px-[35px] justify-center flex-col">
           <motion.h1 className="text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -225,18 +223,27 @@ const Home = () => {
             <span className="relative z-10 ml-[6px] flex items-center"><TbFileArrowRight className='text-green-50 mb-[2px] ml-[1px] group-hover:text-green-400' size={24} /><span className='ml-[12px] group-hover:text-green-100 text-[17px] text-green-800 font-[600]'>Donate Now</span></span>
           </Link>
         </div>
-      </div>
+      </section>
 
-      <section className="pb-16 lg:px-4">
+      <section className='lg:px-[55px] w-full xl:px-[200px] sm:scale-[1] scale-[0.8]'>
+        <div className="slider" style={{ '--width': '210px', '--height': '132px', '--quantity': 8 }}>
+          <div className="list">
+            <div className="stack" style={{ '--position': 1 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-1.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 2 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-2.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 3 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-3.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 4 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-4.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 5 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-5.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 6 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-6.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 7 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-7.png" alt="Partner1" /></div></div> 
+            <div className="stack" style={{ '--position': 8 }}><div className='w-[220px] flex flex-col px-[24px] rounded-xl items-center py-[17px]'><img src="https://templates.envytheme.com/leud/rtl/assets/images/partners/partner-8.png" alt="Partner1" /></div></div> 
+          </div>
+        </div>
+      </section>
+
+      <section className="lg:px-4">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            <div className="md:w-1/2">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOlqw6p12mTeLBtC-lYcK7mppWZIbveZ_nxA&s"
-                alt="Texleath Industries"
-                className="w-full h-[370px] object-cover rounded-lg shadow-lg"
-              />
-            </div>
+
             <div className="md:w-1/2 md:p-8 ">
               <h2 className="text-4xl font-bold mb-6 text-green-600">
                 About Us
@@ -247,6 +254,13 @@ const Home = () => {
               <p className="text-lg font-[500] text-green-700">
                 Founded on the principles of quality and customer satisfaction, we pride ourselves on delivering products that exceed expectations. Our team of experts ensures that every garment meets the highest standards of craftsmanship and style.
               </p>
+            </div>
+            <div className="md:w-1/2">
+              <img
+                src={aboutImage}
+                alt="Connection Error ..."
+                className="w-full h-full scale-[0.7]"
+              />
             </div>
           </div>
         </div>
@@ -390,7 +404,7 @@ const Home = () => {
         </div>
       </section>
 
-    </div>
+    </main>
   );
 };
 
