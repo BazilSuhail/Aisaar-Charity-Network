@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
-import coverImage from "../Styles/photos/coverimage.png"; // Import the image
-import aboutImage from "../Styles/photos/AboutImg.png"; // Import the image
-import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments } from "react-icons/fa";
+import coverImage from "../Styles/photos/coverimage.png";
+import aboutImage from "../Styles/photos/AboutImg.png";
+import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments, FaRegHandshake } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import { useTransform, useScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { Link } from "react-router-dom";
-import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurrencyDollar, HiOutlineUsers, HiOutlineLightBulb } from 'react-icons/hi';
+import { HiCubeTransparent, HiOutlineHeart, HiOutlineBadgeCheck, HiOutlineCurrencyDollar, HiOutlineUsers, HiOutlineLightBulb, HiOutlineClipboardCheck, HiOutlineSparkles } from 'react-icons/hi';
 
-import { motion } from 'framer-motion';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import FAQPage from './faq';
 import { TbFileArrowRight } from 'react-icons/tb';
@@ -103,6 +103,18 @@ const chooseUsData = [
   {
     id: 6, heading: "Ethical Practices",
     body: "We adhere to ethical practices in all our operations, ensuring integrity and trust in everything we do."
+  },
+  {
+    id: 7, heading: "Innovation",
+    body: "We embrace innovation, using creative solutions to address complex challenges and improve the effectiveness of our programs."
+  },
+  {
+    id: 8, heading: "Partnerships",
+    body: "We build strong partnerships with local organizations and other stakeholders to amplify our impact and reach."
+  },
+  {
+    id: 9, heading: "Volunteer Opportunities",
+    body: "We offer various volunteer opportunities, allowing individuals to actively contribute to our cause and make a hands-on difference."
   }
 ];
 
@@ -155,21 +167,28 @@ const Home = () => {
   const renderIcon = (index) => {
     switch (index) {
       case 0:
-        return <HiCubeTransparent size={50} />;
+        return <HiCubeTransparent size={50} />; // Transparency
       case 1:
-        return <HiOutlineHeart size={50} />;
+        return <HiOutlineHeart size={50} />; // Impactful Projects
       case 2:
-        return <HiOutlineBadgeCheck size={50} />;
+        return <HiOutlineBadgeCheck size={50} />; // Accountability
       case 3:
-        return <HiOutlineCurrencyDollar size={50} />;
+        return <HiOutlineCurrencyDollar size={50} />; // Community Engagement
       case 4:
-        return <HiOutlineUsers size={50} />;
+        return <HiOutlineUsers size={50} />; // Long-Term Sustainability
       case 5:
-        return <HiOutlineLightBulb size={50} />;
+        return <HiOutlineLightBulb size={50} />; // Ethical Practices
+      case 6:
+        return <HiOutlineSparkles size={50} />; // Innovation
+      case 7:
+        return <FaRegHandshake size={50} />; // Partnerships
+      case 8:
+        return <HiOutlineClipboardCheck size={50} />; // Volunteer Opportunities
       default:
         return null;
     }
   };
+
 
   const causesData = [
     {
@@ -226,10 +245,6 @@ const Home = () => {
         </div>
       </section>
 
-      <h2 className=" text-xl font-[500] text-end mr-[15px] xl:mr-[45px] text-green-900 mb-8">
-        Donate services to people in <br />
-        <span className='text-green-600 ml-[8px]'>times of need</span>
-      </h2>
       <section className='lg:px-[55px] w-full xl:px-[200px] sm:scale-[1] scale-[0.8]'>
         <div className="slider" style={{ '--width': '210px', '--height': '132px', '--quantity': 8 }}>
           <div className="list">
@@ -244,8 +259,11 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <h2 className=" text-xl font-[500] text-center mr-[15px] xl:mr-[45px] text-green-900 mb-8">
+        Donate services to people in <span className='text-green-600 ml-[8px]'>times of need</span>
+      </h2>
 
-      <section className="lg:px-4">
+      <section className="lg:px-4 mt-[-25px]">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
 
@@ -271,24 +289,46 @@ const Home = () => {
         </div>
       </section >
 
-      <section className="bg-green-950 w-full px-[15px] md:px-[25px] py-[38px]">
-        <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">Why Trust Us</h2>
-        <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-x-[30px] gap-y-[55px] mb-[55px]">
-          {chooseUsData.map((item) => (
-            <motion.div
-              className="flex items-center px-[8px]"
-              style={{ scale, y, opacity }}
-              key={item.id}
-            >
-              <div className='text-green-100 mr-[15px]'>{renderIcon(item.id - 1)}</div>
-              <div>
-                <h3 className="text-[22px] font-[600] text-green-200">{item.heading}</h3>
-                <p className="text-white text-[15px]">{item.body}</p>
-              </div>
-            </motion.div>
-          ))}
+      <section
+        className="relative bg-green-950 w-full px-[15px] md:px-[25px] py-[38px]"
+        style={{
+          backgroundImage: 'url(" https://templates.envytheme.com/leud/rtl/assets/images/gallery/gallery-4.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-green-950 opacity-80 z-0"></div>
+
+        <div className="relative z-10">
+          <h2 className="text-center mb-[45px] text-[45px] font-[700] text-white">
+            Why Trust Us
+          </h2>
+
+          {/* Grid Section */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[55px] mb-[55px]">
+            {chooseUsData.map((item) => (
+              <motion.div
+                className="flex items-center px-[8px]"
+                style={{ scale, y, opacity }}
+                key={item.id}
+              >
+                <div className="text-green-100 mr-[15px]">
+                  {renderIcon(item.id - 1)}
+                </div>
+                <div>
+                  <h3 className="text-[22px] font-[600] text-green-200">
+                    {item.heading}
+                  </h3>
+                  <p className="text-white text-[15px]">{item.body}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
+
 
       <section className="bg-white mt-[65px] py-12 px-4 md:px-8 lg:px-16">
         <h2 className="text-3xl font-bold text-center text-green-900 mb-8">
@@ -375,8 +415,6 @@ const Home = () => {
       </p>
       <Carousel testimonial={testimonials} />
 
-
-
       <section>
         <div className='xl:px-[78px] md:px-[25px] px-[15px] mt-[85px]'>
           <h1 className='text-2xl md:text-3xl font-bold mb-6 text-green-700'>
@@ -391,7 +429,7 @@ const Home = () => {
         <div className='grid mt-[85px] xl:px-[85px] lg:grid-cols-2'>
           <div className="flex items-center  justify-center overflow-hidden">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9S0cJrYw26C5lag_cvgFY7sVKCJFspo6uJCUaH6BWaqEvQHCSv_g5cHY19_YOFoJykTg&usqp=CAU"
+              src='https://templates.envytheme.com/leud/rtl/assets/images/events/event-3.jpg'
               alt="Placeholder"
               className="w-[450px] mt-[-45px] h-[360px] rounded-lg"
             />
@@ -399,18 +437,7 @@ const Home = () => {
           <FAQPage />
         </div>
       </section>
-
-      <section className="border-[3px] border-green-950 xl:mx-[80px] mt-[35px] rounded-[6px] text-white py-16 px-6 md:px-10 lg:px-20 flex items-center justify-between">
-        <div className="text-center md:text-left">
-          <h1 className="text-xl text-green-900 md:text-4xl font-bold mb-4">Let's Change The World<b /> With Humanity</h1>
-        </div>
-        <div className="mt-4 md:mt-0">
-          <Link to="/signup" className="inline-block bg-white text-green-700 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100">
-            Become A Volunteer
-          </Link>
-        </div>
-      </section>
-
+ 
     </main>
   );
 };

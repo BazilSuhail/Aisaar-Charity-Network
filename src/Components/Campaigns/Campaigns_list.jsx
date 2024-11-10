@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fs, auth, FieldValue } from "../../Config/Config";
- 
-import CampaignComp from "./CampaignComp.jsx"; 
+
+import CampaignComp from "./CampaignComp.jsx";
 import Loader from "../Loader";
 
 const Listcampaigns = () => {
@@ -134,15 +134,60 @@ const Listcampaigns = () => {
   };
 
   return (
-    <div className="project bg-gray-100 min-h-screen pt-[75px]"> 
-    
+    <div className="project bg-gray-100 min-h-screen pt-[70px]">
+
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
-        <>  <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
-        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
-      </h2>
-          <div className="grid lg:grid-cols-3 gap-[15px] grid-cols-1">
+        <>
+          <section
+            className="relative bg-gray-100 py-24 px-6 md:px-12 lg:px-24"
+            style={{
+              backgroundImage: 'url("https://templates.envytheme.com/leud/rtl/assets/images/causes/causes-3.jpg")', // Replace with the desired background image URL
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className="absolute inset-0 bg-green-950 opacity-80 z-0"></div>
+
+            <div className="relative z-10 max-w-6xl mx-auto text-center">
+              <h2 className="text-4xl font-bold text-green-200 mb-4">
+                Join Our Campaigns for Change
+              </h2>
+              <p className="text-lg text-gray-200 mb-10">
+                Our franchises are actively running campaigns to bring resources and opportunities to communities in need. By supporting a campaign, you’re empowering local leaders to make a meaningful impact and transform lives.
+              </p>
+            </div>
+
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="bg-[#0d380eb7] shadow-md shadow-green-950 bg-opacity-90 rounded-lg overflow-hidden">
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-green-300 mb-2">Clean Water for All</h3>
+                  <p className="text-green-100 mb-4">
+                    Help provide safe, clean water to underprivileged communities. Every dollar counts in making clean water accessible.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-[#0d380eb7] bg-opacity-90 rounded-lg shadow-lg overflow-hidden">
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-green-300 mb-2">Education for Every Child</h3>
+                  <p className="text-green-100 mb-4">
+                    Join our mission to provide education resources to children in need, opening doors to a brighter future.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-[#0d380eb7] bg-opacity-90 rounded-lg shadow-lg overflow-hidden">
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-green-300 mb-2">Medical Aid for Families</h3>
+                  <p className="text-green-100 mb-4">
+                    Support our efforts to bring medical assistance and resources to families who need it the most.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div className="grid lg:grid-cols-3 pt-[35px] gap-[15px] grid-cols-1">
             {campaigns.map((campaign) => (
               <CampaignComp
                 key={campaign.id}
@@ -151,7 +196,7 @@ const Listcampaigns = () => {
                 userInDonorsCollection={userInDonorsCollection}
               />
             ))}
-          </div> 
+          </div>
         </>
       )}
     </div>

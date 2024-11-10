@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
-import { motion, AnimatePresence } from 'framer-motion'; 
+import { motion, AnimatePresence } from 'framer-motion';
 import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
 
@@ -116,7 +116,6 @@ const Navbar = () => {
           </>
         }
 
-
         {!userType ? <NavLink to="/login" className="ml-auto mr-[15px] bg-green-950 px-[18px] text-white py-[6px] rounded-lg">Get Started</NavLink> :
           <NavLink to={userType === 'Donor' ? '/donor' : '/volunteer'} className=" ml-auto scale-[0.85]">
             <div className='flex items-center  rounded-xl py-[8px]'>
@@ -165,22 +164,44 @@ const Navbar = () => {
                 initial={{ opacity: 0, height: "100vh" }}
                 animate={{ opacity: 1, height: "100vh", transition: { duration: 0.5 } }}
                 exit={{ opacity: 0, height: "100vh", transition: { duration: 0.5, delay: 0.5 } }}
-                className="fixed inset-0 backdrop-blur-md bg-opacity-70 bg-black flex flex-col items-center justify-center space-y-[12px] underline font-[700] text-[#d9f5c5] text-[35px] h-screen z-40"
+                className="fixed inset-0 backdrop-blur-md flex flex-col justify-center items-center bg-opacity-70 bg-black space-y-[12px] h-screen z-40"
                 onClick={handleMenuToggle}
               >
-
-                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.3 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
-                  <NavLink to="/" className="">Home</NavLink>
+                <div className="space-y-2">
+                <motion.div className="mb-[45px]" initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.2 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                  {!userType ? <NavLink to="/login" className="bg-green-950 flex-start px-[18px] text-white py-[6px] rounded-lg">Get Started</NavLink> :
+                    <NavLink to={userType === 'Donor' ? '/donor' : '/volunteer'} >
+                      <div className='flex items-center bg-[#04400674] pl-[15px] rounded-xl w-[200px] py-[8px]'>
+                        <div className="h-[45px] w-[45px] flex items-center justify-center text-white bg-green-800 rounded-full"><IoMdPerson size={26} /></div>
+                        <div className='ml-[12px]'>
+                          <p className='text-green-200 font-[600] text-[13px]'>{userType === "Volunteer" ? 'Volunteer Profile' : 'Donor Profile'}</p>
+                          <div className="text-[18px] text-green-50 font-[700]">{firstname}</div>
+                        </div>
+                      </div>
+                    </NavLink>
+                  }
                 </motion.div>
-                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
-                  <NavLink to="/gallery" className="">Gallery</NavLink>
-                </motion.div>
-                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.7 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
-                  <NavLink to="/listedprojects" className="">Projects</NavLink>
-                </motion.div>
-                <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.9 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
-                  <NavLink to="/listcampaigns" className="">Campaigns</NavLink>
-                </motion.div>
+                  <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.3 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                    <NavLink to="/" className="text-[44px] text-white text-center font-[400]">Home</NavLink>
+                  </motion.div>
+                  <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                    <NavLink to="/gallery" className="text-[44px] text-white text-center font-[400]">Gallery</NavLink>
+                  </motion.div>
+                  <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.7 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                    <NavLink to="/listedprojects" className="text-[44px] text-white text-center font-[400]">Projects</NavLink>
+                  </motion.div>
+                  <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.9 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                    <NavLink to="/listcampaigns" className="text-[44px] text-white text-center font-[400]">Campaigns</NavLink>
+                  </motion.div>
+                  <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1, transition: { duration: 0.5, delay: 1.1 } }} exit={{ y: 50, opacity: 0, transition: { duration: 0.2 } }} onClick={handleMenuToggle}>
+                    {userType === 'Donor'
+                      ?
+                      <NavLink to="/testimonial" className="text-[44px] text-white text-center font-[400]">Testimonial</NavLink>
+                      :
+                      <NavLink to="/complains" className="text-[44px] text-white text-center font-[400]">Complains</NavLink>
+                    } 
+                  </motion.div>
+                </div>
 
 
               </motion.div>

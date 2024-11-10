@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fs, auth, FieldValue } from '../../Config/Config';
+import { FaTimes } from 'react-icons/fa';
 
 const ProjectDetails = ({ onClose, id }) => {
     const projectId = useMemo(() => id, [id]);
@@ -166,8 +167,8 @@ const ProjectDetails = ({ onClose, id }) => {
     return (
         <div className="flex fixed items-center justify-center z-50 inset-0 bg-black bg-opacity-50 p-4">
             <div className="bg-white p-6 rounded-md w-full max-w-lg shadow-lg">
-                <button className="text-gray-500 hover:text-gray-800 text-lg mb-4" onClick={onClose}>Close</button>
-                <h1 className="text-2xl font-semibold mb-4">{project.title}</h1>
+                <button className="text-green-800 hover:text-green-700 text-lg mb-4" onClick={onClose}><FaTimes /></button>
+                <h1 className="text-[32px] text-green-800 font-[600] mb-4">{project.title}</h1>
 
                 <div className="border-b border-gray-300 pb-4 mb-4">
                     <p><strong>Volunteer:</strong> {volunteer.displayName || "N/A"}</p>
@@ -180,14 +181,14 @@ const ProjectDetails = ({ onClose, id }) => {
                 </div>
 
                 <div className="mb-4">
-                    <p><strong>Start Date:</strong> {project.startDate}</p>
-                    <p><strong>End Date:</strong> {project.endDate}</p>
-                    <p className="mt-2"><strong>Description:</strong> {project.ription}</p>
+                    <p><strong>Start Date:</strong> <span className='text-green-700 font-[600] underline'>{project.startDate}</span></p>
+                    <p><strong>End Date:</strong> <span className='text-red-700 font-[600] underline'>{project.endDate}</span></p>
+                    <p className="mt-2 text-green-900 font-[500]"><strong className='font-[700] text-green-950'>Description:</strong><br /> <span className='px-[4px] py-[4px] bg-grey-100 w-full mt-[3px]'>{project.description}</span></p>
                 </div>
 
                 <div className="mb-4">
-                    <p><strong>Target Amount:</strong> ${project.targetAmount}</p>
-                    <p><strong>Collected Amount:</strong> ${project.collectedAmount}</p>
+                    <p><strong className='text-red-700'>Target Amount:</strong> ${project.targetAmount}</p>
+                    <p><strong className='text-green-700'>Collected Amount:</strong> ${project.collectedAmount}</p>
                 </div>
 
                 {currentUser && (
@@ -200,14 +201,14 @@ const ProjectDetails = ({ onClose, id }) => {
                             onChange={(e) => setDonationAmount(e.target.value)}
                         />
                         <button
-                            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 disabled:opacity-50"
+                            className="w-full bg-green-900 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50"
                             onClick={handleDonate}
                             disabled={donationDisabled}
                         >
                             Donate
                         </button>
                         {donationDisabled && (
-                            <p className="text-red-500 mt-2">Cannot donate more than the remaining amount.</p>
+                            <p className="text-red-600 font-[600] mt-2">* Cannot donate more than the remaining amount.</p>
                         )}
                     </div>
                 )}

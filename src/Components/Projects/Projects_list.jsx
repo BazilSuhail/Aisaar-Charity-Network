@@ -65,14 +65,36 @@ const Listedprojects = () => {
   };
 
   return (
-    <div className="project bg-gray-100 min-h-screen pt-[75px]"> 
-    
+    <div className="project bg-gray-100 min-h-screen pt-[70px]">
+
       {loadProjects ? (
         <Loader typeOfloader={"a"} />
       ) : (
-        <>  <h2 className=" text-[55px] font-[700] text-start ml-[15px] xl:mr-[45px] text-green-900 mb-8">
-        Donate services to people in<span className='text-green-600 ml-[8px]'>times of need</span>
-      </h2>
+        <>
+          <section className="relative bg-green-950 py-16 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center">
+            {/* Background Image */}
+            <div className="absolute inset-0 bg-cover bg-center z-0 opacity-15" style={{ backgroundImage: 'url("https://templates.envytheme.com/leud/rtl/assets/images/events/event-7.jpg")' }}></div>
+
+            {/* Content Overlay */}
+            <div className="relative z-10 max-w-lg md:max-w-none md:w-1/2 md:pr-10 text-center md:text-left">
+              <h2 className="text-3xl lg:text-5xl font-bold text-green-300 mb-4">
+                Your Donation Can Change Lives
+              </h2>
+              <p className="text-lg text-gray-50 mb-6">
+                By supporting our projects, you’re not just donating money; you’re offering hope and a chance for a brighter future. Each contribution, big or small, can help provide food, education, and medical care to those who need it the most. Together, we can make a lasting impact.
+              </p>
+              <button className="mt-4 bg-green-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:bg-green-600 transition duration-300">
+                Donate Now
+              </button>
+            </div>
+
+            {/* Decorative Image */}
+            <div className="relative mt-10 md:mt-0 md:w-1/2 flex justify-center">
+              <div className="overflow-hidden rounded-full w-72 h-72 lg:w-96 lg:h-96 bg-cover bg-center shadow-lg" style={{ backgroundImage: 'url("https://templates.envytheme.com/leud/rtl/assets/images/causes/causes-8.jpg")' }}>
+                {/* Placeholder Image */}
+              </div>
+            </div>
+          </section>
           <div className="grid lg:grid-cols-3 gap-[15px] grid-cols-1">
             {projects.map((project) => (
               <div key={project.id} className="mx-[25px] p-6 bg-white border rounded-sm">

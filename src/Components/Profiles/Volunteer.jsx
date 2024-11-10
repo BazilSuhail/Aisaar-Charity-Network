@@ -233,7 +233,7 @@ const Volunteer = () => {
               <tbody>
                 {appliedProjects.map((project, index) => (
                   <tr key={index}>
-                    <td className="border px-4 py-2">{project.name}</td>
+                    <td className="border px-4 py-2">{project.title}</td>
                     <td className="border px-4 py-2">{project.volunteerID}</td>
                   </tr>
                 ))}

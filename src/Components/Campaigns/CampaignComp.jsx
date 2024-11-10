@@ -78,19 +78,19 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
 
             <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div
-                    className="bg-green-500 h-2 rounded-full"
+                    className="bg-green-700 h-2 rounded-full"
                     style={{ width: `${Math.min((campaign.currentAmountRaised / campaign.targetAmount) * 100, 100)}%` }}
                 ></div>
             </div>
 
             <div className="text-sm text-gray-600 mb-4">
-                Status: <span className={`font-semibold text-white px-[10px] py-[3px] rounded-lg  ${campaign.status === 'Active' ? 'bg-green-700' : 'bg-yellow-500'}`}>{campaign.status}</span>
+                Status: <span className={`font-semibold text-white px-[10px] py-[3px] rounded-lg  ${campaign.status === 'Active' ? 'bg-green-800' : 'bg-yellow-500'}`}>{campaign.status}</span>
             </div>
 
             {userInDonorsCollection && !donationComplete && (
                 <div className="flex items-center space-x-2">
                     <input
-                        className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-800"
                         type="number"
                         placeholder="Enter amount"
                         onChange={(e) => setLocalDonationAmount(e.target.value)}
@@ -98,14 +98,14 @@ const CampaignComp = ({ campaign, handleDonate, userInDonorsCollection }) => {
                     <button
                         onClick={handleDonateClick}
                         disabled={donationDisabled}
-                        className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50"
+                        className="w-full px-4 py-2 bg-green-800 text-white font-semibold rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50"
                     >
                         Donate
                     </button>
                 </div>
             )}
 
-            {donationComplete && <div className="text-center font-semibold text-green-600 mt-4">DONATING !!</div>}
+            {donationComplete && <div className="text-center font-semibold text-green-800 mt-4">DONATING !!</div>}
         </div>
     );
 };
