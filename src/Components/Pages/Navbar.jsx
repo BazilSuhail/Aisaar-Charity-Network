@@ -4,7 +4,7 @@ import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from 'framer-motion';
 import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
-import logo from "./favicon.ico";
+import logo from "./logo.svg";
 
 const AnimatedButton = ({ text }) => {
   return (
@@ -109,7 +109,7 @@ const Navbar = () => {
           </>
         }
 
-        {!userType ? <NavLink to="/login" className="ml-auto mr-[15px] bg-green-950 px-[18px] text-white py-[6px] rounded-lg">Get Started</NavLink> :
+        {!userType ? <NavLink to="/login" className="ml-auto mr-[15px] border border-white rounded-2xl text-white px-[10px] hover:bg-green-800 py-[3px]">Get Started</NavLink> :
           <NavLink to={userType === 'Donor' ? '/donor' : '/volunteer'} className=" ml-auto scale-[0.85]">
             <div className='flex items-center  rounded-xl py-[8px]'>
               <div className="h-[45px] w-[45px] flex items-center justify-center text-white bg-green-800 rounded-full"><IoMdPerson size={26} /></div>
