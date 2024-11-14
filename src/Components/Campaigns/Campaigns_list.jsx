@@ -12,6 +12,10 @@ const Listcampaigns = () => {
   const [updatecampaigns, setUpdatecampaigns] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+
+  useEffect(() => {
     const fetchCampaigns = async () => {
       try {
         const campaignsRef = fs.collection("campaigns");

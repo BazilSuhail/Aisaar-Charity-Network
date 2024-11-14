@@ -14,7 +14,7 @@ const Complains = () => {
     complain: "",
   });
   const [complains, setComplains] = useState([]);
-  const [showTable, setShowTable] = useState(false); // New state variable to control table visibility
+  const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {

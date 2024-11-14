@@ -17,6 +17,9 @@ const Testimonial = () => {
     const [donationsExist, setDonationsExist] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    useEffect(() => {
         const fetchDonorData = async () => {
             try {
                 if (currentUser) {

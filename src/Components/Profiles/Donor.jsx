@@ -23,6 +23,10 @@ const Donor = () => {
   });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+
+  useEffect(() => {
     const fetchDonorData = async () => {
       try {
         const currentUser = auth.currentUser;
@@ -104,7 +108,7 @@ const Donor = () => {
 
   return (
     <div className='mt-[60px]  min-h-screen bg-white flex flex-col'>
-      <div className='p-6 '> 
+      <div className='p-6 '>
         <div className="mb-[15px] flex lg:items-center flex-col lg:flex-row lg:justify-between bg-green-900 border-2 border-green-300 p-6 rounded-xl shadow-md">
           <div className="flex items-end space-x-4">
             <img
@@ -118,7 +122,7 @@ const Donor = () => {
             </div>
           </div>
           <div className=" lg:order-1 order-2 flex flex-col py-[25px] items-center space-x-2 text-white rounded-lg bg-[#27760f85] px-[35px]">
-            <FaMedal className="text-yellow-500 lg:text-[115px]"/>
+            <FaMedal className="text-yellow-500 lg:text-[115px]" />
             <span className="font-semibold text-green-200 mt-[15px]">Total Donations:</span>
             <span className="font-bold text-[35px]">${donorData.donations}</span>
           </div>

@@ -2,19 +2,23 @@
 @tailwind components;
 @tailwind utilities;
    
+*{
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar { 
-  width: 10px; 
+  width: 8px; 
   height: 12px; 
 }
 #root{
   overflow-x: hidden;
 }
 ::-webkit-scrollbar-track {
-  background: #f3ffe6; 
+  background: #ffffff; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(0, 92, 0); /* Gradient colors */
+  background: rgb(0, 92, 0);
   border-radius: 4px; 
 }
 

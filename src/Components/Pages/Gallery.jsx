@@ -30,13 +30,17 @@ const Counter = ({ value, duration }) => {
 
 const Gallery = () => {
     const [totalProjects, setTotalProjects] = useState(0);
+    const [totalCampaigns, setTotalCampaigns] = useState(0);
     const [totalFranchises, setTotalFranchises] = useState(0);
     const [projects, setProjects] = useState([]);
     const [campaigns, setCampaigns] = useState([]);
     const [completedProjects, setCompletedProjects] = useState([]);
     const [totalVolunteers, setTotalVolunteers] = useState(0);
     const [totalDonors, setTotalDonors] = useState(0);
-    const [totalBeneficiaries, setTotalBeneficiaries] = useState(0);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,15 +57,12 @@ const Gallery = () => {
                 const campaignsRef = fs.collection('campaigns');
                 const campaignsSnapshot = await campaignsRef.get();
                 setCampaigns(campaignsSnapshot.docs.map(doc => doc.data()));
+                setTotalCampaigns(campaignsSnapshot.size);
 
                 const completedProjectsRef = fs.collection('completedProjects');
                 const completedProjectsSnapshot = await completedProjectsRef.get();
                 const completedProjectsData = completedProjectsSnapshot.docs.map(doc => doc.data());
                 setCompletedProjects(completedProjectsData);
-
-                const beneficiariesRef = fs.collection('beneficiaries');
-                const beneficiariesSnapshot = await beneficiariesRef.get();
-                setTotalBeneficiaries(beneficiariesSnapshot.size);
 
                 const volunteersRef = fs.collection('volunteer');
                 const volunteersSnapshot = await volunteersRef.get();
@@ -142,59 +143,59 @@ const Gallery = () => {
 
     return (
         <div className='w-full overflow-x-hidden py-[80px]'>
-            <section class="flex flex-col lg:flex-row items-center justify-center px-6 ">
-                <div class="relative lg:scale-[0.8] w-full lg:w-1/2 mb-8 lg:mb-0">
-                    <div class="rounded-full overflow-hidden mx-auto w-72 h-72 lg:w-full lg:h-auto">
-                        <img src="https://templates.envytheme.com/leud/rtl/assets/images/what-we-do-img.png" alt="Children" class="object-cover w-full h-full" />
+            <section className="flex flex-col lg:flex-row items-center justify-center px-6 ">
+                <div className="relative lg:scale-[0.8] w-full lg:w-1/2 mb-8 lg:mb-0">
+                    <div className="rounded-full overflow-hidden mx-auto w-72 h-72 lg:w-full lg:h-auto">
+                        <img src="https://templates.envytheme.com/leud/rtl/assets/images/what-we-do-img.png" alt="Children" className="object-cover w-full h-full" />
                     </div>
                 </div>
 
-                <div class="lg:w-1/2 text-center lg:text-left lg:pl-10">
-                    <h2 class="text-green-600 uppercase text-sm font-semibold mb-2">What We Do</h2>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-4">Manage all activities from our foundation</h1>
-                    <p class="text-gray-600 mb-6">
+                <div className="lg:w-1/2 text-center lg:text-left lg:pl-10">
+                    <h2 className="text-green-600 uppercase text-sm font-semibold mb-2">What We Do</h2>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-4">Manage all activities from our foundation</h1>
+                    <p className="text-gray-600 mb-6">
                         Our foundation is dedicated to managing a wide range of impactful initiatives to create lasting change. From supporting local communities to driving educational and healthcare projects, we aim to make a tangible difference in people’s lives. Join us in transforming lives, one project at a time.
                     </p>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-800">
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Medicine help
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-800">
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Medicine help
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Care and protection
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Care and protection
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Education help
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Education help
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Water delivery
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Water delivery
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Special needs
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Special needs
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Adopt a child
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Adopt a child
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Safe house
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Safe house
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Medical camps
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Medical camps
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Food collect
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Food collect
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-500 mr-2">✔</span> Cancer treatment
+                        <div className="flex items-center">
+                            <span className="text-green-500 mr-2">✔</span> Cancer treatment
                         </div>
                     </div>
                 </div>
             </section>
 
-            <h2 className="text-3xl mt-[25px] font-bold text-center text-green-900 mb-8">
+            <h2 className="text-3xl mt-[65px] lg:mt-[25px] font-bold text-center text-green-900 mb-8">
                 Geneoristy In Action
             </h2>
-            <p class="text-green-900 text-center xl:px-[290px] lg:px-[195px] md:px-[85px] px-[15px] mb-4">
+            <p className="text-green-900 text-center xl:px-[290px] lg:px-[195px] md:px-[85px] px-[15px] mb-4">
                 Every act of kindness counts, and together we are creating powerful change. Through the collective generosity of our supporters, we've been able to make a real impact across multiple areas, from healthcare and education to community development and emergency relief.
             </p>
             <section className="grid md:scale-[1] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]">
@@ -202,7 +203,7 @@ const Gallery = () => {
                     <Counter value={overallDonation} duration={100} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">OverAll Donations</div>
                 </div>
-                <div className="flex flex-col items-center justify-center mx-auto text-white py-[30px] ">
+                <div className="flex flex-col items-center justify-center mx-auto text-green-900 py-[30px] ">
                     <Counter value={projDonations} duration={100} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Project  Donations</div>
                 </div>
@@ -211,8 +212,8 @@ const Gallery = () => {
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Campaigns  Donations</div>
                 </div>
                 <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={totalBeneficiaries} duration={50} />
-                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Beneficaires</div>
+                    <Counter value={totalCampaigns} duration={50} />
+                    <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Campaigns</div>
                 </div>
             </section>
 
@@ -221,7 +222,7 @@ const Gallery = () => {
                     <Counter value={totalFranchises} duration={100} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Franchises</div>
                 </div>
-                <div className="flex flex-col  items-center justify-center mx-auto text-white py-[30px] ">
+                <div className="flex flex-col  items-center justify-center mx-auto text-green-900 py-[30px] ">
                     <Counter value={totalProjects} duration={100} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total projects</div>
                 </div>
@@ -271,8 +272,8 @@ const Gallery = () => {
                 Meet the Team <span className='text-green-700'>Our Top Volunteers</span>
             </h2>
             <div className='h-[3px] bg-green-900 w-[90%] mx-auto mb-[20px]'></div>
-            
-            <p class="text-green-900 text-center xl:px-[290px] lg:px-[195px] mb-[35px] md:px-[85px] px-[15px]">
+
+            <p className="text-green-900 text-center xl:px-[290px] lg:px-[195px] mb-[35px] md:px-[85px] px-[15px]">
                 Behind every success story is a team of passionate volunteers dedicated to making a difference. Meet our top volunteers who tirelessly contribute their time and energy to support our mission. Together, we’re transforming lives and building a brighter future for those in need.
             </p>
             {loading ? (

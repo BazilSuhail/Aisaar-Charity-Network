@@ -175,10 +175,10 @@ const Volunteer = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Form Fields for Editing Profile */}
           <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} placeholder="Enter Name" className="w-full p-2 border border-gray-300 rounded-md" required />
-          <input type="text" name="cnic" value={formData.cnic} onChange={handleChange} placeholder="Enter CNIC" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="number" name="cnic" value={formData.cnic} onChange={handleChange} placeholder="Enter CNIC" className="w-full p-2 style-none border border-gray-300 rounded-md" required />
           <input type="text" name="dob" value={formData.dob} onChange={handleChange} placeholder="Enter Date of Birth" className="w-full p-2 border border-gray-300 rounded-md" required />
           <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Enter Address" className="w-full p-2 border border-gray-300 rounded-md" required />
-          <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Enter Phone Number" className="w-full p-2 border border-gray-300 rounded-md" required />
+          <input type="number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Enter Phone Number" className="w-full p-2 border border-gray-300 rounded-md" required />
           {/* Add more fields similar to above */}
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2">
             <span>Update Profile</span>

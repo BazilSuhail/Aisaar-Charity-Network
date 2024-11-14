@@ -10,6 +10,9 @@ const TransactionHistory = () => {
   const [transactionHistory, setTransactionHistory] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+  useEffect(() => {
     const fetchTransactionHistory = async () => {
       try {
         if (currentUser) {
@@ -72,16 +75,15 @@ const TransactionHistory = () => {
                     {transaction.amount}
                   </td>
                   <td className="py-3 px-6 font-[600] text-green-900 text-left">{transaction.projectName}</td>
-              
+
                   <td className="py-3 px-6 text-left">
-  <div
-    className={`py-2 rounded-xl text-center font-semibold text-white ${
-      transaction.idType === "Project" ? "bg-green-700" : "bg-green-900"
-    }`}
-  >
-    {transaction.idType}
-  </div>
-</td>
+                    <div
+                      className={`py-2 rounded-xl text-center font-semibold text-white ${transaction.idType === "Project" ? "bg-green-700" : "bg-green-900"
+                        }`}
+                    >
+                      {transaction.idType}
+                    </div>
+                  </td>
                   <td className="py-3 px-6 text-left">{transaction.projectId}</td>
                   <td className="py-3 px-6 text-left">
                     {new Date(transaction.timestamp).toLocaleTimeString()}

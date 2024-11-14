@@ -130,6 +130,8 @@ const Home = () => {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
+    
+    window.scrollTo(0, 0);
     const fetchTestimonials = async () => {
       try {
         const donorsSnapshot = await fs.collection("donors").get();
@@ -167,23 +169,23 @@ const Home = () => {
   const renderIcon = (index) => {
     switch (index) {
       case 0:
-        return <HiCubeTransparent size={50} />; // Transparency
+        return <HiCubeTransparent size={50} />; 
       case 1:
-        return <HiOutlineHeart size={50} />; // Impactful Projects
+        return <HiOutlineHeart size={50} />; 
       case 2:
-        return <HiOutlineBadgeCheck size={50} />; // Accountability
+        return <HiOutlineBadgeCheck size={50} />; 
       case 3:
-        return <HiOutlineCurrencyDollar size={50} />; // Community Engagement
+        return <HiOutlineCurrencyDollar size={50} />; 
       case 4:
-        return <HiOutlineUsers size={50} />; // Long-Term Sustainability
+        return <HiOutlineUsers size={50} />; 
       case 5:
-        return <HiOutlineLightBulb size={50} />; // Ethical Practices
+        return <HiOutlineLightBulb size={50} />; 
       case 6:
-        return <HiOutlineSparkles size={50} />; // Innovation
+        return <HiOutlineSparkles size={50} />; 
       case 7:
-        return <FaRegHandshake size={50} />; // Partnerships
+        return <FaRegHandshake size={50} />; 
       case 8:
-        return <HiOutlineClipboardCheck size={50} />; // Volunteer Opportunities
+        return <HiOutlineClipboardCheck size={50} />;
       default:
         return null;
     }
@@ -225,7 +227,7 @@ const Home = () => {
             transition={{ duration: 1, delay: 0.5 }}
           />
         </div>
-        <div className="xl:scale-[1] scale-[0.9] flex px-[35px] justify-center flex-col">
+        <div className="xl:scale-[1] scale-[0.9] flex md:px-[35px] justify-center flex-col">
           <motion.h1 className="text-4xl md:text-5xl lg:text-[65px] xl:text-[70px] font-bold text-green-900 mb-4"
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -259,8 +261,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <h2 className=" text-xl font-[500] text-center mr-[15px] xl:mr-[45px] text-green-900 mb-8">
-        Donate services to people in <span className='text-green-600 ml-[8px]'>times of need</span>
+      <h2 className=" text-md font-[500] mt-[-15px] lg:mt-[15px] text-center mr-[15px] xl:mr-[45px] text-green-900 mb-[75px] lg:mb-8">
+        Donate services to people in <span className='text-green-600'>times of need</span>
       </h2>
 
       <section className="lg:px-4 mt-[-25px]">
