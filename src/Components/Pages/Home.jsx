@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fs } from '../../Config/Config';
-import coverImage from "../Styles/photos/coverimage.png";
+import coverImage from "../Styles/photos/coverimage.webp";
 import aboutImage from "../Styles/photos/AboutImg.png";
 import { FaHandHoldingHeart, FaHandsHelping, FaQuestionCircle, FaQuoteRight, FaRegComments, FaRegHandshake } from "react-icons/fa";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';

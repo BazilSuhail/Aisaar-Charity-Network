@@ -4,6 +4,7 @@ import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from 'framer-motion';
 import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
+import logo from "./favicon.ico";
 
 const AnimatedButton = ({ text }) => {
   return (
@@ -84,11 +85,10 @@ const Navbar = () => {
   const firstname = getFirstName(displayName);
 
   return (
-    <nav className='fixed w-full top-0 bg-green-950 text-white shadow-lg z-50'>
-      {/* Full navbar for larger screens */}
+    <nav className='fixed w-full top-0 bg-green-950 text-white shadow-lg z-50'> 
       <div className="w-full z-50 md:flex hidden items-center h-[70px]">
         <NavLink to="/">
-          <img src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
+          <img src={logo} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
         </NavLink>
 
         <div className="w-[2.5px] rounded-xl h-[28px] mr-[8px] text bg-gray-700 "></div>
@@ -96,14 +96,7 @@ const Navbar = () => {
         <NavLink to="/" className="ml-[-8px]"><AnimatedButton text={"Home"} /></NavLink>
         <NavLink to="/gallery" className="ml-[-30px]"><AnimatedButton text={"Gallery"} /></NavLink>
         <NavLink to="/listedprojects" className="ml-[-20px]"><AnimatedButton text={"Projects"} /></NavLink>
-        <NavLink to="/listcampaigns" className="ml-[-10px]"><AnimatedButton text={"Campaigns"} /></NavLink>
-
-        {/*
-        <NavLink to="/" className="ml-[-15px]">Home</NavLink>
-        <NavLink to="/gallery" className="ml-[-15px]">Gallery</NavLink>
-        <NavLink to="/listedprojects" className="ml-[18px]  font-medium text-[17px]">Projects</NavLink>
-        <NavLink to="/listcampaigns" className="ml-[18px]  font-medium text-[17px]">Campaigns</NavLink>
-        */}
+        <NavLink to="/listcampaigns" className="ml-[-10px]"><AnimatedButton text={"Campaigns"} /></NavLink> 
 
         {!userType ? <></> :
           <>
@@ -136,7 +129,7 @@ const Navbar = () => {
           <div className="flex items-center bg-green-950 h-[70px] z-50 justify-between px-4 py-3 relative">
             <div className="h-16 flex items-center justify-center">
               <NavLink to="/">
-                <img src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
+                <img src={logo} alt="Logo" className="w-[42px] ml-[18px] mr-[10px] h-[38px] mx-auto" />
               </NavLink>
             </div>
             <div className="md:hidden z-50">
@@ -215,150 +208,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-/*
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef(null);
-
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const { userType, displayName } = GetcurrUser();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    auth.signOut();
-    navigate("/");
-  };
-
-  const getFirstName = (displayName) => {
-    return displayName.split(' ')[0];
-  };
-
-  const renderLinks = (userType, displayName) => {
-    const firstName = getFirstName(displayName);
-
-    if (userType === "Volunteer") {
-      return (
-        <div className="auth-container" >
-          <NavLink to="/volunteer" className="profile-container-volunteer">
-            <IoMdPerson />
-          </NavLink>
-          <div className="profile">{firstName}</div>
-        </div>
-      );
-    } else if (userType === "Donor") {
-      return (
-        <div className="auth-container" >
-          <NavLink to="/donor" className="profile-container-donor">
-            <IoMdPerson />
-          </NavLink>
-          <div className="profile">{firstName}</div>
-        </div>
-      );
-    }
-  };
-
-  const renderAuthLinks = () => {
-    if (!userType) {
-      return (
-        <NavLink to="/login" className="sign-links">Get Started</NavLink>
-      );
-    } else {
-      return (
-        <>
-          {renderLinks(userType, displayName)}
-          <div>
-            <button onClick={handleLogout} className="logout-button">
-              <IoLogOutOutline />
-              <div className="logout-mobile">Logout</div>
-            </button>
-          </div>
-        </>
-      );
-    }
-  };
-
-  const renderFeedback = (userType) => {
-    if (userType === "Volunteer") {
-      return (
-        <NavLink to="/complains" className="nav-links"  >Complains</NavLink>
-      );
-    } else if (userType === "Donor") {
-      return (
-        <NavLink to="/testimonial" className="nav-links"  >Testimonials</NavLink>
-      );
-    }
-  };
-
-  return (
-    <div className={`navbar ${isOpen ? 'open' : ''}`}>
-      <div className="logo-container">
-        <div className="logo">إيثار</div>
-        {isOpen ? (
-          <RxCross1 className="menu-icon" onClick={toggleNavbar} />
-        ) : (
-          <FaBars className="menu-icon" onClick={toggleNavbar} />
-        )}
-      </div>
-
-      <div className="links">
-        <NavLink to="/" className="nav-links"  >Home</NavLink>
-        <NavLink to="/gallery" className="nav-links"  >Gallery</NavLink>
-        <NavLink to="/listedprojects" className="nav-links"  >Projects</NavLink>
-        <NavLink to="/listcampaigns" className="nav-links"  >Campaigns</NavLink>
-        {renderFeedback(userType)}
-      </div>
-      <div className="auth-links">
-        {renderAuthLinks()}
-      </div>
  
-      <motion.div
-        className="vertical-menu"
-        ref={menuRef}
-        initial={{ x: '-100vw' }}
-        animate={{ x: isOpen ? '0' : '-100vw' }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="vertical-logo"> 
-          <div className="logo" onClick={toggleNavbar}>إيثار</div>
-        </div>
-        <div className="vertical-line"></div>
-        <div className="menu-vertical">
-          <NavLink to="/" className="nav-links" onClick={toggleNavbar}>Home</NavLink>
-          <NavLink to="/gallery" className="nav-links" onClick={toggleNavbar}>Gallery</NavLink>
-          <NavLink to="/listedprojects" className="nav-links" onClick={toggleNavbar}>Projects</NavLink>
-          <NavLink to="/listcampaigns" className="nav-links" onClick={toggleNavbar}>Campaigns</NavLink>
-          {renderFeedback(userType)}
-        </div>
-        <div className="vertical-line2"></div>
-        {renderAuthLinks()}
-      </motion.div>
-    </div>
-  );
-};
-
-export default Navbar;
-*/

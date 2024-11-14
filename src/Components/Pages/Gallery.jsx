@@ -200,38 +200,38 @@ const Gallery = () => {
             </p>
             <section className="grid md:scale-[1] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]">
                 <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={overallDonation} duration={100} />
+                    <Counter value={overallDonation} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">OverAll Donations</div>
                 </div>
                 <div className="flex flex-col items-center justify-center mx-auto text-green-900 py-[30px] ">
-                    <Counter value={projDonations} duration={100} />
+                    <Counter value={projDonations} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Project  Donations</div>
                 </div>
                 <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={campDonations} duration={50} />
+                    <Counter value={campDonations} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Campaigns  Donations</div>
                 </div>
                 <div className="flex flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={totalCampaigns} duration={50} />
+                    <Counter value={totalCampaigns} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Campaigns</div>
                 </div>
             </section>
 
             <section className="grid md:scale-[1] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]">
                 <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={totalFranchises} duration={100} />
+                    <Counter value={totalFranchises} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Franchises</div>
                 </div>
                 <div className="flex flex-col  items-center justify-center mx-auto text-green-900 py-[30px] ">
-                    <Counter value={totalProjects} duration={100} />
+                    <Counter value={totalProjects} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total projects</div>
                 </div>
                 <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={totalDonors} duration={50} />
+                    <Counter value={totalDonors} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Donors</div>
                 </div>
                 <div className="flex  flex-col items-center justify-center mx-auto  text-green-900 py-[30px] ">
-                    <Counter value={totalVolunteers} duration={50} />
+                    <Counter value={totalVolunteers} duration={10000} />
                     <div className="text-center mt-[5px] rounded-lg font-medium text-gray-500 text-lg">Total Volunteers</div>
                 </div>
             </section>

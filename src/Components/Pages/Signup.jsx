@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, fs } from "../../Config/Config";
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
@@ -18,13 +18,16 @@ const SignUp = () => {
   const handleFocus = (field) => setFocus((prev) => ({ ...prev, [field]: true }));
   const handleBlur = (field, value) => setFocus((prev) => ({ ...prev, [field]: !!value }));
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       let idtypeValue = userType === "donor" ? "Donor" : "Volunteer";
-      const userData = { displayName, email, idtype: idtypeValue }; 
+      const userData = { displayName, email, idtype: idtypeValue };
 
       if (userType === "donor") {
         await fs.collection("donors").doc(user.uid).set(userData);
@@ -42,10 +45,7 @@ const SignUp = () => {
         progress: undefined,
         theme: "dark"
       });
-
-      //console.log("User signed up successfully!");
-      //navigate("/login");
-
+ 
       setTimeout(() => {
         navigate(`/login`);
       }, 3000);
@@ -130,8 +130,7 @@ const SignUp = () => {
                 className="w-full pl-12 pt-3 pb-4 border-b-[3px] border-green-800 outline-none focus:border-green-600"
               />
             </div>
-
-            {/* Email Input */}
+ 
             <div className="relative">
               <FaEnvelope size={24} className="absolute top-4 left-3 text-green-600" />
               <label
@@ -152,8 +151,7 @@ const SignUp = () => {
                 className="w-full pl-12 pt-3 pb-4 border-b-[3px] border-green-800 outline-none focus:border-green-600"
               />
             </div>
-
-            {/* Password Input */}
+ 
             <div className="relative">
               <FaLock size={24} className="absolute top-4 left-3 text-green-600" />
               <label
