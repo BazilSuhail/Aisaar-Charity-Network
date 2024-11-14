@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, fs } from "../../Config/Config";
 import { FiEdit } from "react-icons/fi";
 import { motion } from "framer-motion";
+
 const Volunteer = () => {
   const navigate = useNavigate();
   const [volunteerData, setVolunteerData] = useState({});
@@ -11,6 +12,10 @@ const Volunteer = () => {
   const [appliedProjects, setAppliedProjects] = useState([]);
   const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false);
   const [isAppliedProjectsModalOpen, setIsAppliedProjectsModalOpen] = useState(false);
+
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -27,7 +32,6 @@ const Volunteer = () => {
       try {
         const currentUser = auth.currentUser;
         if (currentUser) {
-          // Fetch volunteer data
           const volunteerRef = fs.collection("volunteer").doc(currentUser.uid);
           const volunteerDoc = await volunteerRef.get();
           if (volunteerDoc.exists) {
@@ -38,7 +42,6 @@ const Volunteer = () => {
             console.log("No volunteer data found");
           }
 
-          // Fetch projects data
           const projectsRef = fs
             .collection("projects")
             .where("volunteerID", "==", currentUser.uid);
@@ -46,7 +49,6 @@ const Volunteer = () => {
           const projectsData = projectsSnapshot.docs.map((doc) => doc.data());
           setProjects(projectsData);
 
-          // Fetch applied projects data
           const appliedProjectsRef = fs
             .collection("proposedProjects")
             .where("volunteerID", "==", currentUser.uid);
@@ -74,7 +76,9 @@ const Volunteer = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    console.log(formData);
+    setFormData({ ...formData, [name]: value, photoURL: selectedAvatar });
+
   };
 
   const handleEdit = () => {
@@ -100,15 +104,26 @@ const Volunteer = () => {
     navigate('/AppliedProject');
   };
 
+  const openAvatarModal = () => {
+    setIsAvatarModalOpen(true);
+  };
 
+  const closeAvatarModal = () => {
+    setIsAvatarModalOpen(false);
+  };
+
+  const selectAvatar = (index) => {
+    setSelectedAvatar(index);
+    closeAvatarModal();
+  };
 
   const openProjectsModal = () => setIsProjectsModalOpen(true);
   const closeProjectsModal = () => setIsProjectsModalOpen(false);
   const openAppliedProjectsModal = () => setIsAppliedProjectsModalOpen(true);
   const closeAppliedProjectsModal = () => setIsAppliedProjectsModalOpen(false);
+
   return (
     <div className="mt-[60px] min-h-screen bg-white flex flex-col p-6">
-      {/* Header Section */}
       <div className="mb-[15px] flex lg:items-center flex-col lg:flex-row lg:justify-between bg-green-900 border-2 border-green-300 p-6 rounded-xl shadow-md">
         <div className="flex items-end space-x-4">
           <img
@@ -122,11 +137,9 @@ const Volunteer = () => {
         </div>
       </div>
 
-      {/* Display Profile Data */}
       {!editMode ? (
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Profile Information Cards */}
             <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
               <h2 className="text-lg font-semibold text-gray-800">Full Name</h2>
               <p className="text-gray-600">{volunteerData.displayName}</p>
@@ -137,56 +150,90 @@ const Volunteer = () => {
             </div>
             <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
               <h2 className="text-lg font-semibold text-gray-800">CNIC</h2>
-              <p className="text-gray-600">{!volunteerData.cnic ? volunteerData.cnic : 'Update your CNIC'}</p>
+              <p className="text-gray-600">{volunteerData.cnic ? volunteerData.cnic : 'Update your CNIC'}</p>
             </div>
             <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
               <h2 className="text-lg font-semibold text-gray-800">Address Name</h2>
-              <p className="text-gray-600">{!volunteerData.address ? volunteerData.address : 'Enter Address'}</p>
+              <p className="text-gray-600">{volunteerData.address ? volunteerData.address : 'Enter Address'}</p>
             </div>
             <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
               <h2 className="text-lg font-semibold text-gray-800">Phone Number</h2>
-              <p className="text-gray-600">{!volunteerData.phoneNumber ? volunteerData.phoneNumber : 'Enter Phone Number'}</p>
+              <p className="text-gray-600">{volunteerData.phoneNumber ? volunteerData.phoneNumber : 'Enter Phone Number'}</p>
             </div>
             <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
               <h2 className="text-lg font-semibold text-gray-800">Date of Birth Number</h2>
-              <p className="text-gray-600">{!volunteerData.dob ? volunteerData.dob : 'Enter DOB'}</p>
+              <p className="text-gray-600">{volunteerData.dob ? volunteerData.dob : 'Enter DOB'}</p>
             </div>
-            {/* Add more fields similar to above */}
           </div>
 
-          {/* Action Buttons */}
           <div className="flex mt-[40px] items-center space-x-4">
             <button onClick={handleEdit} className="bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2">
               <FiEdit className="w-5 h-5" />
               <span>Edit Profile</span>
             </button>
-            <button onClick={openProjectsModal} className="bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
-              View Projects
-            </button>
-            <button onClick={openAppliedProjectsModal} className="bg-green-900 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
-              View Applied Projects
-            </button>
             <button onClick={handle_proposal} className="bg-green-900 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
               Appy for Project
             </button>
+            <button onClick={openProjectsModal} className="bg-green-950 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
+              View Projects
+            </button>
+            <button onClick={openAppliedProjectsModal} className="bg-green-950 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600">
+              View Applied Projects
+            </button> 
           </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Form Fields for Editing Profile */}
+          <button
+            type="button"
+            onClick={openAvatarModal}
+            className='bg-blue-900 ml-[10px] text-white px-4 py-[4px] rounded-md hover:bg-gray-600'
+          >
+            Change Avatar
+          </button>
           <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} placeholder="Enter Name" className="w-full p-2 border border-gray-300 rounded-md" required />
           <input type="number" name="cnic" value={formData.cnic} onChange={handleChange} placeholder="Enter CNIC" className="w-full p-2 style-none border border-gray-300 rounded-md" required />
           <input type="text" name="dob" value={formData.dob} onChange={handleChange} placeholder="Enter Date of Birth" className="w-full p-2 border border-gray-300 rounded-md" required />
           <input type="text" name="address" value={formData.address} onChange={handleChange} placeholder="Enter Address" className="w-full p-2 border border-gray-300 rounded-md" required />
           <input type="number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Enter Phone Number" className="w-full p-2 border border-gray-300 rounded-md" required />
-          {/* Add more fields similar to above */}
+
+          {isAvatarModalOpen && (
+            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+              <motion.div
+                className='bg-white p-6 rounded-lg shadow-lg'
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -100, opacity: 0 }}
+              >
+                <h2 className='text-xl font-bold mb-4'>Select an Avatar</h2>
+                <div className='grid grid-cols-2 gap-8'>
+                  {Array.from({ length: 4 }).map((_, index) => (
+                    <img
+                      key={index}
+                      src={`/Assets/${index + 1}.jpg`}
+                      alt={`Avatar ${index + 1}`}
+                      className='w-32 h-32 rounded-full border border-gray-300 shadow-md cursor-pointer hover:opacity-75'
+                      onClick={() => selectAvatar(index + 1)}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </div>
+                <button
+                  onClick={closeAvatarModal}
+                  className='mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600'
+                >
+                  Close
+                </button>
+              </motion.div>
+            </div>
+          )}
+
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2">
             <span>Update Profile</span>
           </button>
         </form>
       )}
 
-      {/* Projects Modal */}
       {isProjectsModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <motion.div className="bg-white p-6 rounded-lg shadow-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -218,7 +265,6 @@ const Volunteer = () => {
         </div>
       )}
 
-      {/* Applied Projects Modal */}
       {isAppliedProjectsModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <motion.div className="bg-white p-6 rounded-lg shadow-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

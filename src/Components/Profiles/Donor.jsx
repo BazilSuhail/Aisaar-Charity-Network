@@ -8,10 +8,8 @@ import { FaMedal } from 'react-icons/fa';
 const Donor = () => {
   const navigate = useNavigate();
   const [donorData, setDonorData] = useState({});
-  const [editMode, setEditMode] = useState(false);
-
-  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-
+  const [editMode, setEditMode] = useState(false); 
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false); 
   const [formData, setFormData] = useState({
     displayName: "",
     email: "",
@@ -24,7 +22,7 @@ const Donor = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-}, []);
+  }, []);
 
   useEffect(() => {
     const fetchDonorData = async () => {
@@ -131,15 +129,10 @@ const Donor = () => {
         {!editMode ? (
           <div>
             <div className=' mb-4'>
-
               <div className="flex-1 space-y-8">
-
-                {/* Profile Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* name Section */}
                   <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-blue-600 text-white rounded-full">
-                      {/* Custom Email SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-8 h-8">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c0-4.28-3.455-5-5-5h-1c-1.545 0-5 .72-5 5v3c0 1.38 1.12 2.5 2.5 2.5H5c1.38 0 2.5 1.12 2.5 2.5v2c0 1.38 1.12 2.5 2.5 2.5h2c1.38 0 2.5-1.12 2.5-2.5v-2c0-1.38 1.12-2.5 2.5-2.5h.5C19.88 16.5 21 15.38 21 14v-3c0-4.28-3.455-5-5-5h-1c-1.545 0-5 .72-5 5z" />
                       </svg>
@@ -150,10 +143,8 @@ const Donor = () => {
                     </div>
                   </div>
 
-                  {/* Email Section */}
                   <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-blue-600 text-white rounded-full">
-                      {/* Custom Email SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12l-4-4m0 0l-4 4m4-4v12" />
                         <path d="M16 5H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2z" />
@@ -165,10 +156,8 @@ const Donor = () => {
                     </div>
                   </div>
 
-                  {/* Phone Section */}
                   <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-green-600 text-white rounded-full">
-                      {/* Custom Phone SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h2l1 2m4 0l1-2h5a2 2 0 012 2v6a2 2 0 01-2 2h-6a2 2 0 01-2-2v-2m-2 0H3m0 0V9m0 0a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3V9a3 3 0 00-3-3h-2a3 3 0 00-3 3v1H6" />
                       </svg>
@@ -179,10 +168,8 @@ const Donor = () => {
                     </div>
                   </div>
 
-                  {/* Gender Section */}
                   <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
                     <div className="p-3 bg-pink-600 text-white rounded-full">
-                      {/* Custom Gender SVG */}
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 7a4 4 0 014-4h3m-7 0a4 4 0 00-4 4v4m0 0l4 4m-4-4l4-4" />
                       </svg>
@@ -201,13 +188,13 @@ const Donor = () => {
               <button onClick={handleEdit}
                 className='bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
               >
-                <FiEdit className='w-5 h-5' /> {/* Professional Edit Icon */}
+                <FiEdit className='w-5 h-5' />
                 <span>Edit Profile</span>
               </button>
               <button onClick={gotoTransactionHistory}
                 className='bg-green-900 ml-[10px]  text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
               >
-                <FiEdit className='w-5 h-5' /> {/* Professional Edit Icon */}
+                <FiEdit className='w-5 h-5' />
                 <span>Check Donations</span>
               </button>
             </div>
@@ -215,11 +202,6 @@ const Donor = () => {
         ) : (
           <form onSubmit={handleSubmit} className='space-y-4'>
             <div className='flex items-end mb-4'>
-              <img
-                src={`/Assets/${donorData.photoURL}.jpg`} // Display the currently selected avatar
-                alt="Profile Avatar"
-                className="w-24 h-24 rounded-full border border-gray-300 shadow-md"
-              />
               <button
                 type="button"
                 onClick={openAvatarModal}
@@ -247,12 +229,12 @@ const Donor = () => {
               required
             />
             <input
-              type="text"
+              type="number"
               name="phone"
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder="Phone"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              className="w-full p-2 border arro border-gray-300 rounded-md"
               required
             />
             <input
@@ -264,13 +246,12 @@ const Donor = () => {
               className="w-full p-2 border border-gray-300 rounded-md"
               required
             />
-            {/* Change Avatar Button */}
             <div className='flex'>
               <button
                 type="submit"
                 className='bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2'
               >
-                <FiSave className='w-5 h-5' /> {/* Save Icon */}
+                <FiSave className='w-5 h-5' />
                 <span>Update Profile</span>
               </button>
             </div>
@@ -278,10 +259,8 @@ const Donor = () => {
         )}
       </div>
 
-      {/* Avatar Selection Modal 
-      */}
       {isAvatarModalOpen && (
-        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+        <div className='fixed inset-0 p-5 flex items-center justify-center bg-black bg-opacity-50'>
           <motion.div
             className='bg-white p-6 rounded-lg shadow-lg'
             initial={{ y: -100, opacity: 0 }}
@@ -289,13 +268,13 @@ const Donor = () => {
             exit={{ y: -100, opacity: 0 }}
           >
             <h2 className='text-xl font-bold mb-4'>Select an Avatar</h2>
-            <div className='grid grid-cols-3 lg:grid-cols-4 gap-4'>
-              {Array.from({ length: 12 }).map((_, index) => (
+            <div className='grid grid-cols-2 gap-8'>
+              {Array.from({ length: 4 }).map((_, index) => (
                 <img
                   key={index}
-                  src={`/Assets/${index + 1}.jpg`} // Render avatar images from 1 to 12
+                  src={`/Assets/${index + 1}.jpg`}
                   alt={`Avatar ${index + 1}`}
-                  className='w-24 h-24 rounded-full border border-gray-300 shadow-md cursor-pointer hover:opacity-75'
+                  className='w-32 h-32 rounded-full border border-gray-300 shadow-md cursor-pointer hover:opacity-75'
                   onClick={() => selectAvatar(index + 1)} // Set avatar to the clicked one
                 />
               ))}
@@ -313,61 +292,4 @@ const Donor = () => {
   );
 };
 
-
-
 export default Donor;
-
-/*
-(
-    <div className='donor'>
-      <div className='donor-heading'>Donor Information</div>
-      {editMode ? (
-        <div className='form'>
-          <form className="formData" onSubmit={handleSubmit}>
-            <div className='attribute'>Name: </div>
-            <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} />
-            <div className='attribute'>Email:</div>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} />
-            <div className='attribute'>Phone Number: </div>
-            <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
-            <div className='attribute'>City: </div>
-            <input type="text" name="city" value={formData.city} onChange={handleChange} />
-            <button className='save' type="submit">Save</button>
-          </form>
-        </div>
-      ) : (
-        <>
-          <div className='props'>
-            <div className='attributes'>Name: </div>
-            <div className='values'>{donorData.displayName}</div>
-            <div className='attributes'>Email:</div>
-            <div className='values'>{donorData.email}</div>
-
-            <div className='attributes'>Phone Number: </div>
-            <div className='values'>{!donorData.phoneNumber
-              ? (<div className='values-placeholder'>Enter your bio</div>)
-              : (<div>{donorData.phoneNumber}</div>)}
-            </div>
-
-            <div className='attributes'>City: </div>
-            <div className='values'>{!donorData.city
-              ? (<div className='values-placeholder'>Enter your bio</div>)
-              : (<div>{donorData.city}</div>)}
-            </div>
-
-            <div className='attributes'>Donations:</div>
-            <div className='values'>{!donorData.donations
-              ? (<div className='values-placeholder'>You Haven't Donated Yet</div>)
-              : (<div>{donorData.donations}</div>)}
-            </div>
-
-            <button className='edit' onClick={handleEdit}>Edit</button>
-          </div>
-          <button className='show-transaction' onClick={gotoTransactionHistory}>
-            Check Transaction History
-          </button>
-        </>
-      )} 
-    </div>
-
-*/
