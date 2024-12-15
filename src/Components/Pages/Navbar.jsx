@@ -4,7 +4,7 @@ import { IoClose, IoLogOutOutline, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from 'framer-motion';
 import { fs, auth } from "../../Config/Config";
 import { IoMdPerson } from "react-icons/io";
-import logo from "./logo.svg";
+import logo from "../../assets/aisaarLogo.webp";
 
 const AnimatedButton = ({ text }) => {
   return (
