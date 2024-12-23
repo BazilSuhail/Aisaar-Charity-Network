@@ -15,7 +15,7 @@ This project aims to provide a centralized platform for charity Franchises/organ
 # Run Locally
  Clone the project using following command
 ```bash
-  git clone https://github.com/BazilSuhail/ClientSide-Charity-Network.git
+  git clone https://github.com/BazilSuhail/Aisaar-Charity-Network.git
 ```
 Go to the project directory
 ```bash
@@ -31,9 +31,9 @@ Then **Run** this cpmmand in you terminal to start vite server:
 ```
 
 ## Functionalities
-
 </br>
 To create such a network to streamline Such Functionalities I implemented following features to cater the problem:
+
 - Creation and management of franchises, projects, volunteer, campaigns, and beneficiaries.
 - Admin registering different franchises holding multiple projects, volunteers and campaigns as well as beneficiaries. 
 - Proper authentication system for Franchises, Volunteers, Donors as well as the Admin
@@ -46,9 +46,10 @@ To create such a network to streamline Such Functionalities I implemented follow
 - Receiving complaints from volunteers and resolving their problems from Admin.
 - Managing beneficiaries enrollment, status and skills they are acquiring within franchises.
 - Maintaining record of completed Projects and franchises.  
-- Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other). 
+- Maintaining the filtration of beneficiaries with respect to their status of enrollment in each franchise(orphan, widow, other).
+
 </br>
 
 ### Live Demo
-## Check out the latest demo of Project [Aisaar](https://aisaar.vercel.app/).  
+Check out the latest demo of Project [Aisaar](https://aisaar.vercel.app/).  
  
