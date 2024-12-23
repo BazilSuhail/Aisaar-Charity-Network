@@ -1,12 +1,12 @@
 # Aisaar
-`Aisaar` a "Charity Management Network" I developed as a semester project for my `Database Systems` in my 4th semster
+Aisaar a  `Charity Management Network` I developed as a semester project for my `Database Systems` in my 4th semster
 
 This project aims to provide a centralized platform for charity Franchises/organizations to manage their operations, including franchise management, there registration, donor management, fundraising campaigns, volunteer coordination along with specific project planning, proposal and there creation, monitoring complains of volunteers. The system should streamline administrative control, enhance donation control, and improve transparency in charity operations. 
 
 ## 🤖 Tech Stack 
  <a href="#"> 
   <img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>  
-  <img alt="React" src="https://img.shields.io/badge/React-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> "/> 
+  <img alt="React" src="https://img.shields.io/badge/React-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/>
   <img alt="Firebase" src="https://img.shields.io/badge/firebase%20-%23039BE5.svg?&style=for-the-badge&logo=firebase"/>  
   <img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-%23ED5A9F.svg?&style=for-the-badge&logo=framer&logoColor=white"/>
   <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind%20CSS-%2306B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/> 
