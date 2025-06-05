@@ -1,81 +1,85 @@
-import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const faqs = [
-    {
-        question: "How can I donate to support your initiatives?",
-        answer: "You can donate through our website by selecting the 'Donate' button and choosing a preferred donation amount. We accept various payment methods, and all contributions go directly toward funding our projects and helping those in need."
-    },
-    {
-        question: "Can I volunteer for your projects?",
-        answer: "Absolutely! We welcome volunteers for our various projects. You can register as a volunteer on our website, browse available projects, and apply. Once approved, you will be notified and can begin contributing your time and skills."
-    },
-    {
-        question: "What kind of projects do you support?",
-        answer: "We support a wide range of projects focusing on education, healthcare, poverty alleviation, and environmental sustainability. Each project is designed to make a positive impact and is driven by our mission to create lasting change in underserved communities."
-    },
-    {
-        question: "How can I register as a volunteer?",
-        answer: "To register as a volunteer, simply create an account on our website and complete the volunteer registration form. Once registered, you’ll have access to our project listings and can apply to participate in any projects of interest."
-    },
-    {
-        question: "Are there any requirements to volunteer?",
-        answer: "We require volunteers to be at least 18 years old. Some projects may have additional requirements based on the type of work involved. Detailed requirements are listed on each project’s page, so please review them before applying."
-    },
-    {
-        question: "Can I donate to a specific project?",
-        answer: "Yes, you can choose to direct your donation to a specific project if you wish. During the donation process, select the project you would like to support from the available list, and your contribution will be allocated accordingly."
-    }
-];
+import { motion } from 'framer-motion';  
+
+const faqData = [
+  {
+    question: "How do I know my donation is being used effectively?",
+    answer:
+      "We provide complete transparency through regular updates, financial reports, and impact stories. Every donor receives detailed information about how their contribution is making a difference. You can track the progress of projects you've supported through our donor portal.",
+  },
+  {
+    question: "Can I volunteer for specific projects?",
+    answer:
+      "We offer various volunteer opportunities both locally and internationally. You can browse available projects on our volunteer portal and apply for those that match your skills and interests. We provide full training and support for all volunteers.",
+  },
+  {
+    question: "What percentage of donations goes directly to causes?",
+    answer:
+      "85% of all donations go directly to our programs and beneficiaries. The remaining 15% covers essential operational costs including administration, fundraising, and program monitoring to ensure maximum impact and transparency.",
+  },
+  {
+    question: "Do you work in emergency situations?",
+    answer:
+      "Yes, we have a dedicated emergency response team that mobilizes quickly during natural disasters, conflicts, and humanitarian crises. We maintain emergency funds and partnerships to provide immediate relief when disasters strike.",
+  },
+  {
+    question: "How can I start a fundraising campaign?",
+    answer:
+      "You can easily create a personal fundraising campaign through our platform. Choose a cause you're passionate about, set your goal, and share your campaign with friends and family. We provide tools and support to help you succeed.",
+  },
+  {
+    question: "Are donations tax-deductible?",
+    answer:
+      "Yes, Aisaar is a registered 501(c)(3) nonprofit organization. All donations are tax-deductible to the full extent allowed by law. You'll receive a tax receipt for your records after making a donation.",
+  },
+]
+
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState(null)
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
+
+  return (
+    <div className="max-w-5xl mx-auto">
+      {faqData.map((faq, index) => (
+        <motion.div
+          key={index}
+          className={`mb-4 bg-green-50 border-[2px] rounded-t-[15px] ${openIndex === index && 'rounded-b-[15px]'} border-green-200 overflow-hidden`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
+          <button
+            onClick={() => toggleFAQ(index)}
+            className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-green-50 transition-colors"
+          >
+            <span className="font-semibold text-green-900">{faq.question}</span>
+            {openIndex === index ? (
+              <FaChevronUp className="text-green-600" />
+            ) : (
+              <FaChevronDown className="text-green-600" />
+            )}
+          </button>
+          <motion.div
+            initial={false}
+            animate={{
+              height: openIndex === index ? "auto" : 0,
+              opacity: openIndex === index ? 1 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-4 rounded-b-[15px] text-gray-50 font-[600] text-[14px] pt-[8px] bg-green-900 leading-relaxed">{faq.answer}</div>
+          </motion.div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
 
 
-const FAQPage = () => {
-    const [openIndex, setOpenIndex] = useState(null);
-
-
-    const handleToggle = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
-
-    return (
-        <div className='pb-8 md:mt-0 mt-[35px] px-4 md:px-8'>
-            <div>
-                {faqs.map((faq, index) => (
-                    <div key={index} className='mb-4'>
-                        <button
-                            className='w-full text-left text-lg font-semibold text-green-900 border-b-[3px] border-green-700 py-2 focus:outline-none flex items-center justify-between'
-                            onClick={() => handleToggle(index)}
-                            type='button'
-                        >
-                            <span>{faq.question}</span>
-                            <motion.div
-                                initial={{ scale: 1.2 }}
-                                animate={{ scale: openIndex === index ? 0.8 : 1.2 }}
-                                transition={{ duration: 0.5 }}
-                                className='text-green-800'
-                            >
-                                {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
-                            </motion.div>
-                        </button>
-                        <AnimatePresence>
-                            {openIndex === index && (
-                                <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    className='mt-2'
-                                >
-                                    <p className='text-green-950 font-[600]'>{faq.answer}</p>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-export default FAQPage;
+export default FAQSection;

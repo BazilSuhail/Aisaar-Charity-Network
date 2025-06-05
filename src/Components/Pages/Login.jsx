@@ -9,8 +9,8 @@ import { FaEnvelope, FaLock, FaUserCircle } from 'react-icons/fa';
 
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("d1@gmail.com");
+  const [password, setPassword] = useState("112233");
   const [userType, setUserType] = useState("donor");
   const navigate = useNavigate();
   const [focus, setFocus] = useState({ email: false, password: false });

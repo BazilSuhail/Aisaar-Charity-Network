@@ -1,15 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { auth, fs } from '../../Config/Config';
-import { useNavigate } from "react-router-dom";
-import { FiEdit, FiSave } from 'react-icons/fi';
-import { motion } from 'framer-motion';
-import { FaMedal } from 'react-icons/fa';
+"use client"
+
+import { useEffect, useState } from "react"
+import { auth, fs } from "../../Config/Config"
+import { useNavigate } from "react-router-dom"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  FiEdit,
+  FiSave,
+  FiUser,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiDollarSign,
+  FiTrendingUp,
+  FiCalendar,
+  FiSettings,
+  FiLogOut,
+  FiX,
+  FiCamera,
+  FiTarget,
+  FiActivity,
+} from "react-icons/fi"
+import { FaMedal, FaTrophy, FaStar, FaChartLine, FaHandHoldingHeart, FaUsers, FaGlobe, FaHeart } from "react-icons/fa"
 
 const Donor = () => {
-  const navigate = useNavigate();
-  const [donorData, setDonorData] = useState({});
-  const [editMode, setEditMode] = useState(false); 
-  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false); 
+  const navigate = useNavigate()
+  const [donorData, setDonorData] = useState({})
+  const [editMode, setEditMode] = useState(false)
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false)
   const [formData, setFormData] = useState({
     displayName: "",
     email: "",
@@ -17,279 +35,455 @@ const Donor = () => {
     city: "",
     donations: "",
     idtype: "Donor",
-    photoURL: ""
-  });
+    photoURL: "",
+  })
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     const fetchDonorData = async () => {
       try {
-        const currentUser = auth.currentUser;
+        const currentUser = auth.currentUser
 
         if (currentUser) {
-          const donorRef = fs.collection("donors").doc(currentUser.uid);
-          const doc = await donorRef.get();
+          const donorRef = fs.collection("donors").doc(currentUser.uid)
+          const doc = await donorRef.get()
 
           if (doc.exists) {
-            setDonorData(doc.data());
-            setFormData({ ...doc.data(), idtype: "Donor" });
-          }
-          else {
-            console.log("No donor data found");
+            setDonorData(doc.data())
+            setFormData({ ...doc.data(), idtype: "Donor" })
+          } else {
+            console.log("No donor data found")
           }
         }
+      } catch (error) {
+        console.error("Error fetching donor data:", error.message)
       }
-      catch (error) {
-        console.error("Error fetching donor data:", error.message);
-      }
-    };
+    }
     // Call fetchData when the component mounts or when the authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchDonorData();
+        fetchDonorData()
       }
-    });
+    })
 
-    return unsubscribe;
-  }, []);
+    return unsubscribe
+  }, [])
 
   const handleEdit = () => {
-    setEditMode(true);
-  };
+    setEditMode(true)
+  }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
+    const { name, value } = e.target
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
-    }));
-  };
+      [name]: value,
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const currentUser = auth.currentUser;
+      const currentUser = auth.currentUser
 
       if (currentUser) {
-        await fs.collection("donors").doc(currentUser.uid).update(formData);
-        setDonorData(formData);
-        setEditMode(false);
+        await fs.collection("donors").doc(currentUser.uid).update(formData)
+        setDonorData(formData)
+        setEditMode(false)
       }
+    } catch (error) {
+      console.error("Error updating donor data:", error.message)
     }
-    catch (error) {
-      console.error("Error updating donor data:", error.message);
-    }
-  };
+  }
 
   const gotoTransactionHistory = () => {
-    navigate('/transactionhistory');
-  };
+    navigate("/transactionhistory")
+  }
 
   const openAvatarModal = () => {
-    setIsAvatarModalOpen(true);
-  };
+    setIsAvatarModalOpen(true)
+  }
 
   const closeAvatarModal = () => {
-    setIsAvatarModalOpen(false);
-  };
+    setIsAvatarModalOpen(false)
+  }
 
   const selectAvatar = (index) => {
     setFormData((prevData) => ({
       ...prevData,
-      photoURL: index
-    }));
-    closeAvatarModal();
-  };
+      photoURL: index,
+    }))
+    closeAvatarModal()
+  }
+
+  // Helper functions
+  const getDonorLevel = (amount) => {
+    const numAmount = Number.parseInt(amount?.toString().replace(/,/g, "") || "0")
+    if (numAmount >= 10000) return { level: "Platinum", icon: FaTrophy, color: "text-green-600" }
+    if (numAmount >= 5000) return { level: "Gold", icon: FaMedal, color: "text-green-500" }
+    if (numAmount >= 1000) return { level: "Silver", icon: FaStar, color: "text-green-400" }
+    return { level: "Bronze", icon: FaHeart, color: "text-green-300" }
+  }
+
+  const donorLevel = getDonorLevel(donorData.donations)
+
+  // Sample impact metrics (you can replace with real data)
+  const impactMetrics = [
+    { icon: FaUsers, label: "Lives Impacted", value: "1,247", color: "text-green-600", bg: "bg-green-50" },
+    { icon: FaGlobe, label: "Countries Reached", value: "5", color: "text-green-500", bg: "bg-green-50" },
+    { icon: FaHandHoldingHeart, label: "Projects Supported", value: "8", color: "text-green-400", bg: "bg-green-50" },
+    { icon: FaChartLine, label: "Impact Score", value: "95%", color: "text-green-700", bg: "bg-green-50" },
+  ]
+
+  // Sample recent donations (you can replace with real data)
+  const recentDonations = [
+    { id: 1, project: "Clean Water Initiative", amount: 500, date: "2024-01-15", status: "Completed" },
+    { id: 2, project: "Education for All", amount: 250, date: "2024-01-10", status: "Completed" },
+    { id: 3, project: "Emergency Relief Fund", amount: 1000, date: "2024-01-05", status: "Processing" },
+  ]
 
   return (
-    <div className='mt-[60px]  min-h-screen bg-white flex flex-col'>
-      <div className='p-6 '>
-        <div className="mb-[15px] flex lg:items-center flex-col lg:flex-row lg:justify-between bg-green-900 border-2 border-green-300 p-6 rounded-xl shadow-md">
-          <div className="flex items-end space-x-4">
-            <img
-              src={`/Assets/${formData.photoURL}.jpg`}
-              alt="Profile Avatar"
-              className="w-20 h-20 lg:w-32 lg:h-32 rounded-full border border-gray-300 shadow-md"
-            />
-            <div className="flex lg:flex-row flex-col lg:items-end text-[25px] lg:text-[35px] font-extrabold text-green-200">
-              Hello,
-              <p className="lg:ml-[15px] text-[30px] lg:text-[45px] text-white">{formData.displayName}</p>
+    <div className="min-h-screen pt-[80px] bg-green-50">
+      {/* Header */}
+      <div className="border-green-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                <FaHandHoldingHeart className="text-white text-xl" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-green-900">Donor Dashboard</h1>
+                <p className="text-green-600">Welcome back, {formData.displayName || "Donor"}</p>
+              </div>
             </div>
-          </div>
-          <div className=" lg:order-1 order-2 flex flex-col py-[25px] items-center space-x-2 text-white rounded-lg bg-[#27760f85] px-[35px]">
-            <FaMedal className="text-yellow-500 lg:text-[115px]" />
-            <span className="font-semibold text-green-200 mt-[15px]">Total Donations:</span>
-            <span className="font-bold text-[35px]">${donorData.donations}</span>
+            
           </div>
         </div>
+      </div>
 
-        {!editMode ? (
-          <div>
-            <div className=' mb-4'>
-              <div className="flex-1 space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
-                    <div className="p-3 bg-blue-600 text-white rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-8 h-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c0-4.28-3.455-5-5-5h-1c-1.545 0-5 .72-5 5v3c0 1.38 1.12 2.5 2.5 2.5H5c1.38 0 2.5 1.12 2.5 2.5v2c0 1.38 1.12 2.5 2.5 2.5h2c1.38 0 2.5-1.12 2.5-2.5v-2c0-1.38 1.12-2.5 2.5-2.5h.5C19.88 16.5 21 15.38 21 14v-3c0-4.28-3.455-5-5-5h-1c-1.545 0-5 .72-5 5z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-800">Full Name</h2>
-                      <p className="text-gray-600">{donorData.displayName}</p>
-                    </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        {/* Profile Header Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-green-950 via-green-900 to-green-800 rounded-2xl p-8 mb-8 text-white"
+        >
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center space-x-6 mb-6 lg:mb-0">
+              <div className="relative">
+                <img
+                  src={`/Assets/${formData.photoURL}.jpg`}
+                  alt="Profile Avatar"
+                  className="w-24 h-24 lg:w-32 lg:h-32 rounded-full border-4 border-white shadow-lg"
+                />
+                {editMode && (
+                  <button
+                    onClick={openAvatarModal}
+                    className="absolute -bottom-2 -right-2 bg-white text-green-600 p-2 rounded-full shadow-lg hover:bg-green-50 transition-colors"
+                  >
+                    <FiCamera className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold mb-2">{formData.displayName || "Donor Name"}</h2>
+                <p className="text-green-100 mb-1">Member since {donorData.joinDate || "Recently"}</p>
+                <div className="flex items-center space-x-2">
+                  <donorLevel.icon className="text-yellow-300" />
+                  <span className="text-green-100">{donorLevel.level} Donor</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white bg-opacity-20 rounded-xl p-6 text-center backdrop-blur-sm">
+              <div className="flex items-center justify-center mb-2">
+                <div>
+                  <div className="flex items-center justify-center">
+                    <FiDollarSign className="text-3xl mr-1" />
+                    <span className="text-4xl font-bold">
+                      {(donorData.donations || 0).toLocaleString()}
+                    </span>
+
                   </div>
+                  <p className="text-green-100 mt-[8px]">Total Donated</p>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </motion.div>
 
-                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
-                    <div className="p-3 bg-blue-600 text-white rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 12l-4-4m0 0l-4 4m4-4v12" />
-                        <path d="M16 5H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-800">Email</h2>
-                      <p className="text-gray-600">{donorData.email}</p>
-                    </div>
-                  </div>
+        {/* Impact Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {impactMetrics.map((metric, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-green-100"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${metric.bg}`}>
+                  <metric.icon className={`text-xl ${metric.color}`} />
+                </div>
+                <FiActivity className="text-green-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-green-900 mb-1">{metric.value}</h3>
+              <p className="text-green-600 text-sm">{metric.label}</p>
+            </motion.div>
+          ))}
+        </div>
 
-                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
-                    <div className="p-3 bg-green-600 text-white rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h2l1 2m4 0l1-2h5a2 2 0 012 2v6a2 2 0 01-2 2h-6a2 2 0 01-2-2v-2m-2 0H3m0 0V9m0 0a3 3 0 00-3 3v6a3 3 0 003 3h12a3 3 0 003-3V9a3 3 0 00-3-3h-2a3 3 0 00-3 3v1H6" />
-                      </svg>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Profile Information */}
+          <div className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-xl shadow-sm border border-green-100"
+            >
+              <div className="p-6 border-b border-green-100">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold text-green-900">Profile Information</h3>
+                  {!editMode ? (
+                    <button
+                      onClick={handleEdit}
+                      className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                    >
+                      <FiEdit className="w-4 h-4" />
+                      <span>Edit Profile</span>
+                    </button>
+                  ) : (
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => {
+                          setEditMode(false)
+                          setFormData(donorData)
+                        }}
+                        className="px-4 py-2 border border-green-300 text-green-700 rounded-lg hover:bg-green-50 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleSubmit}
+                        className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      >
+                        <FiSave className="w-4 h-4" />
+                        <span>Save</span>
+                      </button>
                     </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-800">Phone</h2>
-                      <p className="text-gray-600">{!donorData.phoneNumber ? donorData.phoneNumber : 'Enter Phone Number'}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-4 bg-gray-100 p-6 rounded-lg shadow-sm">
-                    <div className="p-3 bg-pink-600 text-white rounded-full">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 7a4 4 0 014-4h3m-7 0a4 4 0 00-4 4v4m0 0l4 4m-4-4l4-4" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-semibold text-gray-800">City</h2>
-                      <p className="text-gray-600">{donorData.city ? donorData.city : 'Enter City'}</p>
-                    </div>
-                  </div>
-
+                  )}
                 </div>
               </div>
 
-            </div>
-            <div className='flex mt-[40px] items-center'>
-              <button onClick={handleEdit}
-                className='bg-green-700 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
-              >
-                <FiEdit className='w-5 h-5' />
-                <span>Edit Profile</span>
-              </button>
-              <button onClick={gotoTransactionHistory}
-                className='bg-green-900 ml-[10px]  text-white px-4 py-2 rounded-md shadow-md hover:bg-green-600 flex items-center space-x-2'
-              >
-                <FiEdit className='w-5 h-5' />
-                <span>Check Donations</span>
-              </button>
-            </div>
+              <div className="p-6">
+                {!editMode ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                      <div className="p-3 bg-green-100 rounded-lg">
+                        <FiUser className="text-green-600 w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-green-600">Full Name</p>
+                        <p className="font-semibold text-green-900">{donorData.displayName || "Not provided"}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                      <div className="p-3 bg-green-100 rounded-lg">
+                        <FiMail className="text-green-600 w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-green-600">Email Address</p>
+                        <p className="font-semibold text-green-900">{donorData.email || "Not provided"}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                      <div className="p-3 bg-green-100 rounded-lg">
+                        <FiPhone className="text-green-600 w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-green-600">Phone Number</p>
+                        <p className="font-semibold text-green-900">{donorData.phoneNumber || "Not provided"}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                      <div className="p-3 bg-green-100 rounded-lg">
+                        <FiMapPin className="text-green-600 w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-green-600">Location</p>
+                        <p className="font-semibold text-green-900">{donorData.city || "Not provided"}</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-green-700 mb-2">Full Name</label>
+                        <input
+                          type="text"
+                          name="displayName"
+                          value={formData.displayName}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-green-700 mb-2">Email Address</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-green-700 mb-2">Phone Number</label>
+                        <input
+                          type="tel"
+                          name="phoneNumber"
+                          value={formData.phoneNumber}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-green-700 mb-2">City</label>
+                        <input
+                          type="text"
+                          name="city"
+                          value={formData.city}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </motion.div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className='space-y-4'>
-            <div className='flex items-end mb-4'>
-              <button
-                type="button"
-                onClick={openAvatarModal}
-                className='bg-blue-900 ml-[10px] text-white px-4 py-[4px] rounded-md hover:bg-gray-600'
-              >
-                Change Avatar
+
+          {/* Quick Actions & Recent Activity */}
+          <div className="space-y-6">
+            {/* Quick Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-xl shadow-sm p-6 border border-green-100"
+            >
+              <h3 className="text-lg font-semibold text-green-900 mb-4">Quick Actions</h3>
+              <div className="space-y-3">
+                <button className="w-full flex items-center space-x-3 p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
+                  <FiDollarSign className="w-5 h-5" />
+                  <span>Make a Donation</span>
+                </button>
+                <button
+                  onClick={gotoTransactionHistory}
+                  className="w-full flex items-center space-x-3 p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
+                >
+                  <FiCalendar className="w-5 h-5" />
+                  <span>View Transaction History</span>
+                </button>
+                <button className="w-full flex items-center space-x-3 p-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
+                  <FiTarget className="w-5 h-5" />
+                  <span>Browse Projects</span>
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Recent Donations */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-xl shadow-sm p-6 border border-green-100"
+            >
+              <h3 className="text-lg font-semibold text-green-900 mb-4">Recent Donations</h3>
+              <div className="space-y-4">
+                {recentDonations.map((donation) => (
+                  <div key={donation.id} className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                    <div>
+                      <p className="font-medium text-green-900 text-sm">{donation.project}</p>
+                      <p className="text-green-600 text-xs">{donation.date}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-green-600">${donation.amount}</p>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${donation.status === "Completed"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-green-200 text-green-700"
+                          }`}
+                      >
+                        {donation.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button   onClick={gotoTransactionHistory} className="w-full mt-4 text-green-600 hover:text-green-700 text-sm font-medium">
+                View All Donations
               </button>
-            </div>
-            <input
-              type="text"
-              name="name"
-              value={formData.displayName}
-              onChange={handleChange}
-              placeholder="Enter Name"
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-            <input
-              type="text"
-              name="name"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="Enter City"
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-            <input
-              type="number"
-              name="phone"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              placeholder="Phone"
-              className="w-full p-2 border arro border-gray-300 rounded-md"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter Email"
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
-            <div className='flex'>
-              <button
-                type="submit"
-                className='bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 flex items-center space-x-2'
-              >
-                <FiSave className='w-5 h-5' />
-                <span>Update Profile</span>
-              </button>
-            </div>
-          </form>
-        )}
+            </motion.div>
+          </div>
+        </div>
       </div>
 
-      {isAvatarModalOpen && (
-        <div className='fixed inset-0 p-5 flex items-center justify-center bg-black bg-opacity-50'>
+      {/* Avatar Selection Modal */}
+      <AnimatePresence>
+        {isAvatarModalOpen && (
           <motion.div
-            className='bg-white p-6 rounded-lg shadow-lg'
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           >
-            <h2 className='text-xl font-bold mb-4'>Select an Avatar</h2>
-            <div className='grid grid-cols-2 gap-8'>
-              {Array.from({ length: 4 }).map((_, index) => (
-                <img
-                  key={index}
-                  src={`/Assets/${index + 1}.jpg`}
-                  alt={`Avatar ${index + 1}`}
-                  className='w-32 h-32 rounded-full border border-gray-300 shadow-md cursor-pointer hover:opacity-75'
-                  onClick={() => selectAvatar(index + 1)} // Set avatar to the clicked one
-                />
-              ))}
-            </div>
-            <button
-              onClick={closeAvatarModal}
-              className='mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600'
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 max-w-md w-full"
             >
-              Close
-            </button>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-green-900">Choose Avatar</h3>
+                <button
+                  onClick={closeAvatarModal}
+                  className="p-2 text-green-400 hover:text-green-600 transition-colors"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <button key={index} onClick={() => selectAvatar(index + 1)} className="relative group">
+                    <img
+                      src={`/Assets/${index + 1}.jpg`}
+                      alt={`Avatar ${index + 1}`}
+                      className="w-full aspect-square rounded-xl border-2 border-green-200 group-hover:border-green-500 transition-colors"
+                    />
+                    <div className="absolute inset-0 bg-green-600 bg-opacity-0 group-hover:bg-opacity-10 rounded-xl transition-all" />
+                  </button>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
-export default Donor;
+export default Donor
